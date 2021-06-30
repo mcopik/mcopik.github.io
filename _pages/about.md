@@ -2,18 +2,18 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Motto. Etc.
+description: High-performance computing, serverless, and all that jazz!
 
 profile:
   align: right
   image: prof_pic.jpg
   image_circular: false # crops the image to make it circular
   more_info: >
-    <p>555 your office number</p>
-    <p>123 your address street</p>
-    <p>Your City, State 12345</p>
+    <p>SPCL</p>
+    <p>Department of Computer Science (D-INFK)</p>
+    <p>ETH Zürich</p>
 
-selected_papers: true # includes a list of papers marked as "selected={true}"
+selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 
 announcements:
@@ -27,8 +27,37 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](https://www.reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
+I'm a PhD student at the [Scalable Parallel Computing Laboratory](http://spcl.inf.ethz.ch/)
+at the [Department of Computer Science](https://inf.ethz.ch/) at [ETH Zürich](https://ethz.ch),
+advised by [Prof. Torsten Hoefler](http://unixer.de/).
+My main research goal is to develop **high-performance solutions for
+to the new cloud paradigm of Function-as-a-Service (FaaS)** computing.
+The _serverless_ revolution brings new elastic and flexible resource allocation techniques,
+and combined with a high-performance programming model, it will open new opportunities to increase
+resource utilization and decrease monetary and environmental costs in data centers of all sizes.
 
-Put your address / P.O. box / other info right below your picture. You can also disable any of these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
+I obtained my Master's degree in Simulation Sciences from the [RWTH Aachen](https://www.rwth-aachen.de/) (Germany)
+where I worked on my Master thesis in the [HPAC Group](https://hpac.cs.umu.se/), supervised by
+[Prof. Paolo Bientinesi](https://hpac.cs.umu.se/~pauldj/).
+I obtained my Bachelor's degree in Computer Science from the
+[Silesian University of Technology](https://www.polsl.pl/en/Pages/Welcome.aspx) in Poland,
+where I had the opportunity to work at the [Institute of Theoretical and Applied Informatics, Polish Academy of Sciences](https://www.iitis.pl/en)
+with [Prof. Tadeusz Czachórski](https://www.iitis.pl/pl/person/tczachorski).
 
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](https://fontawesome.com/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
+
+
+
+### Research Interests
+<div id="html" markdown="0">
+<hr style="width:50%;text-align:left;margin-left:0">
+<ul style="columns:2;list-style-type:none">
+    <li> <i>Function-as-a-Service (FaaS)</i></li>
+    <li> <i>Elastic and Efficient Computing</i></li>
+    <li> <i>High-Performance Computing</i></li>
+    <li> <i>Performance Modeling</i></li>
+    <li> <i>Parallel Algorithms</i></li>
+    <li> <i>Code-Driven Design and Optimizations</i></li>
+</ul>
+
+</div>
+
