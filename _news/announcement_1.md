@@ -1,8 +1,9 @@
 ---
 layout: post
-date: 2015-10-22 15:59:00-0400
+date: 2021-06-30 15:59:00-0400
 inline: true
 related_posts: false
 ---
 
-A simple inline announcement.
+Our new preprint has been released! [rFaaS: RDMA-Accelerated Serverless](https://arxiv.org/abs/2106.13859)!
+
