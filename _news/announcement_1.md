@@ -5,5 +5,5 @@ inline: true
 related_posts: false
 ---
 
-Our new preprint has been released! [rFaaS: RDMA-Accelerated Serverless](https://arxiv.org/abs/2106.13859)!
+Our new preprint has been released - [rFaaS: RDMA-Accelerated Serverless](/publications#2021rfaas)!
 
