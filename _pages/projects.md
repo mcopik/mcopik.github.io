@@ -5,7 +5,7 @@ permalink: /projects/
 description: 
 nav: true
 nav_order: 3
-display_categories: [serverless, hpc, program analysis, various, fun]
+display_categories: [serverless, hpc, program analysis]
 horizontal: false
 ---
 
