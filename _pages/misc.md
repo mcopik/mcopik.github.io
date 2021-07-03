@@ -12,10 +12,9 @@ This page contains a list of resources that I have found particularly useful and
 during my academic career, including tools that I recommend to my students,
 as well as a few interesting talks, podcasts, and texts related to my hobbies.
 
-{:.no_toc}
-
-* A markdown unordered list which will be replaced with the ToC, excluding the "Contents header" from above
-{:toc}
+* [tools](#tools)
+* [meta](#meta)
+* [history](#history)
 
 ## tools
 
@@ -38,25 +37,6 @@ data on computing systems.
 
 * [The Science of Scientific Writing](https://www.usenix.org/sites/default/files/gopen_and_swan_science_of_scientific_writing.pdf)
 by George D. Gopen and Judith A. Swan, a short and very useful paper on writing papers.
-
-* [How to Write a Great Research Paper](https://www.youtube.com/watch?v=VK51E3gHENc)
-great talk by Simon Peyton Jones with many helpful recommendations and tips. The most important
-lesson from this talk: practice paper-driven research by beginning with a paper draft,
-as explaining the idea helps to find key challenges and weaknesses and quickly identify
-which ideas are worth working on.
-
-* [How to Give a Great Research Talk](https://www.youtube.com/watch?v=sT_-owjKIbA)
-another great talk by Simon Peyton Jones.
-The most important lesson from this talk: focus on one key message, present it very deeply and with
-many details, use examples to drive the narrative, and omit other details from the paper.
-The audience should remember the one major contribution of your work.
-
-* [Leslie Lamport on Writing Papers](https://www.youtube.com/watch?v=ey3BEtt9QLI)
-- what is the most important reason to write a paper? "You have done something that you
-are excited about". Don't include jokes in papers, don't submit papers because conference deadline
-is approaching and you want to be there, bad thinking cannot lead to good writing.
-Use formulas and solid examples to present the ideas, instead of long and verbose descriptions in plain
-English.
 
 ## history
 
