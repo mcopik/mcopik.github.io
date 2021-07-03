@@ -7,19 +7,16 @@ description:
 nav: true
 ---
 
-<!--Allow to jump to a specific publication and display it a little below top of page, allowing for a headerr-->
-<style>
-html {
-  scroll-padding-top: 100px;
-}
-</style>
-
 The list of talks, presentations, and public appearances.
 
-{:.no_toc}
-
-* A markdown unordered list which will be replaced with the ToC, excluding the "Contents header" from above
-{:toc}
+* [2021](#2021)
+* [2019](#2019)
+* [2018](#2018)
+* [2017](#2017)
+* [2016](#2016)
+* [2015](#2015)
+* [2014](#2014)
+* [2013](#2013)
 
 -----------
 
@@ -86,10 +83,6 @@ _Smart Expression Templates_, research seminar final presentation.
 [Slides](/assets/pdf/2015_smart_ets_rwth_slides.pdf). [code repository](https://github.com/mcopik/SmartETBenchmark).
 
 ## 2014
-
-* **Silesian University of Technology, Bachelor Thesis Seminar**, Gliwice, Poland.  
-_GPU-accelerated stochastic simulator engine for PRISM model checker_, presentation of Bachelor thesis.  
-[Slides](/assets/pdf/2014_prism_gpu_bachelor_thesis_slides.pdf).
 
 * **Silesian University of Technology, Students Scientific Group of Programming Engineering and Linguistic Engineering**, Gliwice, Poland.  
 _C++11_, presentation of new C++ features to fellow students (Polish).  
