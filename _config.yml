@@ -285,6 +285,7 @@ plugins:
   - jekyll-terser
   - jekyll-toc
   - jekyll-twitter-plugin
+  - jekyll-redirect-from
   - jemoji
 
   # al-folio plugins
