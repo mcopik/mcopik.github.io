@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-[SeBS, our serverless benchmarking](https://arxiv.org/abs/2012.14132) paper has been accepted at ACM/IFIP Middleware 2021!
+[SeBS, our serverless benchmarking](/publications#2020sebs) paper has been accepted at ACM/IFIP Middleware 2021!
