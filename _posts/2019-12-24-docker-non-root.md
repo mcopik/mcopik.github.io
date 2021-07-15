@@ -18,7 +18,7 @@ not by their names, ensuring that the same user id corresponds to the same user
 in different containers. We should expect our user to own files and processes
 created in the container, right? 
 
-```console
+```bash
 docker run -ti --entrypoint "/bin/bash" ubuntu
 root@822ff39102a8:/# ls -l .
 total 64
@@ -30,13 +30,11 @@ drwxr-xr-x   1 root root 4096 Dec 24 13:26 etc
 
 Surprise! We can confirm further that the entire process is owned by root:
 
-{% raw %}
-```console
+```bash
 PID=$(docker inspect --format='{{ .State.Pid }}' ${DOCKER_ID})
 ps -fe | grep $PID
 root      7694  7668  0 14:26 pts/0    00:00:00 /bin/bash
 ```
-{% endraw %}
 
 In the default configuration, Docker build and containers are executed
 with root as the user. Thus, all files created are owned by root, and Docker processes are root
@@ -50,7 +48,7 @@ to configure containers as executable by an arbitrary user ID.
 
 
 What happens if we try to define the user id when starting a standard container?
-```console
+```bash
 USER=$(id -u)
 GROUP=$(id -g)
 docker run -ti --entrypoint "/bin/bash" --user="$USER:$GROUP" ubuntu
@@ -101,7 +99,7 @@ Creating a standard instance of the container, without additional overriding of
 user, executes the container with the user `docker_user` with user ID equal to
 the one used by user starting the container.
 
-```console
+```bash
 docker run -ti --entrypoint "/bin/bash" ubuntu-user-test
 docker_user@e53ebf506d92:~$ id
 uid=1000(docker_user) gid=1000(docker_user) groups=1000(docker_user) 
@@ -115,14 +113,12 @@ docker_user@e53ebf506d92:~$ ls | wc -l
 
 While on the host we observe the following:
 
-{% raw %}
-```console
-mcopik@mcopik-ThinkPad-T480s id
+```bash
+mcopik@mcopik-ThinkPad-T480s  id
 uid=1000(mcopik) gid=1000(mcopik) [...]
 mcopik@mcopik-ThinkPad-T480s ps -fe | grep $(docker inspect --format='{{ .State.Pid }}' e53)
 mcopik   21399 21375  0 21:29 pts/0    00:00:00 /bin/bash
 ```
-{% endraw %}
 
 We can test this change by mounting a volume to observe permissions of files
 created while executing in the container process.
@@ -135,9 +131,7 @@ mcopik@mcopik-ThinkPad-T480s ls -l input-data
 -rw-r--r-- 1 mcopik mcopik 0 Dec 24 21:35 write_file
 ```
 
-This solution is not perfect by any means - it works as long as the user ID on the host
-and inside the container match. 
-Furthermore, the process is executing as a non-root
+This solution is not perfect by any means - the process is executing as a non-root
 user, leading to a scenario where we can't modify the container's virtual filesystem
 freely. But we achieved a situation that is entirely sufficient for many scenarios: we can
 inspect container processes from the host, and all files and directories created 
