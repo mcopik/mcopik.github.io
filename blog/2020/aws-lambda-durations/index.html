@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title>Marcin Copik | Measuring AWS Lambda performance</title>
+<meta name="description" content="Personal webpage">
+
+<!-- Open Graph -->
+
+
+<!-- Bootstrap & MDB -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha512-MoRNloxbStBcD8z3M/2BmnT+rg4IsMxPkXaGh2zD6LGNNFE80W3onsAhRcMAMrSoyWL9xD7Ert0men7vR8LUZg==" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" integrity="sha512-RO38pBRxYH3SoOprtPTD86JFOclM51/XTIdEPh5j8sj4tp8jmQIx26twG52UaLi//hQldfrh7e51WzP9wuP32Q==" crossorigin="anonymous" />
+
+<!-- Fonts & Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"  integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.1/css/academicons.css" integrity="sha512-WgL+hxwL4NdLGGZ4Euo/BmGAcQgyRRJsTQbNPGui+nWlzaF+3f2zf2rh578ccU3YINJCi8LvHyV1OHLJ8effBA==" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons">
+
+<!-- Code Syntax Highlighting -->
+<link rel="stylesheet" href="https://gitcdn.xyz/repo/jwarby/jekyll-pygments-themes/master/github.css" />
+
+<!-- Styles -->
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
+
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="canonical" href="/blog/2020/aws-lambda-durations/">
+
+<!-- JQuery -->
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
+
+<!-- Theming-->
+
+<script src="/assets/js/theme.js"></script>
+<script src="/assets/js/dark_mode.js"></script>
+
+
+
+
+
+
+    
+<!-- MathJax -->
+<script type="text/javascript">
+  window.MathJax = {
+    tex: {
+      tags: 'ams'
+    }
+  };
+</script>
+<script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js"></script>
+<script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+
+  </head>
+
+  <body class="fixed-top-nav ">
+
+    <!-- Header -->
+
+    <header>
+
+    <!-- Nav Bar -->
+    <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
+    <div class="container">
+      
+      <a class="navbar-brand title font-weight-lighter" href="/">
+       Marcin Copik
+      </a>
+      
+      <!-- Navbar Toggle -->
+      <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar top-bar"></span>
+        <span class="icon-bar middle-bar"></span>
+        <span class="icon-bar bottom-bar"></span>
+      </button>
+      <div class="collapse navbar-collapse text-right" id="navbarNav">
+        <ul class="navbar-nav ml-auto flex-nowrap">
+          <!-- About -->
+          <li class="nav-item ">
+            <a class="nav-link" href="/">
+              about
+              
+            </a>
+          </li>
+          
+          <!-- Blog -->
+          <li class="nav-item active">
+            <a class="nav-link" href="/blog/">
+              blog
+              
+            </a>
+          </li>
+          
+          <!-- Other pages -->
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <li class="nav-item ">
+              <a class="nav-link" href="/projects/">
+                projects
+                
+              </a>
+          </li>
+          
+          
+          
+          <li class="nav-item ">
+              <a class="nav-link" href="/publications/">
+                publications
+                
+              </a>
+          </li>
+          
+          
+          
+          <li class="nav-item ">
+              <a class="nav-link" href="/talks/">
+                talks
+                
+              </a>
+          </li>
+          
+          
+          
+          <li class="nav-item ">
+              <a class="nav-link" href="/students/">
+                students
+                
+              </a>
+          </li>
+          
+          
+          
+          <li class="nav-item ">
+              <a class="nav-link" href="/misc/">
+                miscellaneous
+                
+              </a>
+          </li>
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/assets/pdf/cv.pdf" target="_blank" rel="nofollow">
+              CV
+            </a>
+          </li>
+          
+            <div class = "toggle-container">
+              <a id = "light-toggle">
+                  <i class="fas fa-moon"></i>
+                  <i class="fas fa-sun"></i>
+              </a>
+            </div>
+          
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+</header>
+
+
+    <!-- Content -->
+
+    <div class="container mt-5">
+      
+
+<div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Measuring AWS Lambda performance</h1>
+    <p class="post-meta">January 9, 2020</p>
+  </header>
+
+  <article class="post-content">
+    <p>Measuring AWS Lambda execution times can be in three ways: measure total time
+of synchronous execution on client side when using HTTP trigger, measure function runtime
+and return time with the result, as seen below, and use measurements provided
+by cloud service. The first option is far from ideal since measurements include
+the cost and variability of client-cloud communication. Such a setup is useful
+only when measuring the effect of using different cloud regions. The second approach
+does not include overheads of initialization, and we have no way of measuring cold
+starts.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">datetime</span>
+
+<span class="kn">import</span> <span class="nn">function</span>
+
+<span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+    <span class="n">begin</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">()</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">function</span><span class="p">.</span><span class="n">handler</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">()</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s">"time"</span> <span class="p">:</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">begin</span><span class="p">)</span> <span class="o">/</span> <span class="n">datetime</span><span class="p">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">microseconds</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+        <span class="s">"message"</span><span class="p">:</span> <span class="n">ret</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<p>This leaves us an only option: rely on the cloud to share with us exact measurements.
+On AWS, we can access metrics stored in <a href="https://aws.amazon.com/cloudwatch/">AWS CloudWatch</a>,
+<strong>as long as our function has permissions to access CloudWatch metrics</strong>. We can
+use Python SDK to access metrics with <a href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudwatch.html#CloudWatch.Client.get_metric_data"><code class="language-plaintext highlighter-rouge">get_metric_data</code></a>.
+The query requires multiple parameters and some of them are not that obvious. So
+we start with listing available metrics:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">boto3</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">boto3</span><span class="p">.</span><span class="n">client</span><span class="p">(</span><span class="s">'cloudwatch'</span><span class="p">,</span><span class="s">'us-east-1'</span><span class="p">)</span>
+<span class="n">client</span><span class="p">.</span><span class="n">list_metrics</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>The returned JSON includes multiple various metrics; here, we show those relevant
+to AWS Lambda:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"Metrics"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"Namespace"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AWS/Lambda"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"MetricName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Throttles"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Dimensions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FunctionName"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"Value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"111_dynamic_html_python_128"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"Namespace"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AWS/Lambda"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"MetricName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Errors"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Dimensions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FunctionName"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"Value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"111_dynamic_html_python_128"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"Namespace"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AWS/Lambda"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"MetricName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invocations"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Dimensions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FunctionName"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"Value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"111_dynamic_html_python_128"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"Namespace"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AWS/Lambda"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"MetricName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Duration"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Dimensions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FunctionName"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"Value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"111_dynamic_html_python_128"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"Namespace"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AWS/Lambda"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"MetricName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ConcurrentExecutions"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Dimensions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FunctionName"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"Value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"111_dynamic_html_python_128"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"ResponseMetadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"RequestId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4569d7d8-324e-49a1-b7a9-46893833133a"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"HTTPStatusCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"HTTPHeaders"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"x-amzn-requestid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4569d7d8-324e-49a1-b7a9-46893833133a"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"content-type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text/xml"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"content-length"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9038"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"vary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accept-encoding"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Thu, 09 Jan 2020 17:06:44 GMT"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"RetryAttempts"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>As we can see, for each function, we can measure the number of invocations, execution times,
+concurrency and errors. Continuing with Python API, we can run queries such as the
+one below, computing average duration for all one-hour periods on the 9th of January.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">client</span><span class="p">.</span><span class="n">get_metric_data</span><span class="p">(</span>
+  <span class="n">MetricDataQueries</span><span class="o">=</span><span class="p">[{</span>
+    <span class="s">"Id"</span><span class="p">:</span> <span class="s">"myRequest"</span><span class="p">,</span>
+    <span class="s">"Label"</span><span class="p">:</span> <span class="s">"myRequestLabel"</span><span class="p">,</span>
+    <span class="s">"ReturnData"</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+    <span class="s">"MetricStat"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s">"Period"</span><span class="p">:</span> <span class="mi">3600</span><span class="p">,</span>
+      <span class="s">"Unit"</span><span class="p">:</span> <span class="s">"Milliseconds"</span><span class="p">,</span>
+      <span class="s">"Stat"</span><span class="p">:</span> <span class="s">"Average"</span><span class="p">,</span>
+      <span class="s">"Metric"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">"Namespace"</span><span class="p">:</span> <span class="s">"AWS/Lambda"</span><span class="p">,</span>
+        <span class="s">"MetricName"</span><span class="p">:</span> <span class="s">"Duration"</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}],</span>
+  <span class="n">StartTime</span><span class="o">=</span><span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
+  <span class="n">EndTime</span><span class="o">=</span><span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>The query provides results for each time period:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+  <span class="s">'MetricDataResults'</span><span class="p">:</span> <span class="p">[{</span>
+    <span class="s">'Id'</span><span class="p">:</span> <span class="s">'myRequest'</span><span class="p">,</span>
+    <span class="s">'Label'</span><span class="p">:</span> <span class="s">'myRequestLabel'</span><span class="p">,</span>
+    <span class="s">'Timestamps'</span><span class="p">:</span> <span class="p">[</span>
+      <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span>
+      <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span>
+      <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span>
+      <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span>
+      <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span>
+      <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span>
+      <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">()),</span>
+      <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">tzutc</span><span class="p">())</span>
+    <span class="p">],</span>
+    <span class="s">'Values'</span><span class="p">:</span> <span class="p">[</span>
+      <span class="mf">3529.3</span><span class="p">,</span> <span class="mf">3583.6459999999997</span><span class="p">,</span> <span class="mf">87.735</span><span class="p">,</span> <span class="mf">114.9690909090909</span><span class="p">,</span>
+      <span class="mf">49.782000000000004</span><span class="p">,</span> <span class="mf">8.254999999999999</span><span class="p">,</span> <span class="mf">0.34</span><span class="p">,</span> <span class="mf">0.27</span>
+    <span class="p">],</span>
+    <span class="s">'StatusCode'</span><span class="p">:</span> <span class="s">'Complete'</span>
+  <span class="p">}],</span>
+  <span class="s">'Messages'</span><span class="p">:</span> <span class="p">[],</span>
+  <span class="s">'ResponseMetadata'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">'RequestId'</span><span class="p">:</span> <span class="s">'48c7aedc-e87d-45bb-9045-adf8156be358'</span><span class="p">,</span>
+    <span class="s">'HTTPStatusCode'</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+    <span class="s">'HTTPHeaders'</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s">'x-amzn-requestid'</span><span class="p">:</span> <span class="s">'48c7aedc-e87d-45bb-9045-adf8156be358'</span><span class="p">,</span>
+      <span class="s">'content-type'</span><span class="p">:</span> <span class="s">'text/xml'</span><span class="p">,</span>
+      <span class="s">'content-length'</span><span class="p">:</span> <span class="s">'1240'</span><span class="p">,</span>
+      <span class="s">'date'</span><span class="p">:</span> <span class="s">'Fri, 10 Jan 2020 12:19:11 GMT'</span><span class="p">},</span>
+    <span class="s">'RetryAttempts'</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Although the <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic">set of available statistics</a>
+is quite extensive, including even percentiles to measure tail latency, it is not possible to access raw data since the lowest sampling
+period is 60 seconds. While it’s definitely useful for large applications where
+functions could be executed dozens of thousands of times per day, we can’t do detailed
+experiments and obtain histogram to understand stragglers and outliers.</p>
+
+<p>Fortunately, more detailed data is available in CloudWatch logs. Each function
+execution is followed by the message summarizing not only compute but also
+initialization time:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>START RequestId: bb6b75bb-e119-464c-8e24-1db141d951fa Version: $LATEST
+END RequestId: bb6b75bb-e119-464c-8e24-1db141d951fa
+REPORT RequestId: bb6b75bb-e119-464c-8e24-1db141d951fa
+  Duration: 33.99 ms
+  Billed Duration: 100 ms
+  Memory Size: 128 MB
+  Max Memory Used: 57 MB
+  Init Duration: 55.74 ms
+</code></pre></div></div>
+
+<p>To obtain that information, we don’t have to query logs since it can be returned with every function call when we provide Tail as log type in function invocation. The return will include a base64-encoded log which can be parased with the following code to obtain exact time measurements in milliseconds precision.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">invoke</span><span class="p">(</span>
+  <span class="n">FunctionName</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+  <span class="n">Payload</span><span class="o">=</span><span class="n">payload</span><span class="p">,</span>
+  <span class="n">LogType</span><span class="o">=</span><span class="s">'Tail'</span>
+<span class="p">)</span>
+<span class="k">if</span> <span class="s">'FunctionError'</span> <span class="ow">in</span> <span class="n">ret</span><span class="p">:</span>
+  <span class="n">logging</span><span class="p">.</span><span class="n">error</span><span class="p">(</span><span class="s">'Invocation of {} failed!'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+  <span class="n">logging</span><span class="p">.</span><span class="n">error</span><span class="p">(</span><span class="s">'Input: {}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">)))</span>
+  <span class="k">raise</span> <span class="nb">RuntimeError</span><span class="p">()</span>
+<span class="n">log</span> <span class="o">=</span> <span class="n">base64</span><span class="p">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">ret</span><span class="p">[</span><span class="s">'LogResult'</span><span class="p">])</span>
+<span class="n">vals</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">log</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">).</span><span class="n">split</span><span class="p">(</span><span class="s">'</span><span class="se">\t</span><span class="s">'</span><span class="p">):</span>
+  <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="p">.</span><span class="n">isspace</span><span class="p">():</span>
+    <span class="n">split</span> <span class="o">=</span> <span class="n">line</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">':'</span><span class="p">)</span>
+    <span class="n">vals</span><span class="p">[</span><span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">split</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">return</span> <span class="n">vals</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+  <span class="s">'START RequestId'</span><span class="p">:</span> <span class="s">'2430372f-9fcb-4b9c-8179-8b4b71c86f28'</span><span class="p">,</span>
+  <span class="s">'Duration'</span><span class="p">:</span> <span class="s">'18.37'</span><span class="p">,</span>
+  <span class="s">'Billed Duration'</span><span class="p">:</span> <span class="s">'100'</span><span class="p">,</span>
+  <span class="s">'Memory Size'</span><span class="p">:</span> <span class="s">'128'</span><span class="p">,</span>
+  <span class="s">'Max Memory Used'</span><span class="p">:</span> <span class="s">'57'</span><span class="p">,</span>
+  <span class="s">'Init Duration'</span><span class="p">:</span> <span class="s">'60.74'</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="query-cloudwatch-logs">Query CloudWatch logs</h3>
+
+<p>However, the solution presented above works quite well only when we invoke the
+function synchronously. If we choose ‘Event’ invoke type, the return value consists
+only of return code, <code class="language-plaintext highlighter-rouge">202</code> in case of a correct enqueue of function invocation to
+AWS queue. It’s a useful feature when we want test our function or evaluate performance
+by scheduling multiple invocations at the same time. How can we query the function log afterwards?
+The only option is to use the <a href="https://aws.amazon.com/cloudwatch/">AWS CloudWatch</a>. The query language
+description with samples is available in <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax-examples.html">AWS docs</a>,
+here we focus only on getting <code class="language-plaintext highlighter-rouge">REPORT</code> events that contain information interesting to us.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">region</span> <span class="o">=</span> <span class="s">''</span>
+<span class="n">lambda_function</span> <span class="o">=</span> <span class="s">''</span>
+<span class="n">startTime</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># seconds from epoch
+</span><span class="n">endTime</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># seconds from epoch
+</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">boto3</span><span class="p">.</span><span class="n">client</span><span class="p">(</span><span class="s">'logs'</span><span class="p">,</span> <span class="n">region</span><span class="p">)</span>
+<span class="n">query</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="n">start_query</span><span class="p">(</span>
+    <span class="n">logGroupName</span><span class="o">=</span><span class="s">'/aws/lambda/{}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">lambda_function</span><span class="p">),</span>
+    <span class="n">queryString</span><span class="o">=</span><span class="s">"filter @message like /REPORT/"</span><span class="p">,</span>
+    <span class="n">startTime</span><span class="o">=</span><span class="n">startTime</span><span class="p">,</span>
+    <span class="n">endTime</span><span class="o">=</span><span class="n">endTime</span>
+<span class="p">)</span>
+<span class="n">query_id</span> <span class="o">=</span> <span class="n">query</span><span class="p">[</span><span class="s">'queryId'</span><span class="p">]</span>
+<span class="n">response</span> <span class="o">=</span> <span class="bp">None</span>
+
+<span class="k">while</span> <span class="n">response</span> <span class="o">==</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">response</span><span class="p">[</span><span class="s">'status'</span><span class="p">]</span> <span class="o">==</span> <span class="s">'Running'</span><span class="p">:</span>
+    <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="n">get_query_results</span><span class="p">(</span>
+        <span class="n">queryId</span><span class="o">=</span><span class="n">query_id</span>
+    <span class="p">)</span>
+</code></pre></div></div>
+
+<p>The query result will contain information on results selected</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">"statistics": {
+  "recordsMatched": 15.0,
+  "recordsScanned": 63.0,
+  "bytesScanned": 11802.0
+}
+</span></code></pre></div></div>
+
+<p>and a long array of function reports found for a given time period.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">[
+  {
+    "field": "@timestamp",
+    "value": "2020-01-21 15:24:18.198"
+  },
+  {
+    "field": "@message",
+    "value": "REPORT RequestId: 33792b95-4e1f-4c69-a5f5-5dacea2067cd\tDuration: 25.98 ms\tBilled Duration: 100 ms\tMemory Size: 512 MB\tMax Memory Used: 54 MB\tInit Duration: 1.01 ms\t\n"
+  },
+  {
+    "field": "@ptr",
+    "value": "CnYKPQo5MjYxNDkwODAzNzQ5Oi9hd3MvbGFtYmRhLzQxMV9pbWFnZV9yZWNvZ25pdGlvbl9weXRob25fNTEyEAUSNRoYAgXVWRJZAAAAAMQBWcsABeJxcZAAAACSIAEolaPRxfwtMJaj0cX8LTgDQNwESJ8XUJ0REAIYAQ=="
+  }
+]
+</span></code></pre></div></div>
+
+<p>And what about function result? Well, in that case it’s ignored and the only solution
+to retain it is to export function result into a dedicated S3 bucket.
+The <code class="language-plaintext highlighter-rouge">context</code> argument to every lambda function includes request identification
+`context.aws_request_id’ which can be used to connect output in storage with
+CloudWatch logs.</p>
+
+  </article>
+
+  
+
+</div>
+
+    </div>
+
+    <!-- Footer -->
+
+    
+<footer class="fixed-bottom">
+  <div class="container mt-0">
+    &copy; Copyright 2021 Marcin  Copik.
+    Powered by <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme.
+
+    
+    
+    Last updated: July 20, 2021.
+    
+  </div>
+</footer>
+
+<script type="text/javascript" src="/assets/js/lightbox.js"></script>
+<link rel="stylesheet" href="/assets/css/lightbox.css">
+
+
+  </body>
+
+  <!-- Bootsrap & MDB scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.4.4/umd/popper.min.js" integrity="sha512-eUQ9hGdLjBjY3F41CScH3UX+4JDSI9zXeroz7hJ+RteoCaY+GP/LDoM8AO+Pt+DRFw3nXqsjh9Zsts8hnYv8/A==" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha512-M5KW3ztuIICmVIhjSqXe01oV2bpe248gOxqmlcYrEzAvws7Pw3z6BK0iGbrwvdrUQUhi3eXgtxp5I8PDo9YfjQ==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js" integrity="sha512-Mug9KHKmroQFMLm93zGrjhibM2z2Obg9l6qFG2qKjXEXkMp/VDkI4uju9m4QKPjWSwQ6O2qzZEnJDEeCw0Blcw==" crossorigin="anonymous"></script>
+
+  
+<!-- Mansory & imagesLoaded -->
+<script defer src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script defer src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+<script defer src="/assets/js/mansory.js" type="text/javascript"></script>
+
+
+  
+
+
+<!-- Medium Zoom JS -->
+<script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
+<script src="/assets/js/zoom.js"></script>
+
+
+<!-- Load Common JS -->
+<script src="/assets/js/common.js"></script>
+
+
+</html>

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title>Marcin Copik | Non-root Docker containers.</title>
+<meta name="description" content="Personal webpage">
+
+<!-- Open Graph -->
+
+
+<!-- Bootstrap & MDB -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha512-MoRNloxbStBcD8z3M/2BmnT+rg4IsMxPkXaGh2zD6LGNNFE80W3onsAhRcMAMrSoyWL9xD7Ert0men7vR8LUZg==" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" integrity="sha512-RO38pBRxYH3SoOprtPTD86JFOclM51/XTIdEPh5j8sj4tp8jmQIx26twG52UaLi//hQldfrh7e51WzP9wuP32Q==" crossorigin="anonymous" />
+
+<!-- Fonts & Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"  integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.1/css/academicons.css" integrity="sha512-WgL+hxwL4NdLGGZ4Euo/BmGAcQgyRRJsTQbNPGui+nWlzaF+3f2zf2rh578ccU3YINJCi8LvHyV1OHLJ8effBA==" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons">
+
+<!-- Code Syntax Highlighting -->
+<link rel="stylesheet" href="https://gitcdn.xyz/repo/jwarby/jekyll-pygments-themes/master/github.css" />
+
+<!-- Styles -->
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
+
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="canonical" href="/blog/2019/docker-non-root/">
+
+<!-- JQuery -->
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
+
+<!-- Theming-->
+
+<script src="/assets/js/theme.js"></script>
+<script src="/assets/js/dark_mode.js"></script>
+
+
+
+
+
+
+    
+<!-- MathJax -->
+<script type="text/javascript">
+  window.MathJax = {
+    tex: {
+      tags: 'ams'
+    }
+  };
+</script>
+<script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js"></script>
+<script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+
+  </head>
+
+  <body class="fixed-top-nav ">
+
+    <!-- Header -->
+
+    <header>
+
+    <!-- Nav Bar -->
+    <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
+    <div class="container">
+      
+      <a class="navbar-brand title font-weight-lighter" href="/">
+       Marcin Copik
+      </a>
+      
+      <!-- Navbar Toggle -->
+      <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar top-bar"></span>
+        <span class="icon-bar middle-bar"></span>
+        <span class="icon-bar bottom-bar"></span>
+      </button>
+      <div class="collapse navbar-collapse text-right" id="navbarNav">
+        <ul class="navbar-nav ml-auto flex-nowrap">
+          <!-- About -->
+          <li class="nav-item ">
+            <a class="nav-link" href="/">
+              about
+              
+            </a>
+          </li>
+          
+          <!-- Blog -->
+          <li class="nav-item active">
+            <a class="nav-link" href="/blog/">
+              blog
+              
+            </a>
+          </li>
+          
+          <!-- Other pages -->
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <li class="nav-item ">
+              <a class="nav-link" href="/projects/">
+                projects
+                
+              </a>
+          </li>
+          
+          
+          
+          <li class="nav-item ">
+              <a class="nav-link" href="/publications/">
+                publications
+                
+              </a>
+          </li>
+          
+          
+          
+          <li class="nav-item ">
+              <a class="nav-link" href="/talks/">
+                talks
+                
+              </a>
+          </li>
+          
+          
+          
+          <li class="nav-item ">
+              <a class="nav-link" href="/students/">
+                students
+                
+              </a>
+          </li>
+          
+          
+          
+          <li class="nav-item ">
+              <a class="nav-link" href="/misc/">
+                miscellaneous
+                
+              </a>
+          </li>
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/assets/pdf/cv.pdf" target="_blank" rel="nofollow">
+              CV
+            </a>
+          </li>
+          
+            <div class = "toggle-container">
+              <a id = "light-toggle">
+                  <i class="fas fa-moon"></i>
+                  <i class="fas fa-sun"></i>
+              </a>
+            </div>
+          
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+</header>
+
+
+    <!-- Content -->
+
+    <div class="container mt-5">
+      
+
+<div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Non-root Docker containers.</h1>
+    <p class="post-meta">December 24, 2019</p>
+  </header>
+
+  <article class="post-content">
+    <p>When running a Docker container, root privileges are required to manipulate
+namespaces and file descriptors. This leads to a common issue when users are
+not in the <code class="language-plaintext highlighter-rouge">docker</code> group and thus prevented from performing any action requiring
+assistance from the docker daemon. Let’s assume we configured our installation
+correctly, and we run the docker container as a local user.
+Since Docker containers share the same kernel with the host system, the host and container
+worlds of users and groups are the same. Users are identified by their ids and
+not by their names, ensuring that the same user id corresponds to the same user
+in different containers. We should expect our user to own files and processes
+created in the container, right?</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">docker run -ti --entrypoint "/bin/bash" ubuntu
+</span><span class="gp">root@822ff39102a8:/#</span><span class="w"> </span><span class="nb">ls</span> <span class="nt">-l</span> <span class="nb">.</span>
+<span class="go">total 64
+drwxr-xr-x   2 root root 4096 Dec  2 12:43 bin
+drwxr-xr-x   2 root root 4096 Apr 24  2018 boot
+drwxr-xr-x   5 root root  360 Dec 24 13:26 dev
+drwxr-xr-x   1 root root 4096 Dec 24 13:26 etc
+</span></code></pre></div></div>
+
+<p>Surprise! We can confirm further that the entire process is owned by root:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">PID=$</span><span class="o">(</span>docker inspect <span class="nt">--format</span><span class="o">=</span><span class="s1">'{{ .State.Pid }}'</span> <span class="k">${</span><span class="nv">DOCKER_ID</span><span class="k">}</span><span class="o">)</span>
+<span class="gp">ps -fe | grep $</span>PID
+<span class="go">root      7694  7668  0 14:26 pts/0    00:00:00 /bin/bash
+</span></code></pre></div></div>
+
+<p>In the default configuration, Docker build and containers are executed
+with root as the user. Thus, all files created are owned by root, and Docker processes are root
+processes, as seen from the host. This result is often quite surprising and might be a potential
+security threat - container processes can escape the sandbox environment through
+multiple loopholes, as <a href="https://blog.dragonsector.pl/2019/02/cve-2019-5736-escape-from-docker-and.html?m=1">demonstrated here</a>.
+Although many projects use the default settings in their images, it is recommended
+by Docker <a href="https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#user">to run containers as a non-root process</a>
+and <a href="https://access.redhat.com/documentation/en-us/openshift_container_platform/3.11/html/creating_images/creating-images-guidelines">Red Hat’s OpenShift</a>
+to configure containers as executable by an arbitrary user ID.</p>
+
+<p>What happens if we try to define the user id when starting a standard container?</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">USER=$</span><span class="o">(</span><span class="nb">id</span> <span class="nt">-u</span><span class="o">)</span>
+<span class="gp">GROUP=$</span><span class="o">(</span><span class="nb">id</span> <span class="nt">-g</span><span class="o">)</span>
+<span class="gp">docker run -ti --entrypoint "/bin/bash" --user="$</span>USER:<span class="nv">$GROUP</span><span class="s2">" ubuntu
+</span><span class="go">
+groups: cannot find name for group ID 1000
+I have no name!
+</span></code></pre></div></div>
+
+<p>An unexpected result but an easy one to understand - there’s no corresponding
+entry in neither <code class="language-plaintext highlighter-rouge">/etc/passwd</code> nor <code class="language-plaintext highlighter-rouge">/etc/group</code> for ids provided by us.
+And it gets even worse: now we not only have no home directory, but we can’t even touch the filesystem
+since root owns all files.
+Thus, this solution is not sufficient. What we need is to make the Docker image aware
+of a non-root user by explicitly specifying it during the build. We manually
+create a new user and use Dockerfile command <a href="https://docs.docker.com/engine/reference/builder/#user">USER</a>
+to specify to default user for <code class="language-plaintext highlighter-rouge">RUN</code>, <code class="language-plaintext highlighter-rouge">ENTRYPOINT</code>, and <code class="language-plaintext highlighter-rouge">CMD</code> operations.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM ubuntu
+
+RUN useradd docker_user
+WORKDIR /home/docker_user
+USER docker_user:docker_user
+COPY test.py <span class="nb">.</span>
+</code></pre></div></div>
+
+<p>If we build and run this image as before, checking the permissions of <code class="language-plaintext highlighter-rouge">/home/docker_user</code>
+can only lead to a disappointment - the directory is still owned by root! Unfortunately,
+user change affects only consequent commands, and changing permissions
+manually with <code class="language-plaintext highlighter-rouge">chown -R docker_user:docker_user /home/docker_user</code> is necessary.
+Finally, we notice that while the user home directory has correct permissions,
+the test Python file is still owned by the root. For some reason, <code class="language-plaintext highlighter-rouge">COPY</code> commands
+are unaffected by user changes. We can provide file ownership as an optional argument
+to the command, and finally, we obtain the correct Dockerfile:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM ubuntu
+
+RUN useradd docker_user
+WORKDIR /home/docker_user
+RUN chown -R docker_user:docker_user /home/docker_user
+
+USER docker_user:docker_user
+COPY --chown=docker_user:docker_user test.py .
+</code></pre></div></div>
+
+<p>Creating a standard instance of the container, without additional overriding of
+user, executes the container with the user <code class="language-plaintext highlighter-rouge">docker_user</code> with user ID equal to
+the one used by user starting the container.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">docker run -ti --entrypoint "/bin/bash" ubuntu-user-test
+</span><span class="gp">docker_user@e53ebf506d92:~$</span><span class="w"> </span><span class="nb">id</span>
+<span class="go">uid=1000(docker_user) gid=1000(docker_user) groups=1000(docker_user) 
+</span><span class="gp">docker_user@e53ebf506d92:~$</span><span class="w"> </span><span class="nb">ls</span> <span class="nt">-l</span> <span class="nb">.</span> 
+<span class="go">total 0
+-rw-r--r-- 1 docker_user docker_user 0 Dec 24 16:24 test.py
+</span><span class="gp">docker_user@e53ebf506d92:~$</span><span class="w"> </span><span class="nb">rm </span>test.py
+<span class="gp">docker_user@e53ebf506d92:~$</span><span class="w"> </span><span class="nb">ls</span> | <span class="nb">wc</span> <span class="nt">-l</span>
+<span class="go">0
+</span></code></pre></div></div>
+
+<p>While on the host we observe the following:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">mcopik@mcopik-ThinkPad-T480s id
+uid=1000(mcopik) gid=1000(mcopik) [...]
+</span><span class="gp">mcopik@mcopik-ThinkPad-T480s ps -fe | grep $</span><span class="o">(</span>docker inspect <span class="nt">--format</span><span class="o">=</span><span class="s1">'{{ .State.Pid }}'</span> e53<span class="o">)</span>
+<span class="go">mcopik   21399 21375  0 21:29 pts/0    00:00:00 /bin/bash
+</span></code></pre></div></div>
+
+<p>We can test this change by mounting a volume to observe permissions of files
+created while executing in the container process.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">mcopik@mcopik-ThinkPad-T480s docker run -ti --entrypoint "/bin/bash" --volume $</span><span class="o">(</span><span class="nb">pwd</span><span class="o">)</span>/input-data:/mnt/data ubuntu-user-test
+<span class="gp">docker_user@379cedf1dd24:~$</span><span class="w"> </span><span class="nb">touch</span> /mnt/data/write_file
+<span class="gp">docker_user@379cedf1dd24:~$</span><span class="w"> </span><span class="nb">exit</span>
+<span class="go">mcopik@mcopik-ThinkPad-T480s ls -l input-data
+-rw-r--r-- 1 mcopik mcopik 0 Dec 24 21:35 write_file
+</span></code></pre></div></div>
+
+<p>This solution is not perfect by any means - it works as long as the user ID on the host
+and inside the container match. 
+Furthermore, the process is executing as a non-root
+user, leading to a scenario where we can’t modify the container’s virtual filesystem
+freely. But we achieved a situation that is entirely sufficient for many scenarios: we can
+inspect container processes from the host, and all files and directories created 
+in mounted volumes will no longer be root-owned.</p>
+
+
+  </article>
+
+  
+
+</div>
+
+    </div>
+
+    <!-- Footer -->
+
+    
+<footer class="fixed-bottom">
+  <div class="container mt-0">
+    &copy; Copyright 2021 Marcin  Copik.
+    Powered by <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme.
+
+    
+    
+    Last updated: July 20, 2021.
+    
+  </div>
+</footer>
+
+<script type="text/javascript" src="/assets/js/lightbox.js"></script>
+<link rel="stylesheet" href="/assets/css/lightbox.css">
+
+
+  </body>
+
+  <!-- Bootsrap & MDB scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.4.4/umd/popper.min.js" integrity="sha512-eUQ9hGdLjBjY3F41CScH3UX+4JDSI9zXeroz7hJ+RteoCaY+GP/LDoM8AO+Pt+DRFw3nXqsjh9Zsts8hnYv8/A==" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha512-M5KW3ztuIICmVIhjSqXe01oV2bpe248gOxqmlcYrEzAvws7Pw3z6BK0iGbrwvdrUQUhi3eXgtxp5I8PDo9YfjQ==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js" integrity="sha512-Mug9KHKmroQFMLm93zGrjhibM2z2Obg9l6qFG2qKjXEXkMp/VDkI4uju9m4QKPjWSwQ6O2qzZEnJDEeCw0Blcw==" crossorigin="anonymous"></script>
+
+  
+<!-- Mansory & imagesLoaded -->
+<script defer src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script defer src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+<script defer src="/assets/js/mansory.js" type="text/javascript"></script>
+
+
+  
+
+
+<!-- Medium Zoom JS -->
+<script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
+<script src="/assets/js/zoom.js"></script>
+
+
+<!-- Load Common JS -->
+<script src="/assets/js/common.js"></script>
+
+
+</html>

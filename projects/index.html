@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>Marcin Copik | Marcin Copik</title>
+<title>Marcin Copik | projects</title>
 <meta name="description" content="Personal webpage">
 
 <!-- Open Graph -->
@@ -29,7 +29,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
 
 <link rel="stylesheet" href="/assets/css/main.css">
-<link rel="canonical" href="/blog/">
+<link rel="canonical" href="/projects/">
 
 <!-- JQuery -->
 <!-- jQuery -->
@@ -93,7 +93,7 @@
           </li>
           
           <!-- Blog -->
-          <li class="nav-item active">
+          <li class="nav-item ">
             <a class="nav-link" href="/blog/">
               blog
               
@@ -124,9 +124,11 @@
           
           
           
-          <li class="nav-item ">
+          <li class="nav-item active">
               <a class="nav-link" href="/projects/">
                 projects
+                
+                <span class="sr-only">(current)</span>
                 
               </a>
           </li>
@@ -194,60 +196,265 @@
     <div class="container mt-5">
       <div class="post">
 
-  <div class="header-bar">
-    <h1>Marcin Copik</h1>
-    <h2>tutorials, tips, observations and interesting papers</h2>
-  </div>
+  <header class="post-header">
+    <h1 class="post-title">projects</h1>
+    <p class="post-description"></p>
+  </header>
 
+  <article>
+    
+    <div class="projects">
+  
+  <!-- Display categorized projects -->
+    
+      <h2 class="category">serverless</h2>
+      
+      
+      <!-- Generate cards for each project -->
+      
+        <div class="grid">
+          
+            <div class="grid-item">
+  
+  <a href="/projects/rfaas/">
+  
+    <div class="card hoverable">
+      
+      <img src="/assets/img/rfaas/overview.png" alt="project thumbnail" />
+      
+      <div class="card-body">
+        <h2 class="card-title text-lowercase">RDMA + FaaS = rFaaS</h2>
+        <p class="card-text">Solving the high latency invocations problem of FaaS.</p>
+        <!-- <div class="row ml-1 mr-1 p-0">
+          
+          <div class="github-icon">
+            <div class="icon" data-toggle="tooltip" title="Code Repository">
+              <a href="spcl/rfaas" target="_blank"><i class="fab fa-github gh-icon"></i></a>
+            </div>
+            
+          </div>
+          
+        </div> -->
+      </div>
+    </div>
+  </a>
+</div>
 
-  <ul class="post-list">
+          
+            <div class="grid-item">
+  
+  <a href="/projects/sebs/">
+  
+    <div class="card hoverable">
+      
+      <img src="/assets/img/sebs/benchmark_suite.png" alt="project thumbnail" />
+      
+      <div class="card-body">
+        <h2 class="card-title text-lowercase">SeBS, the serverless benchmark suite</h2>
+        <p class="card-text">Understanding performance challenges in the serverless world.</p>
+        <!-- <div class="row ml-1 mr-1 p-0">
+          
+          <div class="github-icon">
+            <div class="icon" data-toggle="tooltip" title="Code Repository">
+              <a href="spcl/serverless-benchmarks" target="_blank"><i class="fab fa-github gh-icon"></i></a>
+            </div>
+            
+          </div>
+          
+        </div> -->
+      </div>
+    </div>
+  </a>
+</div>
+
+          
+            <div class="grid-item">
+  
+  <a href="/projects/faaskeeper/">
+  
+    <div class="card hoverable">
+      
+      <div class="card-body">
+        <h2 class="card-title text-lowercase">scalable serverless consistency</h2>
+        <p class="card-text"></p>
+        <!-- <div class="row ml-1 mr-1 p-0">
+          
+          <div class="github-icon">
+            <div class="icon" data-toggle="tooltip" title="Code Repository">
+              <a href="todo" target="_blank"><i class="fab fa-github gh-icon"></i></a>
+            </div>
+            
+          </div>
+          
+        </div> -->
+      </div>
+    </div>
+  </a>
+</div>
+
+          
+        </div>
+      
     
-      <li>
-        <h3><a class="post-title" href="/blog/2021/latex-relative-include/">Relative paths in LaTeX.</a></h3>
-        <p class="post-meta">July 19, 2021</p>
-        <p></p>
-      </li>
+      <h2 class="category">hpc</h2>
+      
+      
+      <!-- Generate cards for each project -->
+      
+        <div class="grid">
+          
+            <div class="grid-item">
+  
+  <a href="/projects/prefix_scan/">
+  
+    <div class="card hoverable">
+      
+      <img src="/assets/img/prefix_scan/prefix_scan.png" alt="project thumbnail" />
+      
+      <div class="card-body">
+        <h2 class="card-title text-lowercase">Work-stealing prefix scan</h2>
+        <p class="card-text">Developing new prefix scan algorithms for unbalanced workloads.</p>
+        <!-- <div class="row ml-1 mr-1 p-0">
+          
+          <div class="github-icon">
+            <div class="icon" data-toggle="tooltip" title="Code Repository">
+              <a href="berkels/match-series" target="_blank"><i class="fab fa-github gh-icon"></i></a>
+            </div>
+            
+          </div>
+          
+        </div> -->
+      </div>
+    </div>
+  </a>
+</div>
+
+          
+            <div class="grid-item">
+  
+  <a href="/projects/hpx_gpu/">
+  
+    <div class="card hoverable">
+      
+      <img src="/assets/img/sycl/hpx_internal.png" alt="project thumbnail" />
+      
+      <div class="card-body">
+        <h2 class="card-title text-lowercase">Single-source GPU programming</h2>
+        <p class="card-text">Incorporating Khronos SYCL into HPX.</p>
+        <!-- <div class="row ml-1 mr-1 p-0">
+          
+          <div class="github-icon">
+            <div class="icon" data-toggle="tooltip" title="Code Repository">
+              <a href="mcopik/hpx/tree/compute_sycl" target="_blank"><i class="fab fa-github gh-icon"></i></a>
+            </div>
+            
+          </div>
+          
+        </div> -->
+      </div>
+    </div>
+  </a>
+</div>
+
+          
+            <div class="grid-item">
+  
+  <a href="/projects/prism_gpu/">
+  
+    <div class="card hoverable">
+      
+      <img src="/assets/img/prism/overview.png" alt="project thumbnail" />
+      
+      <div class="card-body">
+        <h2 class="card-title text-lowercase">GPU-accelerated model checking</h2>
+        <p class="card-text">Bringing GPU acceleration to statistical model checking.</p>
+        <!-- <div class="row ml-1 mr-1 p-0">
+          
+          <div class="github-icon">
+            <div class="icon" data-toggle="tooltip" title="Code Repository">
+              <a href="mcopik/prism-fastsim" target="_blank"><i class="fab fa-github gh-icon"></i></a>
+            </div>
+            
+          </div>
+          
+        </div> -->
+      </div>
+    </div>
+  </a>
+</div>
+
+          
+        </div>
+      
     
-      <li>
-        <h3><a class="post-title" href="/blog/2020/dataflow/">C++ Toolchain with Taint Analysis</a></h3>
-        <p class="post-meta">February 24, 2020</p>
-        <p></p>
-      </li>
+      <h2 class="category">program analysis</h2>
+      
+      
+      <!-- Generate cards for each project -->
+      
+        <div class="grid">
+          
+            <div class="grid-item">
+  
+  <a href="/projects/perf_taint/">
+  
+    <div class="card hoverable">
+      
+      <img src="/assets/img/perf_taint/overhead.png" alt="project thumbnail" />
+      
+      <div class="card-body">
+        <h2 class="card-title text-lowercase">perf-taint</h2>
+        <p class="card-text">Enhancing performance modeling with program analysis information.</p>
+        <!-- <div class="row ml-1 mr-1 p-0">
+          
+          <div class="github-icon">
+            <div class="icon" data-toggle="tooltip" title="Code Repository">
+              <a href="spcl/perf-taint" target="_blank"><i class="fab fa-github gh-icon"></i></a>
+            </div>
+            
+          </div>
+          
+        </div> -->
+      </div>
+    </div>
+  </a>
+</div>
+
+          
+            <div class="grid-item">
+  
+  <a href="/projects/cpp_analysis/">
+  
+    <div class="card hoverable">
+      
+      <div class="card-body">
+        <h2 class="card-title text-lowercase">Analysis of Open Source C++ World</h2>
+        <p class="card-text">Analyzing how the open-source community works with C++.</p>
+        <!-- <div class="row ml-1 mr-1 p-0">
+          
+          <div class="github-icon">
+            <div class="icon" data-toggle="tooltip" title="Code Repository">
+              <a href="todo" target="_blank"><i class="fab fa-github gh-icon"></i></a>
+            </div>
+            
+          </div>
+          
+        </div> -->
+      </div>
+    </div>
+  </a>
+</div>
+
+          
+        </div>
+      
     
-      <li>
-        <h3><a class="post-title" href="/blog/2020/azure-functions-monitoring/">Measuring Azure Functions performance</a></h3>
-        <p class="post-meta">January 20, 2020</p>
-        <p></p>
-      </li>
-    
-  </ul>
 
   
-<nav aria-label="Blog page naviation">
-  <ul class="pagination pagination-lg justify-content-center">
-    <li class="page-item disabled">
-      <a class="page-link" href="" tabindex="-1" aria-disabled="">Newer</a>
-    </li>
-    
-      
-        <li class="page-item active"><a class="page-link" href="/blog/index.html" title="Marcin Copik">1</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/blog/page/2/index.html" title="Marcin Copik - page 2">2</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/blog/page/3/index.html" title="Marcin Copik - page 3">3</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/blog/page/4/index.html" title="Marcin Copik - page 4">4</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/blog/page/5/index.html" title="Marcin Copik - page 5">5</a></li>
-      
-    
-    <li class="page-item ">
-      <a class="page-link" href="/blog/page/2/">Older</a>
-    </li>
-  </ul>
-</nav>
 
+</div>
 
+  </article>
 
 </div>
 

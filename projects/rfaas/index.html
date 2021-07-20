@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>Marcin Copik | Marcin Copik</title>
+<title>Marcin Copik | RDMA + FaaS = rFaaS</title>
 <meta name="description" content="Personal webpage">
 
 <!-- Open Graph -->
@@ -29,7 +29,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
 
 <link rel="stylesheet" href="/assets/css/main.css">
-<link rel="canonical" href="/blog/">
+<link rel="canonical" href="/projects/rfaas/">
 
 <!-- JQuery -->
 <!-- jQuery -->
@@ -93,7 +93,7 @@
           </li>
           
           <!-- Blog -->
-          <li class="nav-item active">
+          <li class="nav-item ">
             <a class="nav-link" href="/blog/">
               blog
               
@@ -101,8 +101,6 @@
           </li>
           
           <!-- Other pages -->
-          
-          
           
           
           
@@ -194,60 +192,110 @@
     <div class="container mt-5">
       <div class="post">
 
-  <div class="header-bar">
-    <h1>Marcin Copik</h1>
-    <h2>tutorials, tips, observations and interesting papers</h2>
-  </div>
+  <header class="post-header">
+    <h1 class="post-title">RDMA + FaaS = rFaaS</h1>
+    <p class="post-description">Solving the high latency invocations problem of FaaS.</p>
+  </header>
 
+  <article>
+    
+      <div class="project-summary">
 
-  <ul class="post-list">
-    
-      <li>
-        <h3><a class="post-title" href="/blog/2021/latex-relative-include/">Relative paths in LaTeX.</a></h3>
-        <p class="post-meta">July 19, 2021</p>
-        <p></p>
-      </li>
-    
-      <li>
-        <h3><a class="post-title" href="/blog/2020/dataflow/">C++ Toolchain with Taint Analysis</a></h3>
-        <p class="post-meta">February 24, 2020</p>
-        <p></p>
-      </li>
-    
-      <li>
-        <h3><a class="post-title" href="/blog/2020/azure-functions-monitoring/">Measuring Azure Functions performance</a></h3>
-        <p class="post-meta">January 20, 2020</p>
-        <p></p>
-      </li>
-    
-  </ul>
+      <ul>
+        
+          <li>
+            
+              <a href="/publications#2021rfaas" title="paper" target="_blank" rel="nofollow">
+            
+              <i class="fas fa-scroll"></i><span>Preprint @ arXiv</span>
+              </a>
+          </li>
+        
 
-  
-<nav aria-label="Blog page naviation">
-  <ul class="pagination pagination-lg justify-content-center">
-    <li class="page-item disabled">
-      <a class="page-link" href="" tabindex="-1" aria-disabled="">Newer</a>
-    </li>
-    
-      
-        <li class="page-item active"><a class="page-link" href="/blog/index.html" title="Marcin Copik">1</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/blog/page/2/index.html" title="Marcin Copik - page 2">2</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/blog/page/3/index.html" title="Marcin Copik - page 3">3</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/blog/page/4/index.html" title="Marcin Copik - page 4">4</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/blog/page/5/index.html" title="Marcin Copik - page 5">5</a></li>
-      
-    
-    <li class="page-item ">
-      <a class="page-link" href="/blog/page/2/">Older</a>
-    </li>
-  </ul>
-</nav>
+        
 
+        
+          <li>
+            
+              <a href="https://github.com/spcl/rfaas" title="github" target="_blank" rel="nofollow">
+              <i class="fab fa-github"></i><span>spcl/rfaas</span>
+            
+            </a>
+          </li>
+        
 
+        
+
+        
+      </ul>
+      </div>
+    
+    <div style="vertical-align:middle; text-align:center">
+    <img class="img-fluid rounded z-depth-1" src="/assets/img/rfaas/utilization.png" alt="" title="Piz Daint utilization." />
+</div>
+<div class="caption">
+  The utilization of CPU cores in the Piz Daint supercomputer, April 2021.
+</div>
+
+<p>The world of supercomputing is dominated by the MPI programming model and batch systems.
+These solutions provide the high performance needed for scalable scientific computing, but
+they don’t make it particularly difficult to achieve high machine utilization.
+As shown on the CPU utilization graph from Piz Daint (above), many resources are available
+only for a short time, and the long-running and persistent batch jobs cannot use them.</p>
+
+<div style="vertical-align:middle; text-align:center">
+    <img class="img-fluid rounded z-depth-1" src="/assets/img/rfaas/overview.png" alt="" title="rFaaS overview." />
+</div>
+<div class="caption">
+  rFaaS combines the flexibility of FaaS and high-performance of batch jobs.
+</div>
+
+<p>FaaS provides an elastic resource management system that could address this utilization problem.
+However, serverless struggles to achieve the performance needed in high-performance computing:
+slow invocations, low network bandwidth, and the overheads of the FaaS management system
+make it difficult to incorporate serverless functions when every millisecond counts.
+Therefore, we decided to combine the best of both worlds: <strong>elasticity of FaaS</strong> and <strong>high-performance
+of cluster batch systems</strong>. We built a new FaaS platform with RDMA-accelerated network transport.</p>
+
+<div style="vertical-align:middle; text-align:center">
+    <img class="img-fluid rounded z-depth-1" src="/assets/img/rfaas/lifetime.png" alt="" title="rFaaS invocations." />
+</div>
+<div class="caption">
+  The lifetime of rFaaS invocations.
+</div>
+
+<p>In rFaaS, the centralized schedulers and API gateway are replaced with a decentralized allocation mechanism.
+Instead of using a traditional cloud trigger, MPI applications query executor servers,
+obtain resource allocation and establish RDMA connections to remote workers.
+Every function is invoked by writing input data directly to the memory of the worker.
+This allows us to achieve <strong>a single-digit microsecond hot invocation latency</strong> - hot invocations
+add less than 350 nanoseconds overhead on top of the fastest available network transmission.</p>
+
+<div style="vertical-align:middle; text-align:center">
+  <img class="img-fluid rounded z-depth-1" src="/assets/img/rfaas/system.png" alt="" title="rFaaS with batch systems." />
+</div>
+<div class="caption">
+  The integration of rFaaS with cluster batch systems and MPI applications.
+</div>
+
+<p>rFaaS comes with a dedicated resource manager to notify MPI jobs about changing resource availability
+in an efficient and scalable manner. In addition, the accounting system utilizes RDMA atomic operations to minimize the overheads of user management.
+In rigid MPI jobs, processes (ranks) allocate and use functions independently, allowing for 
+decentralized offloading parts of the computation to the idle cluster capacity.</p>
+
+<div style="vertical-align:middle; text-align:center">
+    <img class="img-fluid rounded z-depth-1" src="/assets/img/rfaas/invocation_times.png" alt="" title="Invocation latencies.." />
+</div>
+<div class="caption">
+  Invocation latencies of FaaS frameworks.
+</div>
+
+<p>We have shown that rFaaS invocations provide the lowest latency and the highest bandwidth
+compared to state-of-the-art solutions. Furthermore, we have shown that rFaaS functions
+can be integrated into scientific applications to provide cheap and easy acceleration.
+The preprint is of the paper is <a href="/publications#2021rfaas">now available</a>.</p>
+
+  </article>
 
 </div>
 

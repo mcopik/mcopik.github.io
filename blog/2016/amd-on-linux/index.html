@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>Marcin Copik | Marcin Copik</title>
+<title>Marcin Copik | Between fglrx and AMDGU&#58; AMD devices on Linux</title>
 <meta name="description" content="Personal webpage">
 
 <!-- Open Graph -->
@@ -29,7 +29,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
 
 <link rel="stylesheet" href="/assets/css/main.css">
-<link rel="canonical" href="/blog/">
+<link rel="canonical" href="/blog/2016/amd-on-linux/">
 
 <!-- JQuery -->
 <!-- jQuery -->
@@ -122,8 +122,6 @@
           
           
           
-          
-          
           <li class="nav-item ">
               <a class="nav-link" href="/projects/">
                 projects
@@ -192,62 +190,34 @@
     <!-- Content -->
 
     <div class="container mt-5">
-      <div class="post">
+      
 
-  <div class="header-bar">
-    <h1>Marcin Copik</h1>
-    <h2>tutorials, tips, observations and interesting papers</h2>
-  </div>
+<div class="post">
 
+  <header class="post-header">
+    <h1 class="post-title">Between fglrx and AMDGU&#58; AMD devices on Linux</h1>
+    <p class="post-meta">November 2, 2016</p>
+  </header>
 
-  <ul class="post-list">
-    
-      <li>
-        <h3><a class="post-title" href="/blog/2021/latex-relative-include/">Relative paths in LaTeX.</a></h3>
-        <p class="post-meta">July 19, 2021</p>
-        <p></p>
-      </li>
-    
-      <li>
-        <h3><a class="post-title" href="/blog/2020/dataflow/">C++ Toolchain with Taint Analysis</a></h3>
-        <p class="post-meta">February 24, 2020</p>
-        <p></p>
-      </li>
-    
-      <li>
-        <h3><a class="post-title" href="/blog/2020/azure-functions-monitoring/">Measuring Azure Functions performance</a></h3>
-        <p class="post-meta">January 20, 2020</p>
-        <p></p>
-      </li>
-    
-  </ul>
+  <article class="post-content">
+    <p>GPU drivers, whether they have been designed by NVIDIA or AMD, have always been a nightmare on Linux and users have been forced to use badly performing opensource drivers or propietary drivers which could easily crash due to dependencies, different kernel versions or bugs.
+It seems that at least AMD wants to change this sorry state, by introducing a new, unified and mostly open-source Linux driver stack known as <a href="http://andrew.technology/amd-unified-linux-driver-amdgpu/">AMDGPU.</a> Although this change is definitely very exciting and I hope that RadeonOpenCompute is going to improve current situation with GPGPU on Linux, it won’t really happen until 2017. So what is the situation now?</p>
+
+<p>If you have an older AMD GPU, a pre-GCN (Graphics Core Next), you are stuck with deprecated fglrx. It simply won’t compile with a newer kernel. Fortunately, long time supports OS can give you lifetime till at least 2019, for example Ubuntu 14.04 LTS. This Ubuntu version is quite important here because we are stuck with our server on this Ubuntu 14.04.4 because currently it is the only Debian-based distro supported by ROCm, support for 16.04 is <em>experimental</em>. Our experience so far suggests that even stable release may generate a lot of problems and that’s why I want to avoid any possible upgrades.</p>
+
+<p>I have had a lot of fun with Radeon Open Compute and one of results of my internship at the <a href="http://stellar.cct.lsu.edu/">STE||AR Group</a> were many opened issues regarding compiler <a href="https://github.com/RadeonOpenCompute/hcc">hcc</a>. <a href="https://github.com/RadeonOpenCompute/hcc/issues/99">One of them</a> stopped further progress but I could make use of our GPUs for OpenCL development until it’s fixed. <a href="https://github.com/RadeonOpenCompute/ROCm/issues/31">OpenCL support won’t come to ROCm before December</a> which forced me to switch kernels and use traditional GPU driver.</p>
+
+<p>Here starts the fun part! With Ubuntu 14.04.4 running on 4.4.x kernel, fgrlx is already gone. AMDGPU can be found in repository but it seems to not provide OpenCL support for device; simply device can’t be located by AMD APP. But we still have AMDGPU-PRO, right? Even driver download on AMD webpage, for our R9 Nano running Ubuntu 14.04.4, forwards to this driver… which has only download version for 16.04! And it is simply not a typo. The driver package depends on libvdpau1 in version &gt;= 1.1 which <a href="http://packages.ubuntu.com/trusty-updates/libvdpau1">can’t be satisfied in this release</a>. Polluting distribution with packages from next release usually ends with a dependency hell and a disaster during upgrade. And judging by Internet discussions, I can only join other confused and disappointed users.</p>
+
+<p>Fortunately there is a hero <a href="https://community.amd.com/thread/202821">who patched the old driver</a> and obtained a compatibility with newer kernels. To be honest, I didn’t expect any luck with this driver but it works! So far, so good, OpenCL applications don’t crash and I can continue my work, meanwhile hopefully waiting for a stable release of ROCm supporting OpenCL.</p>
+
+<p>Once again, open source saves the day.</p>
+
+<p><em>Edit at 21th January, 2016</em>: according to documentation from <a href="https://www.codeplay.com/products/computesuite/computecpp/">ComputeCpp Community Edition 0.1.2</a>, AMDPGPU-PRO comes with no support for OpenCL SPIR 1.2. It is a significant regression when compared to fglrx. My SYCL code runs fine with the previous driver on Fiji GPUs.</p>
+
+  </article>
 
   
-<nav aria-label="Blog page naviation">
-  <ul class="pagination pagination-lg justify-content-center">
-    <li class="page-item disabled">
-      <a class="page-link" href="" tabindex="-1" aria-disabled="">Newer</a>
-    </li>
-    
-      
-        <li class="page-item active"><a class="page-link" href="/blog/index.html" title="Marcin Copik">1</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/blog/page/2/index.html" title="Marcin Copik - page 2">2</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/blog/page/3/index.html" title="Marcin Copik - page 3">3</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/blog/page/4/index.html" title="Marcin Copik - page 4">4</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/blog/page/5/index.html" title="Marcin Copik - page 5">5</a></li>
-      
-    
-    <li class="page-item ">
-      <a class="page-link" href="/blog/page/2/">Older</a>
-    </li>
-  </ul>
-</nav>
-
-
 
 </div>
 

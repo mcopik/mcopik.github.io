@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>Marcin Copik | Marcin Copik</title>
+<title>Marcin Copik | Relative paths in LaTeX.</title>
 <meta name="description" content="Personal webpage">
 
 <!-- Open Graph -->
@@ -29,7 +29,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
 
 <link rel="stylesheet" href="/assets/css/main.css">
-<link rel="canonical" href="/blog/">
+<link rel="canonical" href="/blog/2021/latex-relative-include/">
 
 <!-- JQuery -->
 <!-- jQuery -->
@@ -122,8 +122,6 @@
           
           
           
-          
-          
           <li class="nav-item ">
               <a class="nav-link" href="/projects/">
                 projects
@@ -192,62 +190,57 @@
     <!-- Content -->
 
     <div class="container mt-5">
-      <div class="post">
+      
 
-  <div class="header-bar">
-    <h1>Marcin Copik</h1>
-    <h2>tutorials, tips, observations and interesting papers</h2>
-  </div>
+<div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Relative paths in LaTeX.</h1>
+    <p class="post-meta">July 19, 2021</p>
+  </header>
+
+  <article class="post-content">
+    <p>Recently, I started to gather the LaTeX tools, scripts, and useful imports in a single
+repository: <a href="https://github.com/mcopik/latex-tools">latex-tools @ GitHub.com</a>.
+I designed it to have a single entry point <code class="language-plaintext highlighter-rouge">includes.tex</code>, and for each paper, I could add this
+repository as a submodule.</p>
+
+<p>But how should I include such a file in a LaTeX document? One option is to use <code class="language-plaintext highlighter-rouge">include</code>, but it mustn’t
+be used in preambles which disqualifies it from handling package imports.
+Instead, we can use <code class="language-plaintext highlighter-rouge">input</code> that works similarly to the C/C++ <code class="language-plaintext highlighter-rouge">#include</code>, doing a simple copy&amp;paste.
+It does not simplify the build and development, as <code class="language-plaintext highlighter-rouge">include</code> does by splitting <code class="language-plaintext highlighter-rouge">.tex</code> files
+into different compilation units, which is great for books and theses with many chapters.
+However, you can use <code class="language-plaintext highlighter-rouge">input</code> with almost all parts of the document and you are allowed to use
+nested inputs.</p>
+
+<p>There’s one caveat, though: <code class="language-plaintext highlighter-rouge">input</code> does not support relative imports.
+So, for example, if we have the following directory structure, we won’t be able to
+use <code class="language-plaintext highlighter-rouge">\usepackage{dependency}</code> in <code class="language-plaintext highlighter-rouge">includes.tex</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+-- paper.tex
++-- latex-tools
+|   +-- dependency.sty
+|   +-- includes.tex
+</code></pre></div></div>
+
+<p>The paths in <code class="language-plaintext highlighter-rouge">input</code> are always relative to the main file. Thus, we end up with an error:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>! LaTeX Error: File `dependency.sty' not found.
+</code></pre></div></div>
+
+<p>Fortunately, there’s an <a href="https://www.ctan.org/pkg/import"><code class="language-plaintext highlighter-rouge">import</code></a> package to the rescue!
+The last <code class="language-plaintext highlighter-rouge">/</code> in directory name is important, otherwise the path is not correctly processed.</p>
+
+<div class="language-latex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">\usepackage</span><span class="p">{</span>import<span class="p">}</span>
+<span class="k">\subimport</span><span class="p">{</span>latex-tools/<span class="p">}{</span>includes.tex<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Thus, we can easily decompose LaTeX sources, tables, and graphics into a hierarchy of modules.</p>
 
 
-  <ul class="post-list">
-    
-      <li>
-        <h3><a class="post-title" href="/blog/2021/latex-relative-include/">Relative paths in LaTeX.</a></h3>
-        <p class="post-meta">July 19, 2021</p>
-        <p></p>
-      </li>
-    
-      <li>
-        <h3><a class="post-title" href="/blog/2020/dataflow/">C++ Toolchain with Taint Analysis</a></h3>
-        <p class="post-meta">February 24, 2020</p>
-        <p></p>
-      </li>
-    
-      <li>
-        <h3><a class="post-title" href="/blog/2020/azure-functions-monitoring/">Measuring Azure Functions performance</a></h3>
-        <p class="post-meta">January 20, 2020</p>
-        <p></p>
-      </li>
-    
-  </ul>
+  </article>
 
   
-<nav aria-label="Blog page naviation">
-  <ul class="pagination pagination-lg justify-content-center">
-    <li class="page-item disabled">
-      <a class="page-link" href="" tabindex="-1" aria-disabled="">Newer</a>
-    </li>
-    
-      
-        <li class="page-item active"><a class="page-link" href="/blog/index.html" title="Marcin Copik">1</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/blog/page/2/index.html" title="Marcin Copik - page 2">2</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/blog/page/3/index.html" title="Marcin Copik - page 3">3</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/blog/page/4/index.html" title="Marcin Copik - page 4">4</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/blog/page/5/index.html" title="Marcin Copik - page 5">5</a></li>
-      
-    
-    <li class="page-item ">
-      <a class="page-link" href="/blog/page/2/">Older</a>
-    </li>
-  </ul>
-</nav>
-
-
 
 </div>
 

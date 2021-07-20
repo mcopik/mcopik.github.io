@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title>Marcin Copik | SeBS, the serverless benchmark suite</title>
+<meta name="description" content="Personal webpage">
+
+<!-- Open Graph -->
+
+
+<!-- Bootstrap & MDB -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha512-MoRNloxbStBcD8z3M/2BmnT+rg4IsMxPkXaGh2zD6LGNNFE80W3onsAhRcMAMrSoyWL9xD7Ert0men7vR8LUZg==" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" integrity="sha512-RO38pBRxYH3SoOprtPTD86JFOclM51/XTIdEPh5j8sj4tp8jmQIx26twG52UaLi//hQldfrh7e51WzP9wuP32Q==" crossorigin="anonymous" />
+
+<!-- Fonts & Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"  integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.1/css/academicons.css" integrity="sha512-WgL+hxwL4NdLGGZ4Euo/BmGAcQgyRRJsTQbNPGui+nWlzaF+3f2zf2rh578ccU3YINJCi8LvHyV1OHLJ8effBA==" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons">
+
+<!-- Code Syntax Highlighting -->
+<link rel="stylesheet" href="https://gitcdn.xyz/repo/jwarby/jekyll-pygments-themes/master/github.css" />
+
+<!-- Styles -->
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
+
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="canonical" href="/projects/sebs/">
+
+<!-- JQuery -->
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
+
+<!-- Theming-->
+
+<script src="/assets/js/theme.js"></script>
+<script src="/assets/js/dark_mode.js"></script>
+
+
+
+
+
+
+    
+<!-- MathJax -->
+<script type="text/javascript">
+  window.MathJax = {
+    tex: {
+      tags: 'ams'
+    }
+  };
+</script>
+<script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js"></script>
+<script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+
+  </head>
+
+  <body class="fixed-top-nav ">
+
+    <!-- Header -->
+
+    <header>
+
+    <!-- Nav Bar -->
+    <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
+    <div class="container">
+      
+      <a class="navbar-brand title font-weight-lighter" href="/">
+       Marcin Copik
+      </a>
+      
+      <!-- Navbar Toggle -->
+      <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar top-bar"></span>
+        <span class="icon-bar middle-bar"></span>
+        <span class="icon-bar bottom-bar"></span>
+      </button>
+      <div class="collapse navbar-collapse text-right" id="navbarNav">
+        <ul class="navbar-nav ml-auto flex-nowrap">
+          <!-- About -->
+          <li class="nav-item ">
+            <a class="nav-link" href="/">
+              about
+              
+            </a>
+          </li>
+          
+          <!-- Blog -->
+          <li class="nav-item ">
+            <a class="nav-link" href="/blog/">
+              blog
+              
+            </a>
+          </li>
+          
+          <!-- Other pages -->
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <li class="nav-item ">
+              <a class="nav-link" href="/projects/">
+                projects
+                
+              </a>
+          </li>
+          
+          
+          
+          <li class="nav-item ">
+              <a class="nav-link" href="/publications/">
+                publications
+                
+              </a>
+          </li>
+          
+          
+          
+          <li class="nav-item ">
+              <a class="nav-link" href="/talks/">
+                talks
+                
+              </a>
+          </li>
+          
+          
+          
+          <li class="nav-item ">
+              <a class="nav-link" href="/students/">
+                students
+                
+              </a>
+          </li>
+          
+          
+          
+          <li class="nav-item ">
+              <a class="nav-link" href="/misc/">
+                miscellaneous
+                
+              </a>
+          </li>
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/assets/pdf/cv.pdf" target="_blank" rel="nofollow">
+              CV
+            </a>
+          </li>
+          
+            <div class = "toggle-container">
+              <a id = "light-toggle">
+                  <i class="fas fa-moon"></i>
+                  <i class="fas fa-sun"></i>
+              </a>
+            </div>
+          
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+</header>
+
+
+    <!-- Content -->
+
+    <div class="container mt-5">
+      <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">SeBS, the serverless benchmark suite</h1>
+    <p class="post-description">Understanding performance challenges in the serverless world.</p>
+  </header>
+
+  <article>
+    
+      <div class="project-summary">
+
+      <ul>
+        
+          <li>
+            
+              <a href="/publications#copik2020sebs" title="paper" target="_blank" rel="nofollow">
+            
+              <i class="fas fa-scroll"></i><span>Paper @ Middleware 2021</span>
+              </a>
+          </li>
+        
+
+        
+
+        
+          <li>
+            
+              <a href="https://github.com/spcl/serverless-benchmarks" title="github" target="_blank" rel="nofollow">
+              <i class="fab fa-github"></i><span>spcl/serverless-benchmarks</span>
+            
+            </a>
+          </li>
+        
+
+        
+
+        
+      </ul>
+      </div>
+    
+    <p>Serverless computing gained significant traction in industry and academia and allowed
+developers to build scalable and elastic applications.
+Nevertheless, many authors raised several important issues, including unpredictable and
+reduced performance, and the black-box nature of commercial systems made it difficult to gain
+insights into the limitations and performance challenges of FaaS systems.
+But the new field was lacking an automatic, representative, and easy-to-use benchmarking platform.
+Therefore, we built <strong>SeBS</strong>, a serverless benchmarking suite, to fill that gap and provide clear and fair baselines
+for the comparative evaluation of serverless providers.</p>
+
+<div style="vertical-align:middle; text-align:center">
+  <a href="/assets/img/sebs/platform_model.png">
+    <img class="img-fluid rounded z-depth-1" src="/assets/img/sebs/platform_model.png" alt="" title="FaaS platform model." />
+  </a>
+</div>
+<div class="caption">
+  <b>FaaS platform model</b>: function invocations are triggered (1), sent to cloud executon servers (2), and use cloud storage (3, 4). (click to zoom)
+</div>
+
+<p>In our work, we consider an abstract and high-level view of the serverless platform that allows us
+to design a benchmarking suite that is independent of a specific cloud provider.
+With a clear decomposition of the system, we can design experiments measuring the performance and overheads of different components of the FaaS platform.</p>
+
+<div style="vertical-align:middle; text-align:center">
+  <a href="/assets/img/sebs/benchmark_suite.png">
+    <img class="img-fluid rounded z-depth-1" src="/assets/img/sebs/benchmark_suite.png" alt="" title="SeBS overview." />
+  </a>
+</div>
+<div class="caption">
+  <b>SeBS</b>: the overview of our benchmarking suite with applications, metrics, experiments, and a deployment toolkit.
+</div>
+
+<p>While prior research work in the field included serverless benchmark suites, often the benchmarks
+included only functions with an input, without any automatization of the deployment to the cloud.
+Therefore, we build SeBS with <strong>a fully automatic framework for building, deploying, and invoking
+functions</strong> to guide users towards reproducible results.
+Users must only select the platform and provide credentials, and all necessary cloud resources are created automatically.
+The experiments are conducted automatically, and the results are parsed into a data frame format for easy analysis and plotting.</p>
+
+<div style="vertical-align:middle; text-align:center">
+  <a href="/assets/img/sebs/benchmarks.png">
+    <img class="img-fluid rounded z-depth-1" src="/assets/img/sebs/benchmarks.png" alt="" title="Benchmark collection." />
+  </a>
+</div>
+<div class="caption">
+  <b>SeBS benchmark applications</b> include a selection of Python and Node.js functions.
+</div>
+
+<p>Our benchmark suite includes multiple functions to cover <strong>the broad spectrum of serverless applications</strong>,
+from lightweight utilities and website backends, up to computationally intensive multimedia
+and machine learning functions.
+The functions are implemented in a platform-agnostic way, and we deploy small and light-weight
+shims to adapt function and storage interfaces to the selected FaaS system.
+The platform is modular, and thanks to the abstract system view, it can be easily extended
+to support new serverless platforms.</p>
+
+<div style="vertical-align:middle; text-align:center">
+  <a href="/assets/img/sebs/cold_startups.png">
+    <img class="img-fluid rounded z-depth-1" src="/assets/img/sebs/cold_startups.png" alt="" title="Cold startups." />
+  </a>
+</div>
+<div class="caption">
+  <b>Cold startup overheads</b>: significant penalty in functions with large deployment package and runtime shorter than one second.
+</div>
+
+<p>Our work resulted in multiple novel findings into the performance, reliability, and portability
+of serverless platforms. In addition to extensive performance evaluation of
+different workloads, we identified portability issues between providers, analyzed the
+<strong>cold startup</strong> cost and overhead, and we quantified the <strong>performance cost of application “FaaSification”</strong>
+with a comparison against an IaaS deployment.</p>
+
+<div class="row justify-content-sm-center align-items-center">
+  <div class="col-sm-8 mt-3 mt-md-0">
+    <a href="/assets/img/sebs/cost_invocations.png">
+      <img class="img-fluid rounded z-depth-1" src="/assets/img/sebs/cost_invocations.png" alt="" title="Functions invocations cost." />
+    </a>
+  </div>
+  <div class="col-sm-4 mt-3 mt-md-0">
+    <a href="/assets/img/sebs/cost_efficiency.png">
+      <img class="img-fluid rounded z-depth-1" src="/assets/img/sebs/cost_efficiency.png" alt="" title="Resource utilization efficiency." />
+    </a>
+  </div>
+</div>
+<div class="caption">
+  <b>Serverless cost</b>: the cost of one milion invocations (left), and the utiliation of CPU and memory resources (right).
+</div>
+
+<p>We conducted a detailed <strong>cost analysis</strong> of functions, showing essential cost differences between
+cloud providers and significant underutilization of provided resources.
+These results confirm prior findings from non-serverless applications that CPU and memory consumption
+are rarely correlated.
+The current price systems lead to resource waste, as computationally-intensive functions must
+allocate large amounts of unused memory to obtain sufficient CPU power.
+The overallocation limits the number of active sandboxes on a server and negatively affects the utilization
+boost provided by FaaS platforms.</p>
+
+<div style="vertical-align:middle; text-align:center">
+  <a href="/assets/img/sebs/invocations_overheads.png">
+    <img class="img-fluid rounded z-depth-1" src="/assets/img/sebs/invocations_overheads.png" alt="" title="Cold startups." />
+  </a>
+</div>
+<div class="caption">
+  <b>Invocation overheads</b>: comparing timestamps between function server and client, with the help of a clock drift estimation technique.
+</div>
+
+<p>Because of the black-box nature of serverless systems, it isn’t easy to measure the invocation overheads accurately;
+after all, we don’t know how much time passes between the arrival of the request at the cloud trigger
+system and the beginning of an invocation.
+Some benchmarks approximate this by measuring the difference between the function execution time reported
+by the cloud provider and the total execution time observed by the client.
+To find the most accurate estimation, we estimate the <em>clock drift</em> between function
+execution sandbox and client.
+With that information, we can directly compare timestamps obtained on the client and the function server.
+After subtracting connection setup overheads provided by curl, we provide <strong>an accurate
+estimation of the invocation overhead</strong>.
+The results show that while warm starts increase linearly with the payload size, as expected,
+the cold starts on some of the platforms indicate significant bottlenecks and nondeterminism.</p>
+
+<p>More insights and results can be found in <a href="/publications#2020sebs">our benchmarking paper</a> that has been accepted at Middleware 2021.
+<a href="https://github.com/spcl/serverless-benchmarks">The open-source release of SeBS is available on GitHub</a> - try it today!
+It supports AWS Lambda, Azure Functions, Google Cloud Functions, and OpenWhisk support is coming soon!</p>
+
+  </article>
+
+</div>
+
+    </div>
+
+    <!-- Footer -->
+
+    
+<footer class="fixed-bottom">
+  <div class="container mt-0">
+    &copy; Copyright 2021 Marcin  Copik.
+    Powered by <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme.
+
+    
+    
+    Last updated: July 20, 2021.
+    
+  </div>
+</footer>
+
+<script type="text/javascript" src="/assets/js/lightbox.js"></script>
+<link rel="stylesheet" href="/assets/css/lightbox.css">
+
+
+  </body>
+
+  <!-- Bootsrap & MDB scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.4.4/umd/popper.min.js" integrity="sha512-eUQ9hGdLjBjY3F41CScH3UX+4JDSI9zXeroz7hJ+RteoCaY+GP/LDoM8AO+Pt+DRFw3nXqsjh9Zsts8hnYv8/A==" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha512-M5KW3ztuIICmVIhjSqXe01oV2bpe248gOxqmlcYrEzAvws7Pw3z6BK0iGbrwvdrUQUhi3eXgtxp5I8PDo9YfjQ==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js" integrity="sha512-Mug9KHKmroQFMLm93zGrjhibM2z2Obg9l6qFG2qKjXEXkMp/VDkI4uju9m4QKPjWSwQ6O2qzZEnJDEeCw0Blcw==" crossorigin="anonymous"></script>
+
+  
+<!-- Mansory & imagesLoaded -->
+<script defer src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script defer src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+<script defer src="/assets/js/mansory.js" type="text/javascript"></script>
+
+
+  
+
+
+<!-- Medium Zoom JS -->
+<script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
+<script src="/assets/js/zoom.js"></script>
+
+
+<!-- Load Common JS -->
+<script src="/assets/js/common.js"></script>
+
+
+</html>

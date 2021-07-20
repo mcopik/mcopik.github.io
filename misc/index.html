@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>Marcin Copik | Marcin Copik</title>
+<title>Marcin Copik | miscellaneous</title>
 <meta name="description" content="Personal webpage">
 
 <!-- Open Graph -->
@@ -29,7 +29,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
 
 <link rel="stylesheet" href="/assets/css/main.css">
-<link rel="canonical" href="/blog/">
+<link rel="canonical" href="/misc/">
 
 <!-- JQuery -->
 <!-- jQuery -->
@@ -93,7 +93,7 @@
           </li>
           
           <!-- Blog -->
-          <li class="nav-item active">
+          <li class="nav-item ">
             <a class="nav-link" href="/blog/">
               blog
               
@@ -160,9 +160,11 @@
           
           
           
-          <li class="nav-item ">
+          <li class="nav-item active">
               <a class="nav-link" href="/misc/">
                 miscellaneous
+                
+                <span class="sr-only">(current)</span>
                 
               </a>
           </li>
@@ -194,60 +196,107 @@
     <div class="container mt-5">
       <div class="post">
 
-  <div class="header-bar">
-    <h1>Marcin Copik</h1>
-    <h2>tutorials, tips, observations and interesting papers</h2>
-  </div>
+  <header class="post-header">
+    <h1 class="post-title">miscellaneous</h1>
+    <p class="post-description"></p>
+  </header>
 
+  <article>
+    
+    <p>This page contains a list of resources that I have found particularly useful and helpful
+during my academic career, including tools that I recommend to my students,
+as well as a few interesting talks, podcasts, and texts related to my hobbies.</p>
 
-  <ul class="post-list">
-    
-      <li>
-        <h3><a class="post-title" href="/blog/2021/latex-relative-include/">Relative paths in LaTeX.</a></h3>
-        <p class="post-meta">July 19, 2021</p>
-        <p></p>
-      </li>
-    
-      <li>
-        <h3><a class="post-title" href="/blog/2020/dataflow/">C++ Toolchain with Taint Analysis</a></h3>
-        <p class="post-meta">February 24, 2020</p>
-        <p></p>
-      </li>
-    
-      <li>
-        <h3><a class="post-title" href="/blog/2020/azure-functions-monitoring/">Measuring Azure Functions performance</a></h3>
-        <p class="post-meta">January 20, 2020</p>
-        <p></p>
-      </li>
-    
-  </ul>
+<ul class="no_toc" id="markdown-toc">
+  <li><a href="#tools" id="markdown-toc-tools">tools</a></li>
+  <li><a href="#meta" id="markdown-toc-meta">meta</a></li>
+  <li><a href="#history" id="markdown-toc-history">history</a></li>
+</ul>
 
-  
-<nav aria-label="Blog page naviation">
-  <ul class="pagination pagination-lg justify-content-center">
-    <li class="page-item disabled">
-      <a class="page-link" href="" tabindex="-1" aria-disabled="">Newer</a>
-    </li>
-    
-      
-        <li class="page-item active"><a class="page-link" href="/blog/index.html" title="Marcin Copik">1</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/blog/page/2/index.html" title="Marcin Copik - page 2">2</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/blog/page/3/index.html" title="Marcin Copik - page 3">3</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/blog/page/4/index.html" title="Marcin Copik - page 4">4</a></li>
-      
-        <li class="page-item "><a class="page-link" href="/blog/page/5/index.html" title="Marcin Copik - page 5">5</a></li>
-      
-    
-    <li class="page-item ">
-      <a class="page-link" href="/blog/page/2/">Older</a>
-    </li>
-  </ul>
-</nav>
+<h2 id="tools">tools</h2>
 
+<p>The list includes various engineering tools that are useful or even necessary when working on
+a thesis or a research project.</p>
 
+<ul>
+  <li>
+    <p><a href="https://www.valgrind.org/docs/manual/quick-start.html">valgrind</a> - the most standard and useful tool for debugging 
+memory errors and bugs on Linux.</p>
+  </li>
+  <li>
+    <p><a href="https://ccache.dev/">ccache</a> - speed up compilation of C/C++ programs.</p>
+  </li>
+</ul>
+
+<h2 id="meta">meta</h2>
+
+<ul>
+  <li>
+    <p><a href="https://www.youtube.com/watch?v=a1zDuOPkMSw">You and Your Research</a> by Richard Hamming,
+a must-watch for PhDs, researchers, and engineers.</p>
+  </li>
+  <li>
+    <p><a href="https://spcl.inf.ethz.ch/Teaching/2020-dphpc/hoefler-scientific-benchmarking.pdf">Scientific Benchmarking of Parallel Computing Systems: twelve ways to tell the masses when reporting performance results</a> - the “art of the scientific benchmarking” paper
+by Prof. Hoefler, covering the most important aspects of gathering and interpreting measurements
+data on computing systems.</p>
+  </li>
+  <li>
+    <p><a href="https://www.usenix.org/sites/default/files/gopen_and_swan_science_of_scientific_writing.pdf">The Science of Scientific Writing</a>
+by George D. Gopen and Judith A. Swan, a short and very useful paper on writing papers.</p>
+  </li>
+  <li>
+    <p><a href="https://www.youtube.com/watch?v=VK51E3gHENc">How to Write a Great Research Paper</a>
+great talk by Simon Peyton Jones with many helpful recommendations and tips. The most important
+lesson from this talk: practice paper-driven research by beginning with a paper draft,
+as explaining the idea helps to find key challenges and weaknesses and quickly identify
+which ideas are worth working on.</p>
+  </li>
+  <li>
+    <p><a href="https://www.youtube.com/watch?v=sT_-owjKIbA">How to Give a Great Research Talk</a>
+another great talk by Simon Peyton Jones.
+The most important lesson from this talk: focus on one key message, present it very deeply and with
+many details, use examples to drive the narrative, and omit other details from the paper.
+The audience should remember the one major contribution of your work.</p>
+  </li>
+</ul>
+
+<h2 id="history">history</h2>
+
+<ul>
+  <li>
+    <p><a href="https://en.wikipedia.org/wiki/The_History_of_Rome_(podcast)">(Podcast) The History of Rome</a> - an excellent
+podcast covering the entire history of ancient Rome in almost 180 episodes.</p>
+  </li>
+  <li>
+    <p><a href="http://www.uvm.edu/~sgutman/Herbert.html">(Text) Why the Classics</a> - a poem by Zbigniew Herbert,
+a famous Polish poet who has been exploring classic authors and mythology extensively in his works.</p>
+  </li>
+  <li>
+    <p><a href="https://www.youtube.com/watch?v=6d_U5RVw2iA">(Video, PL) Początki narodu polskiego..?</a> - a lecture
+on the beginnings of the Polish nation by Prof. Henryk Samsonowicz, one of the most accomplished Polish historians.</p>
+  </li>
+  <li>
+    <p><a href="https://www.youtube.com/watch?v=bxQ4TcTcPbI">(Video) (EN) Napoleon the Great?</a> - a debate
+on the legacy of Napoleon Bonaparte between Andrew Roberts and Adam Zamoyski.</p>
+  </li>
+  <li>
+    <p><a href="https://www.youtube.com/watch?v=A_3R-Rkn_98">(Video) [Barbarossa] The Major Errors and Blunders - Or why Barbarossa Failed</a>
+The WWII and Eastern Front have been extensively exploited by the pop culture, spreading many
+myths and half-truths. This video by the <a href="https://www.youtube.com/c/MilitaryHistory/">Military History Visualized</a>,
+a YouTube channel created by a German historian, covers the usually ignored problems of logistics
+and intelligence, providing a high-level overview of the Barbarossa campaign and its ultimate collapse.</p>
+  </li>
+  <li>
+    <p><a href="https://en.wikipedia.org/wiki/Ring_of_Steel_(book)">(Book) Ring of Steel</a> - major and popular history books on
+world wars tend to focus on the perspectives of Allied powers.
+Instead, this book provides a very wide and in-depth analysis of the German and
+Austria-Hungary empires before and during the First World War, covering the geopolitical, ethnic,
+economic, and agricultural situations of both countries. A highly recommended read to learn the
+other perspective on the Great War.</p>
+  </li>
+</ul>
+
+  </article>
 
 </div>
 

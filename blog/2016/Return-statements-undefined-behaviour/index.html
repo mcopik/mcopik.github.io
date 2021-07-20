@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title>Marcin Copik | Yet another lesson on undefined behavior</title>
+<meta name="description" content="Personal webpage">
+
+<!-- Open Graph -->
+
+
+<!-- Bootstrap & MDB -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha512-MoRNloxbStBcD8z3M/2BmnT+rg4IsMxPkXaGh2zD6LGNNFE80W3onsAhRcMAMrSoyWL9xD7Ert0men7vR8LUZg==" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" integrity="sha512-RO38pBRxYH3SoOprtPTD86JFOclM51/XTIdEPh5j8sj4tp8jmQIx26twG52UaLi//hQldfrh7e51WzP9wuP32Q==" crossorigin="anonymous" />
+
+<!-- Fonts & Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"  integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.1/css/academicons.css" integrity="sha512-WgL+hxwL4NdLGGZ4Euo/BmGAcQgyRRJsTQbNPGui+nWlzaF+3f2zf2rh578ccU3YINJCi8LvHyV1OHLJ8effBA==" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons">
+
+<!-- Code Syntax Highlighting -->
+<link rel="stylesheet" href="https://gitcdn.xyz/repo/jwarby/jekyll-pygments-themes/master/github.css" />
+
+<!-- Styles -->
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
+
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="canonical" href="/blog/2016/Return-statements-undefined-behaviour/">
+
+<!-- JQuery -->
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
+
+<!-- Theming-->
+
+<script src="/assets/js/theme.js"></script>
+<script src="/assets/js/dark_mode.js"></script>
+
+
+
+
+
+
+    
+<!-- MathJax -->
+<script type="text/javascript">
+  window.MathJax = {
+    tex: {
+      tags: 'ams'
+    }
+  };
+</script>
+<script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js"></script>
+<script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+
+  </head>
+
+  <body class="fixed-top-nav ">
+
+    <!-- Header -->
+
+    <header>
+
+    <!-- Nav Bar -->
+    <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
+    <div class="container">
+      
+      <a class="navbar-brand title font-weight-lighter" href="/">
+       Marcin Copik
+      </a>
+      
+      <!-- Navbar Toggle -->
+      <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar top-bar"></span>
+        <span class="icon-bar middle-bar"></span>
+        <span class="icon-bar bottom-bar"></span>
+      </button>
+      <div class="collapse navbar-collapse text-right" id="navbarNav">
+        <ul class="navbar-nav ml-auto flex-nowrap">
+          <!-- About -->
+          <li class="nav-item ">
+            <a class="nav-link" href="/">
+              about
+              
+            </a>
+          </li>
+          
+          <!-- Blog -->
+          <li class="nav-item active">
+            <a class="nav-link" href="/blog/">
+              blog
+              
+            </a>
+          </li>
+          
+          <!-- Other pages -->
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <li class="nav-item ">
+              <a class="nav-link" href="/projects/">
+                projects
+                
+              </a>
+          </li>
+          
+          
+          
+          <li class="nav-item ">
+              <a class="nav-link" href="/publications/">
+                publications
+                
+              </a>
+          </li>
+          
+          
+          
+          <li class="nav-item ">
+              <a class="nav-link" href="/talks/">
+                talks
+                
+              </a>
+          </li>
+          
+          
+          
+          <li class="nav-item ">
+              <a class="nav-link" href="/students/">
+                students
+                
+              </a>
+          </li>
+          
+          
+          
+          <li class="nav-item ">
+              <a class="nav-link" href="/misc/">
+                miscellaneous
+                
+              </a>
+          </li>
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/assets/pdf/cv.pdf" target="_blank" rel="nofollow">
+              CV
+            </a>
+          </li>
+          
+            <div class = "toggle-container">
+              <a id = "light-toggle">
+                  <i class="fas fa-moon"></i>
+                  <i class="fas fa-sun"></i>
+              </a>
+            </div>
+          
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+</header>
+
+
+    <!-- Content -->
+
+    <div class="container mt-5">
+      
+
+<div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Yet another lesson on undefined behavior</h1>
+    <p class="post-meta">December 9, 2016</p>
+  </header>
+
+  <article class="post-content">
+    <p>Recently I have started a completely new project: a framework for benchmarking linear algebra code in C++, including an interfacing for the most popular Expression Templates and Smart ET libraries, such as Eigen, Blaze or Armadillo. Setting up was quite usual: write CMake build scripts, install external libraries and implement basic benchmarking to verify if my approach does not introduce a measurable overhead. The first example has been finished, built, run… and a segfault. Run again, works fine. One more try, a segfault again. Quick check with Valgrind which suggests operation on uninitialised values in a destructor, a lot of playing with code to see if I may be overwriting some parts of memory and finally I find the problem here:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">Duration</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">F</span><span class="p">,</span> <span class="k">typename</span><span class="o">...</span> <span class="nc">Args</span><span class="p">&gt;</span>
+<span class="k">static</span> <span class="k">auto</span> <span class="nf">call</span><span class="p">(</span><span class="n">basic_benchmarker</span><span class="o">&lt;</span><span class="n">Duration</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="n">b</span><span class="p">,</span> <span class="n">F</span> <span class="o">&amp;&amp;</span> <span class="n">f</span><span class="p">,</span> 
+	<span class="n">Args</span> <span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">std</span><span class="o">::</span><span class="n">result_of_t</span><span class="o">&lt;</span><span class="n">F</span><span class="p">(</span><span class="n">Args</span><span class="p">...)</span><span class="o">&gt;</span>
+<span class="p">{</span>
+	<span class="n">f</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...);</span>
+<span class="err">}</span>
+</code></pre></div></div>
+
+<p>This is a part of helper class using SFINAE to call benchmarked function properly, not knowing if it takes an additional argument allowing to access benchmarker and define clocks inside. It should be quite obvious why my code has been failing: a missing return statement. I did not enable warnings in CMake scripts and somewhere deep in my brain was a thought that “missing return is not important as long as the returned value is ignored”. I couldn’t be more wrong. In fact, it is a perfect example of an undefined behaviour in C++.</p>
+
+<p>To find out why I have been so convinced that my code is safe, I took a look at different C and C++ standards. It is not easy to find drafts of older standards, <a href="http://stackoverflow.com/questions/17014835/where-can-i-find-the-c89-c90-standards-in-pdf-format">although StackOverflow is helpful one more time</a>. 
+Links to pdfs or web versions of drafts are posted in each section; as far as I know none of ISO standards can be found on the Internet for free (legally!).</p>
+
+<h3 id="c89c90">C89/C90</h3>
+<p><a href="http://port70.net/~nsz/c/c89/c89-draft.html">Draft of the ISO 9899 standard.</a></p>
+
+<p>We find relevant definitions in section <a href="http://port70.net/~nsz/c/c89/c89-draft.html#3.6.6.4">3.6.6.4</a>:</p>
+
+<blockquote>
+  <p>Constraints
+A return statement with an expression shall not appear in a function whose return type is void.
+Semantics
+[…]
+<strong>If a return statement without an expression is executed, and the value of the function call is used by the caller, the behavior is undefined.</strong> Reaching the } that terminates a function is equivalent to executing a return statement without an expression.</p>
+</blockquote>
+
+<p>And here it is! Either an empty return statement, usually applied as exiting from a void function, or no return statement is permitted in a non-void function. However, using the value returned from that function is an <strong>undefined behaviour</strong>. It seems that my knowledge on return statements does indicate an influence of good old C. Examples below are perfectly fine in C89</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">foo</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">bar</span><span class="p">()</span>
+<span class="p">{}</span>
+
+<span class="n">foo</span><span class="p">();</span>
+<span class="n">bar</span><span class="p">();</span>
+<span class="c1">// this would be UB</span>
+<span class="c1">// int x = foo();</span>
+</code></pre></div></div>
+
+<h3 id="c99">C99</h3>
+<p>N1256, draft of ISO 9899:1999 with three technical corrigendums. <a href="http://www.open-std.org/jtc1/sc22/wg14/www/standards.html#9899">PDF</a></p>
+
+<p>Now description of return statement is placed in paragraph 6.8.6.4:</p>
+
+<blockquote>
+  <p>Constraints<br />
+1 A return statement with an expression shall not appear in a function whose return type is void. A return statement without an expression shall only appear in a function whose return type is void.</p>
+</blockquote>
+
+<p>An empty return statement is no longer permitted in a non-void function. But how the program behaves when there is no return from a non-void function? This explanation has been moved to paragraph 6.9.1/12 describing functions:</p>
+
+<blockquote>
+  <p>If the } that terminates a function is reached, and the value of the function call is used by the caller, the behavior is undefined.</p>
+</blockquote>
+
+<p>Nothing has changed here semantically and it is still legal to not return a value from a function. The example from previous section becomes smaller:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">bar</span><span class="p">()</span>
+<span class="p">{}</span>
+
+<span class="n">bar</span><span class="p">();</span>
+<span class="c1">// this would be UB</span>
+<span class="c1">// int x = foo();</span>
+</code></pre></div></div>
+
+<h3 id="c11">C11</h3>
+<p>N1570, draft of ISO ISO 9899:2011. <a href="http://www.open-std.org/jtc1/sc22/wg14/www/standards.html#9899">PDF</a> <a href="http://port70.net/~nsz/c/c11/n1570.html">HTML</a></p>
+
+<p>Same as above. It seems that idea behind my code is perfectly fine in C but what about C++?</p>
+
+<h3 id="c98c03c11c14">C++98/C++03/C++11/C++14</h3>
+
+<p>There is <a href="http://stackoverflow.com/a/4653479">a great SO answer</a> keeping up to date a list of all drafts. It seems that all standards have the same semantics although the wording is different; later it is specified that these rules do not apply for the main function.</p>
+
+<p>Paragraph 6.6.3 defines return statements:</p>
+
+<blockquote>
+  <p>A return statement without an expression can be used only in functions that do not return a value, that is, a function with the return type void, a constructor (12.1), or a destructor (12.4).</p>
+</blockquote>
+
+<p>C++ has introduced the concept of complex user-defined types with constructors and destructors. Not only they create a special type of functions but also indicate a potential problem with C approach to functions not returning a value. As long as we have been returning fundamental types or simple structures, there was no problem with destroying data allocated for the value returned from a function. What happens if cleaning requires calling a destructor? Standard has a very simple solution for that:</p>
+
+<blockquote>
+  <p>Flowing off the end of a function is equivalent to a return with no value; this results in undefined behavior in a value-returning function.</p>
+</blockquote>
+
+<p>I have to admit that as a not native English speaker I had to ask other people for clarification here, I have never heard before the verb “to flow off” in this context and I was not quite sure what it is supposed to mean. In C++ it is prohibited to not return a value from a non-void function, even when it is ignored by the caller. Each such attempt is an <strong>undefined behaviour</strong>. Does it mean that non-void functions with no return statements are prohibited as well? No! We do not have to always return a value:</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// this is legal</span>
+<span class="kt">int</span> <span class="nf">foo</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="n">std</span><span class="o">::</span><span class="n">terminate</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">//still good</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">bar</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">();</span>
+<span class="p">}</span>	
+
+<span class="c1">// this is undefined behaviour</span>
+<span class="kt">float</span> <span class="nf">bad_function</span><span class="p">(</span><span class="kt">bool</span> <span class="n">flag</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
+		<span class="k">return</span> <span class="mf">1.0</span><span class="n">f</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">bad_function</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="what-may-have-been-happening-in-my-code">What may have been happening in my code?</h3>
+
+<p>To understand what GCC may have been doing with my obviously incorrect code, I used <a href="https://godbolt.org/">Compiler Explorer</a>, an online tool allowing to compare C++ code with generated assembly by displaying matching sections in the same colour. I have simplified the problem to <a href="https://godbolt.org/g/KYPWnD">a function which is supposed to return one of the most common STL types</a>.</p>
+
+<div style="vertical-align:middle; text-align:center">
+  <a href="/assets/img/blogposts/2016_12_compiler_explorer.png">
+    <img class="img-fluid rounded z-depth-1" src="/assets/img/blogposts/2016_12_compiler_explorer.png" alt="" title="Compiler explorer." />
+  </a>
+</div>
+<figure>
+
+No vector is constructed but line 20 on assembly listing indicates a call to vector destructor! This is a clear prescription for disaster widely known as a segmentation fault. At least we know what happens in this case, but there is no *general* case for undefined behaviours.
+
+### Conclusions?
+
+* I could have prevented this mistake from becoming a bug by enabling warnings or even treating most of the warnings as errors. It's a pity that there is no CMake support and one has to implement compiler-dependent settings manually
+* Using clang-sanitizer would also help to find the source of problem
+* And the most important lesson for me: be aware of what you have learned from C and assumed it works exactly the same in C++
+</figure>
+
+  </article>
+
+  
+
+</div>
+
+    </div>
+
+    <!-- Footer -->
+
+    
+<footer class="fixed-bottom">
+  <div class="container mt-0">
+    &copy; Copyright 2021 Marcin  Copik.
+    Powered by <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme.
+
+    
+    
+    Last updated: July 20, 2021.
+    
+  </div>
+</footer>
+
+<script type="text/javascript" src="/assets/js/lightbox.js"></script>
+<link rel="stylesheet" href="/assets/css/lightbox.css">
+
+
+  </body>
+
+  <!-- Bootsrap & MDB scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.4.4/umd/popper.min.js" integrity="sha512-eUQ9hGdLjBjY3F41CScH3UX+4JDSI9zXeroz7hJ+RteoCaY+GP/LDoM8AO+Pt+DRFw3nXqsjh9Zsts8hnYv8/A==" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha512-M5KW3ztuIICmVIhjSqXe01oV2bpe248gOxqmlcYrEzAvws7Pw3z6BK0iGbrwvdrUQUhi3eXgtxp5I8PDo9YfjQ==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js" integrity="sha512-Mug9KHKmroQFMLm93zGrjhibM2z2Obg9l6qFG2qKjXEXkMp/VDkI4uju9m4QKPjWSwQ6O2qzZEnJDEeCw0Blcw==" crossorigin="anonymous"></script>
+
+  
+<!-- Mansory & imagesLoaded -->
+<script defer src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script defer src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+<script defer src="/assets/js/mansory.js" type="text/javascript"></script>
+
+
+  
+
+
+<!-- Medium Zoom JS -->
+<script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
+<script src="/assets/js/zoom.js"></script>
+
+
+<!-- Load Common JS -->
+<script src="/assets/js/common.js"></script>
+
+
+</html>

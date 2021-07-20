@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title>Marcin Copik | GPU-accelerated model checking</title>
+<meta name="description" content="Personal webpage">
+
+<!-- Open Graph -->
+
+
+<!-- Bootstrap & MDB -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha512-MoRNloxbStBcD8z3M/2BmnT+rg4IsMxPkXaGh2zD6LGNNFE80W3onsAhRcMAMrSoyWL9xD7Ert0men7vR8LUZg==" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" integrity="sha512-RO38pBRxYH3SoOprtPTD86JFOclM51/XTIdEPh5j8sj4tp8jmQIx26twG52UaLi//hQldfrh7e51WzP9wuP32Q==" crossorigin="anonymous" />
+
+<!-- Fonts & Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"  integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.1/css/academicons.css" integrity="sha512-WgL+hxwL4NdLGGZ4Euo/BmGAcQgyRRJsTQbNPGui+nWlzaF+3f2zf2rh578ccU3YINJCi8LvHyV1OHLJ8effBA==" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons">
+
+<!-- Code Syntax Highlighting -->
+<link rel="stylesheet" href="https://gitcdn.xyz/repo/jwarby/jekyll-pygments-themes/master/github.css" />
+
+<!-- Styles -->
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
+
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="canonical" href="/projects/prism_gpu/">
+
+<!-- JQuery -->
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
+
+<!-- Theming-->
+
+<script src="/assets/js/theme.js"></script>
+<script src="/assets/js/dark_mode.js"></script>
+
+
+
+
+
+
+    
+<!-- MathJax -->
+<script type="text/javascript">
+  window.MathJax = {
+    tex: {
+      tags: 'ams'
+    }
+  };
+</script>
+<script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js"></script>
+<script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+
+  </head>
+
+  <body class="fixed-top-nav ">
+
+    <!-- Header -->
+
+    <header>
+
+    <!-- Nav Bar -->
+    <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
+    <div class="container">
+      
+      <a class="navbar-brand title font-weight-lighter" href="/">
+       Marcin Copik
+      </a>
+      
+      <!-- Navbar Toggle -->
+      <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar top-bar"></span>
+        <span class="icon-bar middle-bar"></span>
+        <span class="icon-bar bottom-bar"></span>
+      </button>
+      <div class="collapse navbar-collapse text-right" id="navbarNav">
+        <ul class="navbar-nav ml-auto flex-nowrap">
+          <!-- About -->
+          <li class="nav-item ">
+            <a class="nav-link" href="/">
+              about
+              
+            </a>
+          </li>
+          
+          <!-- Blog -->
+          <li class="nav-item ">
+            <a class="nav-link" href="/blog/">
+              blog
+              
+            </a>
+          </li>
+          
+          <!-- Other pages -->
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <li class="nav-item ">
+              <a class="nav-link" href="/projects/">
+                projects
+                
+              </a>
+          </li>
+          
+          
+          
+          <li class="nav-item ">
+              <a class="nav-link" href="/publications/">
+                publications
+                
+              </a>
+          </li>
+          
+          
+          
+          <li class="nav-item ">
+              <a class="nav-link" href="/talks/">
+                talks
+                
+              </a>
+          </li>
+          
+          
+          
+          <li class="nav-item ">
+              <a class="nav-link" href="/students/">
+                students
+                
+              </a>
+          </li>
+          
+          
+          
+          <li class="nav-item ">
+              <a class="nav-link" href="/misc/">
+                miscellaneous
+                
+              </a>
+          </li>
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/assets/pdf/cv.pdf" target="_blank" rel="nofollow">
+              CV
+            </a>
+          </li>
+          
+            <div class = "toggle-container">
+              <a id = "light-toggle">
+                  <i class="fas fa-moon"></i>
+                  <i class="fas fa-sun"></i>
+              </a>
+            </div>
+          
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+</header>
+
+
+    <!-- Content -->
+
+    <div class="container mt-5">
+      <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">GPU-accelerated model checking</h1>
+    <p class="post-description">Bringing GPU acceleration to statistical model checking.</p>
+  </header>
+
+  <article>
+    
+      <div class="project-summary">
+
+      <ul>
+        
+          <li>
+            
+              <a href="/publications#2016gpu" title="paper" target="_blank" rel="nofollow">
+            
+              <i class="fas fa-scroll"></i><span>Paper @ CS&P 2016</span>
+              </a>
+          </li>
+        
+
+        
+
+        
+          <li>
+            
+              <a href="https://github.com/mcopik/prism-fastsim" title="github" target="_blank" rel="nofollow">
+              <i class="fab fa-github"></i><span>mcopik/prism-fastsim</span>
+            
+            </a>
+          </li>
+        
+
+        
+
+        
+      </ul>
+      </div>
+    
+    <p><a href="https://www.prismmodelchecker.org/">PRISM</a> is a state-of-the-art and well-known
+<strong>probabilistic model checker</strong>.
+The core idea of model checking is to describe a complex system with an abstract mathematical model,
+define its properties in a formal logic language, and verify the properties automatically.
+PRISM uses probabilistic models such as discrete-time and continuous-time Markov chains (DTMC, CTMC),
+Markov decision process (MDP), and probabilistic timed automata (PTA).</p>
+
+<p>The classical approach of PMC is to use the linear algebra methods, such as represent
+the model and properties as a system of linear equations and solve them in an iterative fashion.
+While this method has been applied successfully in many cases, it does suffer from
+the well-known problem of  <strong><a href="https://link.springer.com/chapter/10.1007/978-3-642-35746-6_1">state space explosion</a></strong>.
+Furthermore, a wrong selection of termination conditions might lead to incorrect results,
+as we will show later.</p>
+
+<p>Another approach is to <strong>analyze the properties statistically</strong>: use the Monte Carlo method to generate
+many random walks through the model and average the results of property verification.
+It’s not a perfect method, the number of samples limits its precision, and it cannot easily
+verify some qualitative properties.
+Nevertheless, a model checker will benefit from a fast and easy-to-use statistical simulator.</p>
+
+<div style="vertical-align:middle; text-align:center">
+  <a href="/assets/img/prism/example.png">
+    <img class="img-fluid rounded z-depth-1" src="/assets/img/prism/example.png" alt="" title="PRISM example." style="max-width:100%;width:70%;" />
+  </a>
+</div>
+<div class="caption">
+  Example of a PRISM model: a discrete-time Markov chain representing. 6-sided die coin.
+  <a href="https://www.prismmodelchecker.org/tutorial/die.php">Source of the image</a>.
+</div>
+
+<p>The example presented above is a DTMC model written in the PRISM language (<a href="https://www.prismmodelchecker.org/tutorial/die.php">see PRISM website for full discussion</a>).
+It simulates throwing a 6-side dice by using only coin throw with 50% probability.
+In the end, reaching each value of <code class="language-plaintext highlighter-rouge">d</code> has exactly one chance in 6.
+The <strong>state</strong> of the model is a composition of all variables, and the commands describe transitions.
+Each <strong>transition</strong> includes a guard specifying when this transition can be taken, followed by the
+multiple possible transition results with corresponding probability rates.</p>
+
+<p>Finally, the transitions can be synchronized, and PRISM models can include multiple modules that
+are executed in parallel. If we have many models with a huge number of possible states in
+each of them, we will end up with the state space explosion problem - there are too many
+states to handle when computing a solution.</p>
+
+<p>Clearly, this model is not very difficult to simulate - we need to encode transition guards as
+<code class="language-plaintext highlighter-rouge">if</code> conditions, compute the probability distribution of all available transitions, and randomize
+the selection while verifying properties in each step.
+Unfortunately, PRISM includes only a limited simulator that is quite sequential and implemented
+entirely in Java, reinterpreting the model above in every transition.
+The simulator is sufficient for debugging purposes, but it’s not fast enough for statistical computations.</p>
+
+<div style="vertical-align:middle; text-align:center">
+  <a href="/assets/img/prism/overview.png">
+    <img class="img-fluid rounded z-depth-1" src="/assets/img/prism/overview.png" alt="" title="Overview of prism-fastsim." style="max-width:100%;width:70%;" />
+  </a>
+</div>
+<div class="caption">
+Overview of <b>prism-fastsim</b>: for each simulation, we generate OpenCL kernel and use it to generate
+samples in parallel.
+</div>
+
+<p>We created <strong>prism-faststim</strong>, an OpenCL-based fast and heterogeneous simulator for PRISM.
+We created <strong>a high-level Java library for the generation of OpenCL kernels</strong>,
+and we used it to build a <strong>just-in-time source-to-source translation</strong> of the PRISM model and properties
+to a dedicated compute kernel.
+The kernel is a program executing the model on many GPU and CPU threads, using the
+single-instruction-multiple-data paradigm.
+The implementation had to be specially adapted for GPU devices, leading to low-level optimizations.
+For example, when simulating independent paths, they will diverge at some point which is not ideal on a GPU device with limited ability to handle diverging control flow.
+We compress variables sizes as much as possible to save the register and local memory space.
+We want to perform synchronized transitions in a single step to keep for performance reasons,
+but this might require multiple copies of the state vector because of Read-After-Write race
+conditions.
+To keep the high efficiency and decrease memory consumption, we use a single copy of the vector
+and analyze transitions to detect variables affected by a race condition and make copies of only those
+memory locations.</p>
+
+<div style="vertical-align:middle; text-align:center">
+  <a href="/assets/img/prism/algorithm.png">
+    <img class="img-fluid rounded z-depth-1" src="/assets/img/prism/algorithm.png" alt="" title="HPX." style="max-width:100%;width:70%;" />
+  </a>
+</div>
+<div class="caption">
+<b>prism-fastsim</b> simulation algorithm: each thread computes a single path until it verifies
+the property, reaches maximum time or a number of steps, or it finds a self-loop or a deadlock.
+</div>
+
+<p>The simulation algorithm presents a single OpenCL thread executing a single path through the model.
+The second loop (lines 8-27) generates the path until any of the following happens:
+its maximum length is reached (line 8), a deadlock (line 14) or a self-loop (line 18) occurs,
+or all properties are verified precisely enough (line 24). The last loop (lines 29–31) copies the
+collected data into the global memory, which will be collected later by the host simulator.</p>
+
+<div class="row justify-content-sm-center align-items-center">
+  <div class="col-sm-6 mt-3 mt-md-0">
+  <a href="/assets/img/prism/correctness.png">
+    <img class="img-fluid rounded z-depth-1" src="/assets/img/prism/correctness.png" alt="" title="HPX." style="max-width:100%;width:100%;" />
+  </a>
+  </div>
+  <div class="col-sm-6 mt-3 mt-md-0">
+  <a href="/assets/img/prism/performance.png">
+    <img class="img-fluid rounded z-depth-1" src="/assets/img/prism/performance.png" alt="" title="HPX." style="max-width:100%;width:100%;" />
+  </a>
+  </div>
+</div>
+<div class="caption">
+Statistical probabilistic model checking in action: detecting erroneous results from the classical
+numerical engine (left) and the time needed to verify PCTL properties with increasing time, i.e.,
+length of the random path (right).
+</div>
+
+<p>We demonstrated the usability of our tool on an example of computing an instantaneous reward in
+a CTMC. PRISM performs discretization and performs an iterative process to approximate the probabilities.
+When executing that operation, Prism also tests if a steady state has been reached by
+checking the difference between elements in solution vectors from two successive steps.
+If the difference is smaller than a constant threshold, the process is terminated early as such
+a state has been reached.
+However, in some models, detecting a steady state is premature if the default termination criterion is used.
+This can lead to incorrect results (plot above, on the left).
+Therefore, the fast statistical model checking is used to <strong>verify with a high degree of certainty if
+the analytical result is correct</strong>, helping users discover incorrect results.</p>
+
+<p>Furthermore, we compared the performance of our simulator on an AMD R9 Nano, a modern mid-range
+GPU with 4096 stream processors, and on two Intel Xeon E5-2630 v3 CPUs with clock frequency 2.40GHz,
+each of them providing eight cores with HyperThreading, resulting in 32 threads for OpenCL.
+The results (plot above, right) show that two CPUs are several times slower than a GPU.
+<strong>This shows the advantage of streams processors in the case of a large number of parallel
+tasks.</strong></p>
+
+<p>The results from the PRISM simulator are not shown on the plot, as it is not optimized for speed.
+At <code class="language-plaintext highlighter-rouge">t = 2000</code>, where long paths make it especially advantageous to use the on-the-fly compilation,
+it took the PRISM simulator over 130 minutes to evaluate the same reward property on the same CPU,
+<strong>thousands of times slower comparing a respective simulation on a GPU</strong>.</p>
+
+<p>This work is a result of <a href="/publications#2014bachelorthesis">my Bachelor’s thesis</a>
+conducted at the <a href="https://www.iitis.pl/en">Institute of Theoretical and Applied Informatics, Polish Academy of Sciences</a>, under the supervision of Dr. Artur Rataj, Dr. Mateusz Nowak, and <a href="https://www.iitis.pl/pl/person/tczachorski">Prof. Tadeusz Czachórski</a>.
+We presented the paper <a href="/publications#2016gpu">at the 25th International Workshop on Concurrency, Specification and Programming</a>.</p>
+
+  </article>
+
+</div>
+
+    </div>
+
+    <!-- Footer -->
+
+    
+<footer class="fixed-bottom">
+  <div class="container mt-0">
+    &copy; Copyright 2021 Marcin  Copik.
+    Powered by <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme.
+
+    
+    
+    Last updated: July 20, 2021.
+    
+  </div>
+</footer>
+
+<script type="text/javascript" src="/assets/js/lightbox.js"></script>
+<link rel="stylesheet" href="/assets/css/lightbox.css">
+
+
+  </body>
+
+  <!-- Bootsrap & MDB scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.4.4/umd/popper.min.js" integrity="sha512-eUQ9hGdLjBjY3F41CScH3UX+4JDSI9zXeroz7hJ+RteoCaY+GP/LDoM8AO+Pt+DRFw3nXqsjh9Zsts8hnYv8/A==" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha512-M5KW3ztuIICmVIhjSqXe01oV2bpe248gOxqmlcYrEzAvws7Pw3z6BK0iGbrwvdrUQUhi3eXgtxp5I8PDo9YfjQ==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js" integrity="sha512-Mug9KHKmroQFMLm93zGrjhibM2z2Obg9l6qFG2qKjXEXkMp/VDkI4uju9m4QKPjWSwQ6O2qzZEnJDEeCw0Blcw==" crossorigin="anonymous"></script>
+
+  
+<!-- Mansory & imagesLoaded -->
+<script defer src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script defer src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+<script defer src="/assets/js/mansory.js" type="text/javascript"></script>
+
+
+  
+
+
+<!-- Medium Zoom JS -->
+<script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
+<script src="/assets/js/zoom.js"></script>
+
+
+<!-- Load Common JS -->
+<script src="/assets/js/common.js"></script>
+
+
+</html>
