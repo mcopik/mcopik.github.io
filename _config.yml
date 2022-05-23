@@ -143,6 +143,7 @@ bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
 
 blog_name: Marcin Copik # blog_name will be displayed in your blog page
 blog_description: tutorials, tips, observations and interesting papers
+blog_nav_title: blog
 permalink: /blog/:year/:title/
 lsi: false # produce an index for related posts
 
