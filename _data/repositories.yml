@@ -1,14 +1,19 @@
 github_users:
-  - torvalds
-  - alshedivat
+  - mcopik
 
-repo_description_lines_max: 2
+research_github_repos:
+  - spcl/serverless-benchmarks
+  - spcl/rfaas
+  - spcl/faaskeeper
+  - spcl/perf-taint
 
-github_repos:
-  - alshedivat/al-folio
-  - jekyll/jekyll
-  - twbs/bootstrap
-  - jquery/jquery
-  - FortAwesome/Font-Awesome
-  - mathjax/MathJax
-  - jpswalsh/academicons
+tools_github_repos:
+  - mcopik/bibtex-compression
+  - mcopik/memreuse-analyzer
+  - mcopik/latex-tools
+  - mcopik/SmartETBenchmark
+  - mcopik/GEMMBenchmark
+  - mcopik/OpenCLPRNGs
+
+
+
