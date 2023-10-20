@@ -1,0 +1,836 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml"/><link href="/" rel="alternate" type="text/html"/><updated>2023-10-20T14:44:56+00:00</updated><id>/feed.xml</id><title type="html">Marcin Copik</title><subtitle>Personal webpage</subtitle><entry><title type="html">Google Summer of Code 2023</title><link href="/blog/2023/gsoc/" rel="alternate" type="text/html" title="Google Summer of Code 2023"/><published>2023-03-31T08:00:00+00:00</published><updated>2023-03-31T08:00:00+00:00</updated><id>/blog/2023/gsoc</id><content type="html" xml:base="/blog/2023/gsoc/"><![CDATA[<p>Google Summer of Code is a unique opportunity to engage with the open-source community. To work on exciting projects with established organizations, candidates must submit a proposal that outlines their project idea and explains how they plan to accomplish project goals during the coding period. I participated in the GSoC program as a student twice, I mentored students, and now I am proud to co-organize the GSoC program at <a href="https://summerofcode.withgoogle.com/programs/2023/organizations/scalable-parallel-computing-laboratory">Scalable Parallel Computing Laboratory (SPCL) @ ETH Zurich</a>. My GSoC experience spanned multiple fields, from Java-based model checking, through high-performance computing in C++, up to serverless computing in Python and C++. However, regardless of the language and technology, there is one rule that applies to all projects: <strong>the proposal is the most important factor when evaluating a prospective student.</strong> It is the only way you have to convince mentors that you are the right person for the job.</p> <p>The proposal should be structured around a few critical questions. First, it needs to explain clearly <strong>what problem you are trying to solve?</strong>. Then, you need to show that <strong>the problem is important</strong> for the organization and to you - are you excited to work on this project? Finally, the proposals should <strong>convince mentors that you will succeed</strong>. Did you check all dependencies? Did you check related work in other projects? Did you think about potential problems? All these factors demonstrate that you are a well-prepared and promising candidate.</p> <ul> <li> <p><strong>Check existing resources.</strong> GSoC has been going for over a decade now, and there are countless articles and blogposts that help you to prepare for the program. Definitely check <a href="https://google.github.io/gsocguides/student/writing-a-proposal">the official GSoC guide</a> on writing proposals.</p> </li> <li> <p><strong>Learn from the others.</strong> Hundreds of students have conducted successful GSoC projects in the past, and many of their proposals are available online. These can be invaluable sources of good practices that will help you to write a more convincing proposal. For example, the official GSoC guideline includes <a href="https://google.github.io/gsocguides/student/proposal-example-1">proposal examples</a>. Other organizations shared their proposals as well - you can find many examples in the <a href="https://blogs.python-gsoc.org/en/">Python Software Foundation</a> and in <a href="https://github.com/prondubuisi/accepted-gsoc-proposals">this GitHub collection</a>.</p> </li> <li> <p><strong>Be precise and concise.</strong> Proposals cannot be too short since they need to contain necessary information on project goals and timeline. However, there is no need to explain every library you are planning to use in detail. Instead, focus on aspects that are critical to your project.</p> </li> <li> <p><strong>Do your research.</strong> Every project has many potential pitfalls - what if the selected library is incompatible with the rest of the project? Is the framework you plan to use the best option, or are other faster, leaner, and more modern alternatives? Explaining your design choices in the proposal shows that you have thought through the idea and won’t be surprised by a foreseeable problem.</p> </li> <li> <p><strong>Procrastination does not help.</strong>. It is uncommon for someone writes a fantastic proposal in the last few hours before the deadline. Prepare the first draft early and share it with mentors to receive feedback. The best papers and proposals require multiple iterations of corrections and feedback to become really good.</p> </li> <li> <p><strong>Sell your skills.</strong> Emphasize skills most relevant to the project, and focus on experiences demonstrating your successes in managing projects of similar scope and complexity.</p> </li> <li> <p><strong>Last, but not least - be original.</strong> The recent introduction of ChatGPT made it possible to “write” long form documents with minimal effort. While many AI-powered writing can help you to write better English and polish your sentences, you should not let the AI do all of the work. And obviously plagiarism is not acceptable. Do not send proposals where you simply copied contents from another project or from a paper.</p> </li> </ul>]]></content><author><name></name></author><category term="open-source"/><category term="serverles"/><category term="cloud"/><category term="open-source"/><summary type="html"><![CDATA[Google Summer of Code is a unique opportunity to engage with the open-source community. To work on exciting projects with established organizations, candidates must submit a proposal that outlines their project idea and explains how they plan to accomplish project goals during the coding period. I participated in the GSoC program as a student twice, I mentored students, and now I am proud to co-organize the GSoC program at Scalable Parallel Computing Laboratory (SPCL) @ ETH Zurich. My GSoC experience spanned multiple fields, from Java-based model checking, through high-performance computing in C++, up to serverless computing in Python and C++. However, regardless of the language and technology, there is one rule that applies to all projects: the proposal is the most important factor when evaluating a prospective student. It is the only way you have to convince mentors that you are the right person for the job.]]></summary></entry><entry><title type="html">Installing FetchContent targets in CMake</title><link href="/blog/2023/cmake/" rel="alternate" type="text/html" title="Installing FetchContent targets in CMake"/><published>2023-03-31T08:00:00+00:00</published><updated>2023-03-31T08:00:00+00:00</updated><id>/blog/2023/cmake</id><content type="html" xml:base="/blog/2023/cmake/"><![CDATA[<p>The <a href="https://cmake.org/cmake/help/latest/module/FetchContent.html"><code class="language-plaintext highlighter-rouge">FetchContent</code></a> module is the easiest and most efficient way of adding dependencies to your CMake project. In contrast to <code class="language-plaintext highlighter-rouge">ExternalProject</code>, it fetches the dependency at the configuration time, which makes it easier to discover imported targets and verify that you are linking your executables and libraries correctly. Thus, you can now easily add to your C/C++ project dependencies that you do not expect to be available on the user’s system - libraries, SDKs, and internal tools such as testing frameworks. In fact, the first example shown in CMake documentation uses the <code class="language-plaintext highlighter-rouge">gtest</code> framework:</p> <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">FetchContent_Declare</span><span class="p">(</span>
+  googletest
+  GIT_REPOSITORY https://github.com/google/googletest.git
+  GIT_TAG        703bd9caab50b139428cea1aaff9974ebee5742e <span class="c1"># release-1.10.0</span>
+<span class="p">)</span>
+<span class="nf">FetchContent_MakeAvailable</span><span class="p">(</span>googletest<span class="p">)</span>
+</code></pre></div></div> <p>And it works great! We don’t have to do anything else, as CMake will fetch the <code class="language-plaintext highlighter-rouge">gtest</code> release, configure it, and build at runtime. We only have to link our test targets against imported <code class="language-plaintext highlighter-rouge">gtest</code> targets:</p> <pre><code class="language-CMake">target_link_libraries(${target} PRIVATE GTest::gtest_main)
+target_link_libraries(${target} PRIVATE GTest::gmock_main)
+
+gtest_discover_tests(${target})
+</code></pre> <p>However, this solution has one drawback that we might only realize very late in the process. The issue is clearly visible in the log before:</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">--</span> Installing: /install_process/include/gmock
+<span class="nt">--</span> Installing: /install_process/include/gmock/gmock-more-matchers.h
+<span class="nt">--</span> Installing: /install_process/include/gmock/internal
+<span class="nt">--</span> Installing: /install_process/include/gmock/internal/custom
+<span class="nt">--</span> Installing: /install_process/include/gmock/internal/custom/gmock-matchers.h
+<span class="nt">--</span> Installing: /install_process/include/gmock/internal/custom/gmock-generated-actions.h
+<span class="nt">--</span> Installing: /install_process/include/gmock/internal/custom/gmock-port.h
+<span class="nt">--</span> Installing: /install_process/include/gmock/internal/custom/README.md
+<span class="nt">--</span> Installing: /install_process/include/gmock/internal/gmock-pp.h
+<span class="nt">--</span> Installing: /install_process/include/gmock/internal/gmock-port.h
+<span class="nt">--</span> Installing: /install_process/include/gmock/internal/gmock-internal-utils.h
+<span class="nt">--</span> Installing: /install_process/include/gmock/gmock-function-mocker.h
+<span class="nt">--</span> Installing: /install_process/include/gmock/gmock-spec-builders.h
+<span class="nt">--</span> Installing: /install_process/include/gmock/gmock.h
+<span class="nt">--</span> Installing: /install_process/include/gmock/gmock-matchers.h
+<span class="nt">--</span> Installing: /install_process/include/gmock/gmock-nice-strict.h
+<span class="nt">--</span> Installing: /install_process/include/gmock/gmock-cardinalities.h
+<span class="nt">--</span> Installing: /install_process/include/gmock/gmock-actions.h
+<span class="nt">--</span> Installing: /install_process/include/gmock/gmock-more-actions.h
+<span class="nt">--</span> Installing: /install_process/lib/libgmock.a
+<span class="nt">--</span> Installing: /install_process/lib/libgmock_main.a
+<span class="nt">--</span> Installing: /install_process/lib/pkgconfig/gmock.pc
+<span class="nt">--</span> Installing: /install_process/lib/pkgconfig/gmock_main.pc
+<span class="nt">--</span> Installing: /install_process/lib/cmake/GTest/GTestTargets.cmake
+<span class="nt">--</span> Installing: /install_process/lib/cmake/GTest/GTestTargets-relwithdebinfo.cmake
+<span class="nt">--</span> Installing: /install_process/lib/cmake/GTest/GTestConfigVersion.cmake
+<span class="nt">--</span> Installing: /install_process/lib/cmake/GTest/GTestConfig.cmake
+<span class="nt">--</span> Up-to-date: /install_process/include
+<span class="nt">--</span> Installing: /install_process/include/gtest
+<span class="nt">--</span> Installing: /install_process/include/gtest/internal
+<span class="nt">--</span> Installing: /install_process/include/gtest/internal/gtest-port-arch.h
+<span class="nt">--</span> Installing: /install_process/include/gtest/internal/custom
+<span class="nt">--</span> Installing: /install_process/include/gtest/internal/custom/gtest-port.h
+<span class="nt">--</span> Installing: /install_process/include/gtest/internal/custom/gtest-printers.h
+<span class="nt">--</span> Installing: /install_process/include/gtest/internal/custom/README.md
+<span class="nt">--</span> Installing: /install_process/include/gtest/internal/custom/gtest.h
+<span class="nt">--</span> Installing: /install_process/include/gtest/internal/gtest-death-test-internal.h
+<span class="nt">--</span> Installing: /install_process/include/gtest/internal/gtest-internal.h
+<span class="nt">--</span> Installing: /install_process/include/gtest/internal/gtest-port.h
+<span class="nt">--</span> Installing: /install_process/include/gtest/internal/gtest-filepath.h
+<span class="nt">--</span> Installing: /install_process/include/gtest/internal/gtest-param-util.h
+<span class="nt">--</span> Installing: /install_process/include/gtest/internal/gtest-type-util.h
+<span class="nt">--</span> Installing: /install_process/include/gtest/internal/gtest-string.h
+<span class="nt">--</span> Installing: /install_process/include/gtest/gtest-spi.h
+<span class="nt">--</span> Installing: /install_process/include/gtest/gtest-typed-test.h
+<span class="nt">--</span> Installing: /install_process/include/gtest/gtest-matchers.h
+<span class="nt">--</span> Installing: /install_process/include/gtest/gtest-test-part.h
+<span class="nt">--</span> Installing: /install_process/include/gtest/gtest-death-test.h
+<span class="nt">--</span> Installing: /install_process/include/gtest/gtest-message.h
+<span class="nt">--</span> Installing: /install_process/include/gtest/gtest_prod.h
+<span class="nt">--</span> Installing: /install_process/include/gtest/gtest-printers.h
+<span class="nt">--</span> Installing: /install_process/include/gtest/gtest_pred_impl.h
+<span class="nt">--</span> Installing: /install_process/include/gtest/gtest-param-test.h
+<span class="nt">--</span> Installing: /install_process/include/gtest/gtest.h
+<span class="nt">--</span> Installing: /install_process/lib/libgtest.a
+<span class="nt">--</span> Installing: /install_process/lib/libgtest_main.a
+<span class="nt">--</span> Installing: /install_process/lib/pkgconfig/gtest.pc
+<span class="nt">--</span> Installing: /install_process/lib/pkgconfig/gtest_main.pc
+</code></pre></div></div> <p>CMake automatically installed targets imported in the <code class="language-plaintext highlighter-rouge">gtest</code> dependency. It doesn’t matter if we add installation targets very carefully and ensure that the <code class="language-plaintext highlighter-rouge">gtest</code> is not selected for installation. This configuration is very problematic for many C/C++ projects, as there are many situations where we don’t want to install some targets:</p> <ul> <li><strong>Static libraries</strong> are usually already linked to our targets. There is no need to install them.</li> <li><strong>Header-only libraries</strong> are very common in the C++ world. If they are used only internally in translation units and are not exposed to the end user through headers, they should not be installed.</li> <li>While <strong>shared libraries</strong> are usually necessary during deployment, they are sometimes not. For example, serverless functions execute in a dedicated runtime with a pre-defined environment. Building functions might require linking against certain dependencies, e.g., cloud provider’s SDK for databases. This library might already be available at the deployment site.</li> <li><strong>Internal</strong> components, such as testing frameworks, should not be installed or deployed at all.</li> </ul> <p>Contrary to the older solution of using <a href="https://cmake.org/cmake/help/latest/module/ExternalProject.html"><code class="language-plaintext highlighter-rouge">ExternalProject</code></a>, <code class="language-plaintext highlighter-rouge">FetchContent</code> functions do not allow us to disable installation by overriding the installation command with an empty string:</p> <blockquote> <p>ExternalProject_Add: The default install step builds the install target of the external project, but this can be overridden with a custom command using this option (generator expressions are supported). Passing an empty string as the <cmd> makes the install step do nothing.</cmd></p> </blockquote> <p>Fortunately, there is an easy solution, but it requires a little more work than just using <code class="language-plaintext highlighter-rouge">FetchContent</code>. The call to <code class="language-plaintext highlighter-rouge">FetchContent_MakeAvailable</code> populates the dependency, if this has not already been done, and adds its targets to the main configuration. We can replace this call with a slightly more verbose solution:</p> <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">FetchContent_GetProperties</span><span class="p">(</span>googletest<span class="p">)</span>
+<span class="nb">if</span><span class="p">(</span>NOT googletest_POPULATED<span class="p">)</span>
+  <span class="nf">FetchContent_Populate</span><span class="p">(</span>googletest<span class="p">)</span>
+  <span class="nb">add_subdirectory</span><span class="p">(</span><span class="si">${</span><span class="nv">googletest_SOURCE_DIR</span><span class="si">}</span> <span class="si">${</span><span class="nv">googletest_BINARY_DIR</span><span class="si">}</span> EXCLUDE_FROM_ALL<span class="p">)</span>
+<span class="nb">endif</span><span class="p">()</span>
+</code></pre></div></div> <p>Now, we can use the <code class="language-plaintext highlighter-rouge">EXCLUDE_FROM_ALL</code> flag when manually adding the dependency to the project. Thus, we can still use those targets as previously, but they will not appear in our installation - unless we add them there explicitly.</p>]]></content><author><name></name></author><category term="c++"/><category term="c++"/><category term="cmake"/><summary type="html"><![CDATA[The FetchContent module is the easiest and most efficient way of adding dependencies to your CMake project. In contrast to ExternalProject, it fetches the dependency at the configuration time, which makes it easier to discover imported targets and verify that you are linking your executables and libraries correctly. Thus, you can now easily add to your C/C++ project dependencies that you do not expect to be available on the user’s system - libraries, SDKs, and internal tools such as testing frameworks. In fact, the first example shown in CMake documentation uses the gtest framework:]]></summary></entry><entry><title type="html">Debugging the debugger</title><link href="/blog/2022/gdb-bug/" rel="alternate" type="text/html" title="Debugging the debugger"/><published>2022-09-19T08:00:00+00:00</published><updated>2022-09-19T08:00:00+00:00</updated><id>/blog/2022/gdb-bug</id><content type="html" xml:base="/blog/2022/gdb-bug/"><![CDATA[<p>While working on our high-performance serverless platform <a href="#/projects/rfaas">rFaaS</a>, I stumbled upon a curious bug in the GNU debugger <code class="language-plaintext highlighter-rouge">gdb</code>. In <code class="language-plaintext highlighter-rouge">rFaaS</code>, we allowed clients to submit the function code directly to a remote executor by shipping the contents of the shared library across networks. This works quite well for simple functions in homogenous HPC clusters since there are no issues with binary compatibility.</p> <p>Sometimes, the function does not execute correctly even if it works when called directly from the application. There might be a bug in serializing function arguments, deserializing binary data in a function, or maybe an unnoticed dependency on the shared state. The easiest way to debug the issue or an unexpected crash is to use the debugger. However, in this case, we observed a very unusual behavior - <strong>gdb always hangs!</strong> Thus, we’re going to look at how to reproduce this issue and find a possible cause.</p> <p>Since <code class="language-plaintext highlighter-rouge">rFaaS</code> spawns new processes to execute the function, we attached <code class="language-plaintext highlighter-rouge">gdb</code> to the process running function. However, this step is unnecessary to reproduce the issue, and we will skip the attaching from this point on.</p> <p>Let’s take a look at the following code that reads a shared library, extracts a function <code class="language-plaintext highlighter-rouge">foo</code> that accepts a single integer and returns an integer, and executes the function.</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kt">void</span><span class="o">*</span> <span class="n">library_handle</span> <span class="o">=</span> <span class="n">dlopen</span><span class="p">(</span><span class="s">"./lib.so"</span><span class="p">,</span> <span class="n">RTLD_NOW</span><span class="p">);</span>
+<span class="n">assert</span><span class="p">(</span><span class="n">library_handle</span><span class="p">);</span>
+
+<span class="k">typedef</span> <span class="nf">int</span> <span class="p">(</span><span class="o">*</span><span class="n">func_t</span><span class="p">)(</span><span class="kt">int</span><span class="p">);</span>
+<span class="n">func_t</span> <span class="n">func</span> <span class="o">=</span> <span class="n">dlsym</span><span class="p">(</span><span class="n">library_handle</span><span class="p">,</span> <span class="s">"foo"</span><span class="p">);</span>
+<span class="n">assert</span><span class="p">(</span><span class="n">func</span><span class="p">);</span>
+
+<span class="n">func</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>
+
+<span class="n">dlclose</span><span class="p">(</span><span class="n">library_handle</span><span class="p">);</span>
+</code></pre></div></div> <p>When the shared library is transmitted over the network, it would be wasteful to write the contents to the file and read it again. Instead, we can create a memory-mapped file and store the data there. In <code class="language-plaintext highlighter-rouge">rFaaS</code>, the data is transmitted over RDMA to the memory location. For simplicity, here we replace it by moving the data from the file to the memory buffer.</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">path</span> <span class="o">=</span> <span class="s">"lib.so"</span><span class="p">;</span>
+<span class="c1">// Receive code information</span>
+<span class="kt">FILE</span><span class="o">*</span> <span class="n">file</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s">"rb"</span><span class="p">);</span>
+<span class="n">assert</span><span class="p">(</span><span class="n">file</span><span class="p">);</span>
+<span class="n">fseek</span> <span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="mi">0</span> <span class="p">,</span> <span class="n">SEEK_END</span><span class="p">);</span>
+<span class="kt">size_t</span> <span class="n">size</span> <span class="o">=</span> <span class="n">ftell</span><span class="p">(</span><span class="n">file</span><span class="p">);</span>
+<span class="n">rewind</span><span class="p">(</span><span class="n">file</span><span class="p">);</span>
+
+<span class="kt">int</span> <span class="n">fd</span> <span class="o">=</span> <span class="n">memfd_create</span><span class="p">(</span><span class="s">"libfunction"</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="n">assert</span><span class="p">(</span><span class="n">fd</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">);</span>
+<span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">ftruncate</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span> <span class="p">;</span>
+<span class="n">assert</span><span class="p">(</span><span class="n">ret</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+
+<span class="kt">void</span><span class="o">*</span> <span class="n">memory_handle</span> <span class="o">=</span> <span class="n">mmap</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">PROT_WRITE</span><span class="p">,</span> <span class="n">MAP_SHARED</span><span class="p">,</span> <span class="n">fd</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="n">assert</span><span class="p">(</span><span class="n">memory_handle</span><span class="p">);</span>
+<span class="kt">size_t</span> <span class="n">bytes_read</span> <span class="o">=</span> <span class="n">fread</span><span class="p">(</span><span class="n">memory_handle</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">file</span><span class="p">);</span>
+<span class="n">assert</span><span class="p">(</span><span class="n">bytes_read</span> <span class="o">==</span> <span class="n">size</span><span class="p">);</span>
+<span class="n">fclose</span><span class="p">(</span><span class="n">file</span><span class="p">);</span>
+
+<span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">32</span><span class="p">];</span>
+<span class="n">snprintf</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="s">"%s%d"</span><span class="p">,</span> <span class="s">"/proc/self/fd/"</span><span class="p">,</span> <span class="n">fd</span><span class="p">);</span>
+<span class="kt">void</span><span class="o">*</span> <span class="n">library_handle</span> <span class="o">=</span> <span class="n">dlopen</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">RTLD_NOW</span><span class="p">);</span>
+</code></pre></div></div> <p>This code works fine as well - the <code class="language-plaintext highlighter-rouge">library_handle</code> can be used identically as in the previous code snippet.</p> <p>Let’s assume that our function experiences some issues, and we want to find the root cause. For a spawned process, we could insert an artificial loop waiting on a test variable, attach the debugger to the process, set up breakpoints as desired, and change the variable value to continue execution. To simplify the discussion, we will execute the code directly from the main application and skip the process spawn.</p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~ gdb ./from_memory 
+GNU gdb <span class="o">(</span>Ubuntu 12.0.90-0ubuntu1<span class="o">)</span> 12.0.90
+Copyright <span class="o">(</span>C<span class="o">)</span> 2022 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type <span class="s2">"show copying"</span> and <span class="s2">"show warranty"</span> <span class="k">for </span>details.
+This GDB was configured as <span class="s2">"x86_64-linux-gnu"</span><span class="nb">.</span>
+Type <span class="s2">"show configuration"</span> <span class="k">for </span>configuration details.
+For bug reporting instructions, please see:
+&lt;https://www.gnu.org/software/gdb/bugs/&gt;.
+Find the GDB manual and other documentation resources online at:
+    &lt;http://www.gnu.org/software/gdb/documentation/&gt;.
+
+For <span class="nb">help</span>, <span class="nb">type</span> <span class="s2">"help"</span><span class="nb">.</span>
+Type <span class="s2">"apropos word"</span> to search <span class="k">for </span>commands related to <span class="s2">"word"</span>...
+Reading symbols from ./from_memory...
+<span class="o">(</span>gdb<span class="o">)</span> r
+Starting program: /home/mcopik/bug_report/from_memory 
+<span class="o">[</span>Thread debugging using libthread_db enabled]
+Using host libthread_db library <span class="s2">"/lib/x86_64-linux-gnu/libthread_db.so.1"</span><span class="nb">.</span>
+</code></pre></div></div> <p>Here we observe the issue - <code class="language-plaintext highlighter-rouge">gdb</code> hangs. It does not respond to any comments, it does not respond to signals, and we need to use <code class="language-plaintext highlighter-rouge">SIGKILL</code> to terminate the debugging session. But what can be going wrong in this example? Can it be caused just by our memory-mapped files? Let’s attach <code class="language-plaintext highlighter-rouge">gdb</code> to the frozen <code class="language-plaintext highlighter-rouge">gdb</code> instance to find what might be happening.</p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Attaching to process 546764
+<span class="o">[</span>New LWP 546767]
+<span class="o">[</span>New LWP 546768]
+<span class="o">[</span>New LWP 546769]
+<span class="o">[</span>New LWP 546770]
+<span class="o">[</span>New LWP 546771]
+<span class="o">[</span>New LWP 546772]
+<span class="o">[</span>New LWP 546773]
+<span class="o">[</span>New LWP 546774]
+<span class="o">[</span>Thread debugging using libthread_db enabled]
+Using host libthread_db library <span class="s2">"/lib/x86_64-linux-gnu/libthread_db.so.1"</span><span class="nb">.</span>
+__GI___libc_read <span class="o">(</span><span class="nv">nbytes</span><span class="o">=</span>4096, <span class="nv">buf</span><span class="o">=</span>0x564e51949e30, <span class="nv">fd</span><span class="o">=</span>15<span class="o">)</span> at ../sysdeps/unix/sysv/linux/read.c:26
+26      ../sysdeps/unix/sysv/linux/read.c: No such file or directory.
+<span class="o">(</span>gdb<span class="o">)</span> bt
+<span class="c">#0  __GI___libc_read (nbytes=4096, buf=0x564e51949e30, fd=15) at ../sysdeps/unix/sysv/linux/read.c:26</span>
+<span class="c">#1  __GI___libc_read (fd=15, buf=0x564e51949e30, nbytes=4096) at ../sysdeps/unix/sysv/linux/read.c:24</span>
+<span class="c">#2  0x00007f69046c3cb6 in _IO_new_file_underflow (fp=0x564e517345d0) at ./libio/libioP.h:947</span>
+<span class="c">#3  0x00007f69046c24b8 in __GI__IO_file_xsgetn (fp=0x564e517345d0, data=&lt;optimized out&gt;, n=64) at ./libio/fileops.c:1321</span>
+<span class="c">#4  0x00007f69046b6c29 in __GI__IO_fread (buf=0x7ffc6e69b6f0, size=1, count=64, fp=0x564e517345d0) at ./libio/iofread.c:38</span>
+<span class="c">#5  0x0000564e4f0c833e in ?? ()</span>
+<span class="c">#6  0x0000564e4f0c842a in ?? ()</span>
+<span class="c">#7  0x0000564e4f0c7224 in ?? ()</span>
+<span class="c">#8  0x0000564e4f0f338b in ?? ()</span>
+<span class="c">#9  0x0000564e4f0cc08a in ?? ()</span>
+<span class="c">#10 0x0000564e4f0cb946 in ?? ()</span>
+<span class="c">#11 0x0000564e4efb9bae in ?? ()</span>
+<span class="c">#12 0x0000564e4efb8c97 in ?? ()</span>
+<span class="c">#13 0x0000564e4efbac77 in ?? ()</span>
+<span class="c">#14 0x0000564e4efbb6cb in ?? ()</span>
+<span class="c">#15 0x0000564e4efbb923 in ?? ()</span>
+<span class="c">#16 0x0000564e4ecf1cc5 in ?? ()</span>
+<span class="c">#17 0x0000564e4ee79d96 in ?? ()</span>
+<span class="c">#18 0x0000564e4ee7bba3 in ?? ()</span>
+<span class="c">#19 0x0000564e4ee7d5c1 in ?? ()</span>
+<span class="c">#20 0x0000564e4f1b6576 in ?? ()</span>
+<span class="c">#21 0x0000564e4f1b6a5a in ?? ()</span>
+<span class="c">#22 0x0000564e4eec227d in ?? ()</span>
+<span class="c">#23 0x0000564e4eec3f65 in ?? ()</span>
+<span class="c">#24 0x0000564e4ec5a150 in ?? ()</span>
+<span class="c">#25 0x00007f6904660d90 in __libc_start_call_main (main=main@entry=0x564e4ec5a110, argc=argc@entry=2, argv=argv@entry=0x7ffc6e69c568)</span>
+    at ../sysdeps/nptl/libc_start_call_main.h:58
+<span class="c">#26 0x00007f6904660e40 in __libc_start_main_impl (main=0x564e4ec5a110, argc=2, argv=0x7ffc6e69c568, init=&lt;optimized out&gt;, fini=&lt;optimized out&gt;, </span>
+    <span class="nv">rtld_fini</span><span class="o">=</span>&lt;optimized out&gt;, <span class="nv">stack_end</span><span class="o">=</span>0x7ffc6e69c558<span class="o">)</span> at ../csu/libc-start.c:392
+<span class="c">#27 0x0000564e4ec5fbf5 in ?? ()</span>
+</code></pre></div></div> <p>We can see at the stack frame <code class="language-plaintext highlighter-rouge">#4</code> that the issue is in a call that attempts to read some file data. Since I first noticed this issue with <code class="language-plaintext highlighter-rouge">gdb</code> version <code class="language-plaintext highlighter-rouge">12.0.90-0ubuntu1</code>, I manually built the newest version <code class="language-plaintext highlighter-rouge">12.1</code>. The entire process is straightforward: run <code class="language-plaintext highlighter-rouge">./configure</code> and <code class="language-plaintext highlighter-rouge">make -j${CPUS}</code>. The problem persists, but we can now use a debug build of <code class="language-plaintext highlighter-rouge">gdb</code> to get more insight.</p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Attaching to process 573765
+<span class="o">[</span>New LWP 573767]
+<span class="o">[</span>New LWP 573768]
+<span class="o">[</span>New LWP 573769]
+<span class="o">[</span>New LWP 573770]
+<span class="o">[</span>New LWP 573771]
+<span class="o">[</span>New LWP 573772]
+<span class="o">[</span>New LWP 573773]
+<span class="o">[</span>New LWP 573774]
+<span class="o">[</span>Thread debugging using libthread_db enabled]
+Using host libthread_db library <span class="s2">"/lib/x86_64-linux-gnu/libthread_db.so.1"</span><span class="nb">.</span>
+__GI___libc_read <span class="o">(</span><span class="nv">nbytes</span><span class="o">=</span>4096, <span class="nv">buf</span><span class="o">=</span>0x558434f1b220, <span class="nv">fd</span><span class="o">=</span>15<span class="o">)</span> at ../sysdeps/unix/sysv/linux/read.c:26
+26      ../sysdeps/unix/sysv/linux/read.c: No such file or directory.
+<span class="o">(</span>gdb<span class="o">)</span> bt
+<span class="c">#0  __GI___libc_read (nbytes=4096, buf=0x558434f1b220, fd=15) at ../sysdeps/unix/sysv/linux/read.c:26</span>
+<span class="c">#1  __GI___libc_read (fd=15, buf=0x558434f1b220, nbytes=4096) at ../sysdeps/unix/sysv/linux/read.c:24</span>
+<span class="c">#2  0x00007f82b8697cb6 in _IO_new_file_underflow (fp=0x558434e4f2c0) at ./libio/libioP.h:947</span>
+<span class="c">#3  0x00007f82b86964b8 in __GI__IO_file_xsgetn (fp=0x558434e4f2c0, data=&lt;optimized out&gt;, n=64) at ./libio/fileops.c:1321</span>
+<span class="c">#4  0x00007f82b868ac29 in __GI__IO_fread (buf=buf@entry=0x7ffc32027bb0, size=size@entry=1, count=count@entry=64, fp=fp@entry=0x558434e4f2c0)</span>
+    at ./libio/iofread.c:38
+<span class="c">#5  0x000055843364f53e in fread (__stream=0x558434e4f2c0, __n=64, __size=1, __ptr=0x7ffc32027bb0) at /usr/include/x86_64-linux-gnu/bits/stdio2.h:293</span>
+<span class="c">#6  cache_bread_1 (nbytes=64, buf=0x7ffc32027bb0, f=0x558434e4f2c0) at cache.c:319</span>
+<span class="c">#7  cache_bread (abfd=&lt;optimized out&gt;, buf=0x7ffc32027bb0, nbytes=64) at cache.c:358</span>
+<span class="c">#8  0x000055843364e564 in bfd_bread (ptr=ptr@entry=0x7ffc32027bb0, size=&lt;optimized out&gt;, size@entry=64, abfd=&lt;optimized out&gt;, abfd@entry=0x558434f0f210)</span>
+    at bfdio.c:259
+<span class="c">#9  0x000055843366ca53 in bfd_elf64_object_p (abfd=0x558434f0f210) at /home/mcopik/bug_report/build/gdb-12.1/bfd/elfcode.h:519</span>
+<span class="c">#10 0x000055843365199c in bfd_check_format_matches (abfd=0x558434f0f210, format=&lt;optimized out&gt;, matching=0x0) at format.c:344</span>
+<span class="c">#11 0x000055843351edfe in solib_bfd_open (pathname=0x558434e90200 "/proc/self/fd/4") at ./../gdbsupport/gdb_ref_ptr.h:130</span>
+<span class="c">#12 0x000055843351dee7 in solib_map_sections (so=0x558434f0ff00) at solib.c:540</span>
+<span class="c">#13 0x000055843351fe56 in update_solib_list (from_tty=&lt;optimized out&gt;) at solib.c:860</span>
+<span class="c">#14 0x0000558433520877 in solib_add (pattern=pattern@entry=0x0, from_tty=from_tty@entry=0, readsyms=1) at solib.c:960</span>
+<span class="c">#15 0x0000558433520b00 in handle_solib_event () at solib.c:1269</span>
+<span class="c">#16 0x0000558433252165 in bpstat_stop_status (aspace=&lt;optimized out&gt;, bp_addr=bp_addr@entry=140737353900800, thread=thread@entry=0x558434ddf090, ws=..., </span>
+    <span class="nv">stop_chain</span><span class="o">=</span>stop_chain@entry<span class="o">=</span>0x0<span class="o">)</span> at breakpoint.c:5455
+<span class="c">#17 0x00005584333dbc8b in handle_signal_stop (ecs=0x7ffc32028700) at infrun.c:6191</span>
+<span class="c">#18 0x00005584333dda68 in handle_stop_requested (ecs=&lt;optimized out&gt;) at infrun.c:4465</span>
+<span class="c">#19 handle_stop_requested (ecs=&lt;optimized out&gt;) at infrun.c:4460</span>
+<span class="c">#20 handle_inferior_event (ecs=0x7ffc32028700) at infrun.c:5695</span>
+<span class="c">#21 0x00005584333df48e in fetch_inferior_event () at infrun.c:4085</span>
+<span class="c">#22 0x00005584336f7ef6 in gdb_wait_for_event (block=block@entry=0) at event-loop.cc:700</span>
+<span class="c">#23 0x00005584336f83da in gdb_wait_for_event (block=0) at event-loop.cc:596</span>
+<span class="c">#24 gdb_do_one_event () at event-loop.cc:212</span>
+<span class="c">#25 0x0000558433424275 in start_event_loop () at main.c:421</span>
+<span class="c">#26 captured_command_loop () at main.c:481</span>
+<span class="c">#27 0x0000558433425e75 in captured_main (data=0x7ffc320288a0) at main.c:1351</span>
+<span class="c">#28 gdb_main (args=args@entry=0x7ffc320288d0) at main.c:1366</span>
+<span class="c">#29 0x00005584331b9d10 in main (argc=&lt;optimized out&gt;, argv=&lt;optimized out&gt;) at gdb.c:32</span>
+</code></pre></div></div> <p>The stackframe <code class="language-plaintext highlighter-rouge">#11</code> proves that <code class="language-plaintext highlighter-rouge">gdb</code> is trying to open a filedescriptor associated with our memory-mapped file. Then, the request is redirected to its internal cache of file descriptors at stackframes <code class="language-plaintext highlighter-rouge">#6</code> and <code class="language-plaintext highlighter-rouge">#7</code>, where a single call to <code class="language-plaintext highlighter-rouge">fread</code> is made. The function <code class="language-plaintext highlighter-rouge">cache_bread_1</code> attempts to read 64 bytes from the file, which does not terminate.</p> <p>What if <code class="language-plaintext highlighter-rouge">gdb</code> cannot read the data because it’s simply not there? We might have to flush the data back to the filesystem to make it visible to other processes.</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">msync</span><span class="p">(</span><span class="n">memory_handle</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">MS_SYNC</span><span class="p">);</span>
+</code></pre></div></div> <p>Unfortunately, this does not resolve the issue. The problem seems to be a core <code class="language-plaintext highlighter-rouge">gdb</code> issue that I cannot resolve by myself, and I opened a <a href="https://sourceware.org/bugzilla/show_bug.cgi?id=29586">bug request at their Bugzilla</a>.</p> <p>You can find all of the code and compilation scripts on <a href="https://gist.github.com/mcopik/c6dc64e6b24aea9576d517ca00d1a9c0">GitHub</a>.</p>]]></content><author><name></name></author><category term="linux"/><category term="linux"/><category term="c"/><summary type="html"><![CDATA[While working on our high-performance serverless platform rFaaS, I stumbled upon a curious bug in the GNU debugger gdb. In rFaaS, we allowed clients to submit the function code directly to a remote executor by shipping the contents of the shared library across networks. This works quite well for simple functions in homogenous HPC clusters since there are no issues with binary compatibility.]]></summary></entry><entry><title type="html">Remote Bash scripts with SSH</title><link href="/blog/2022/bash-remote/" rel="alternate" type="text/html" title="Remote Bash scripts with SSH"/><published>2022-09-01T08:00:00+00:00</published><updated>2022-09-01T08:00:00+00:00</updated><id>/blog/2022/bash-remote</id><content type="html" xml:base="/blog/2022/bash-remote/"><![CDATA[<p>What is the easiest way of executing a Bash script on remote machines, with support for arbitrary options and arguments, without having to transmit the code manually? Let’s say we have a script to invoke that we want to run on a remote machine - in our case, it’s the part of <a href="#/projects/rfaas">rFaaS</a> that scans network interfaces and RDMA links to generate a device database.</p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~ tools/device_generator.sh <span class="nt">-d</span> wlp61s0 <span class="nt">-o</span> devices.json
+</code></pre></div></div> <p>We want to execute this command on many endpoints in parallel since they will be used to host rFaaS executors. While this is trivial in a supercomputer where all nodes can read the script from a shared parallel filesystem, it is not so simple in the cloud, where virtual machines might not have common storage. Fortunately, we don’t have to copy the code manually - we can feed bash standard input with the script contents:</p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~ ssh <span class="nv">$node</span> bash &lt; tools/device_generator.sh
+</code></pre></div></div> <p>But what if we want to pass positional arguments? That’s why we need the <code class="language-plaintext highlighter-rouge">-s</code> flag:</p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~ ssh <span class="nv">$node</span> bash <span class="nt">-s</span> <span class="nv">$ARG</span> &lt; tools/device_generator.sh
+</code></pre></div></div> <p>But what if we want to support options in our script? We can’t put them here since bash will interpret it as its own option. So instead, we need a double dash (<code class="language-plaintext highlighter-rouge">--</code>) to mark the end of bash options and the start of positional arguments:</p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~ ssh <span class="nv">$node</span> bash <span class="nt">-s</span> <span class="nt">--</span> <span class="nt">-d</span> wlp61s0 <span class="nv">$ARG</span> &lt; tools/device_generator.sh <span class="o">&gt;</span> <span class="nv">$node</span>.json
+</code></pre></div></div> <p>This command can be easily combined with forked processes running in the background, scaling the query to dozens and even hundreds of machines in parallel.</p> <p>And what if we are in a supercomputer? Then we do not need such tricks at all. For example, if we have already allocated a bunch of nodes with SLURM’s command <code class="language-plaintext highlighter-rouge">salloc</code>, then we just need to use:</p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~ srun /bin/bash <span class="nt">-c</span> <span class="s1">'tools/device_generator.sh &gt; $(hostname -s).json'</span>
+</code></pre></div></div> <p>Using single quotes prevents variable expansion on the host side. Thus, we will obtain one file for each node in the allocation.</p>]]></content><author><name></name></author><category term="linux"/><category term="linux"/><category term="cli"/><category term="tips"/><summary type="html"><![CDATA[What is the easiest way of executing a Bash script on remote machines, with support for arbitrary options and arguments, without having to transmit the code manually? Let’s say we have a script to invoke that we want to run on a remote machine - in our case, it’s the part of rFaaS that scans network interfaces and RDMA links to generate a device database.]]></summary></entry><entry><title type="html">JSON in Bash and CLI with jq</title><link href="/blog/2021/jq/" rel="alternate" type="text/html" title="JSON in Bash and CLI with jq"/><published>2021-07-30T08:00:00+00:00</published><updated>2021-07-30T08:00:00+00:00</updated><id>/blog/2021/jq</id><content type="html" xml:base="/blog/2021/jq/"><![CDATA[<p>The JSON data format has become a ubiquitous tool for interchanging and storing human-readable data. In particular, it is very convenient when it comes to storing user-defined settings and properties. For example, in rFaaS, <a href="/projects/rfaas">our RDMA-accelerated serverless platform</a>, we have to store multi-parameter device configurations for the local and remote endpoints. Thus, we want to have the configuration in JSON as this format is flexible, widely supported, and easy to parse for humans:</p> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"devices"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rocep7s0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"ip_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"192.168.0.18"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"port"</span><span class="p">:</span><span class="w"> </span><span class="mi">10005</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"max_inline_data"</span><span class="p">:</span><span class="w"> </span><span class="mi">128</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"default_receive_buffer_size"</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rocep6s0f0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"ip_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"192.168.1.31"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"port"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"max_inline_data"</span><span class="p">:</span><span class="w"> </span><span class="mi">128</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"default_receive_buffer_size"</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <p>While JSON is natively supported in many languages, and even C++ has a multitude of easy-to-use or high-performance JSON libraries, there’s no native way of using JSONs in Bash scripts. Bash syntax and capabilities are a bit ancient, but automated testing and benchmarking scripts could benefit from using the same configuration format. Fortunately, there’s an easy and lightweight tool for that - <a href="https://stedolan.github.io/jq/">jq</a>. <code class="language-plaintext highlighter-rouge">jq</code> is a very simple querying tool that allows reading and processing all complex and nested JSON structures. Below, I will present a selection of queries in <code class="language-plaintext highlighter-rouge">jq</code> that demonstrate the basic usage and capabilities of this simple yet powerful and useful tool.</p> <p>The simplest query displays all JSON contents.</p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~ jq <span class="s1">'.'</span> configuration/devices.json
+</code></pre></div></div> <p>Another one can be used to create a JSON object from scratch.</p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~ jq <span class="nt">--null-input</span> <span class="s1">'{}'</span>
+</code></pre></div></div> <p>Selecting JSON object.</p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~ jq <span class="s1">'.["devices"]'</span> configuration/devices.json
+<span class="o">[</span>
+  <span class="o">{</span>
+    <span class="s2">"name"</span>: <span class="s2">"rocep7s0"</span>,
+    <span class="s2">"ip_address"</span>: <span class="s2">"192.168.0.18"</span>,
+    <span class="s2">"port"</span>: 10005,
+    <span class="s2">"max_inline_data"</span>: 128,
+    <span class="s2">"default_receive_buffer_size"</span>: 32
+  <span class="o">}</span>,
+  <span class="o">{</span>
+    <span class="s2">"name"</span>: <span class="s2">"rocep6s0f0"</span>,
+    <span class="s2">"ip_address"</span>: <span class="s2">"192.168.1.31"</span>,
+    <span class="s2">"port"</span>: 10000,
+    <span class="s2">"max_inline_data"</span>: 128,
+    <span class="s2">"default_receive_buffer_size"</span>: 32
+  <span class="o">}</span>
+<span class="o">]</span>
+</code></pre></div></div> <p>Selecting object in an array through direct indexing.</p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~ jq <span class="s1">'.["devices"][0]'</span> configuration/devices.json
+<span class="o">{</span>
+  <span class="s2">"name"</span>: <span class="s2">"rocep7s0"</span>,
+  <span class="s2">"ip_address"</span>: <span class="s2">"192.168.0.18"</span>,
+  <span class="s2">"port"</span>: 10005,
+  <span class="s2">"max_inline_data"</span>: 128,
+  <span class="s2">"default_receive_buffer_size"</span>: 32
+<span class="o">}</span>
+</code></pre></div></div> <p>Requesting a specific field in the object.</p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~ jq <span class="s1">'.["devices"][0]["ip_address"]'</span> configuration/devices.json
+<span class="s2">"192.168.0.18"</span>
+</code></pre></div></div> <p>The quotation marks are usually not needed but we don’t need <code class="language-plaintext highlighter-rouge">sed</code> or <code class="language-plaintext highlighter-rouge">tr</code> to remove them.</p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~ jq <span class="nt">-r</span> <span class="s1">'.["devices"][0]["ip_address"]'</span> configuration/devices.json
+192.168.0.18
+</code></pre></div></div> <p>What if we want to access multiple fields with a single query?</p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~ jq <span class="nt">-r</span> <span class="s1">'.["devices"][0] | .ip_address,.port'</span> configuration/devices.json
+192.168.0.18
+10005
+</code></pre></div></div> <p>Unnecessary whitespace can be removed too.</p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~ jq <span class="nt">-j</span> <span class="s1">'.["devices"][0] | .ip_address,.port'</span> configuration/devices.json
+192.168.0.1810005
+</code></pre></div></div> <p>However, this output is far from ideal. Instead, we might want to get a CSV-like or a semicolon-separated output. We can use string interpolation for that.</p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~ jq <span class="nt">-j</span> <span class="s1">'.["devices"][0] | "\(.ip_address);\(.port)"'</span> configuration/devices.json
+192.168.0.18<span class="p">;</span>10005
+</code></pre></div></div> <p>Thus, we can process device addresses with this one-liner in Bash.</p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~ <span class="nv">IFS</span><span class="o">=</span><span class="s2">";"</span> <span class="nb">read </span>ip port <span class="o">&lt;&lt;&lt;</span> <span class="si">$(</span>jq <span class="nt">-j</span> <span class="s1">'.["devices"][0] | "\(.ip_address);\(.port)"'</span> configuration/devices.json<span class="si">)</span>
+~ <span class="nb">echo</span> <span class="nv">$ip</span> <span class="nv">$port</span>
+192.168.0.18 10005
+</code></pre></div></div> <p><code class="language-plaintext highlighter-rouge">jq</code> is not only about simple queries and text parsing. The tool allows more complex operations, including finding an object with a specific value. In our case, we want to find the address of a device with a given name, without knowing its position in the <code class="language-plaintext highlighter-rouge">devices</code> array:</p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~ jq <span class="nt">-r</span> <span class="s1">'.devices[] | select(.name=="rocep7s0") | .ip_address'</span> configuration/devices.json
+192.168.0.18
+</code></pre></div></div> <p>Furthermore, objects can be freely modified. In this example, we add a new simple object to the array.</p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~ jq <span class="s1">'.devices += [{"name": "new_dev"}]'</span> configuration/devices.json
+</code></pre></div></div> <p>Do you need to expand your JSON with new values that are defined at runtime? You can tell <code class="language-plaintext highlighter-rouge">jq</code> to treat certain values as arguments:</p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~ jq <span class="nt">--arg</span> addr <span class="nv">$ADDRESS</span> <span class="s1">'.devices[0]["ip_address"] = $addr'</span> configuration/devices.json
+</code></pre></div></div> <p>Do you need to merge two JSON files or copy values from one JSON to another? Use the <code class="language-plaintext highlighter-rouge">argfile</code> option. In this example, we add elements of an array from the file <code class="language-plaintext highlighter-rouge">devices.json</code> to the array in <code class="language-plaintext highlighter-rouge">configuration/devices.json</code>.</p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~ jq <span class="nt">--argfile</span> file1 devices.json <span class="s1">'.devices += $file1.devices'</span> configuration/devices.json
+</code></pre></div></div> <p>More advanced queries are available in <code class="language-plaintext highlighter-rouge">jq</code>, including scripting with <a href="https://stedolan.github.io/jq/manual/#Advancedfeatures"><code class="language-plaintext highlighter-rouge">select</code>, <code class="language-plaintext highlighter-rouge">map</code>, and user-defined functions</a>.</p>]]></content><author><name></name></author><category term="linux"/><category term="linux"/><category term="cli"/><category term="tips"/><summary type="html"><![CDATA[The JSON data format has become a ubiquitous tool for interchanging and storing human-readable data. In particular, it is very convenient when it comes to storing user-defined settings and properties. For example, in rFaaS, our RDMA-accelerated serverless platform, we have to store multi-parameter device configurations for the local and remote endpoints. Thus, we want to have the configuration in JSON as this format is flexible, widely supported, and easy to parse for humans:]]></summary></entry><entry><title type="html">Relative paths in LaTeX.</title><link href="/blog/2021/latex-relative-include/" rel="alternate" type="text/html" title="Relative paths in LaTeX."/><published>2021-07-19T08:00:00+00:00</published><updated>2021-07-19T08:00:00+00:00</updated><id>/blog/2021/latex-relative-include</id><content type="html" xml:base="/blog/2021/latex-relative-include/"><![CDATA[<p>Recently, I started to gather the LaTeX tools, scripts, and useful imports in a single repository: <a href="https://github.com/mcopik/latex-tools">latex-tools @ GitHub.com</a>. I designed it to have a single entry point <code class="language-plaintext highlighter-rouge">includes.tex</code>, and for each paper, I could add this repository as a submodule.</p> <p>But how should I include such a file in a LaTeX document? One option is to use <code class="language-plaintext highlighter-rouge">include</code>, but it mustn’t be used in preambles which disqualifies it from handling package imports. Instead, we can use <code class="language-plaintext highlighter-rouge">input</code> that works similarly to the C/C++ <code class="language-plaintext highlighter-rouge">#include</code>, doing a simple copy&amp;paste. It does not simplify the build and development, as <code class="language-plaintext highlighter-rouge">include</code> does by splitting <code class="language-plaintext highlighter-rouge">.tex</code> files into different compilation units, which is great for books and theses with many chapters. However, you can use <code class="language-plaintext highlighter-rouge">input</code> with almost all parts of the document and you are allowed to use nested inputs.</p> <p>There’s one caveat, though: <code class="language-plaintext highlighter-rouge">input</code> does not support relative imports. So, for example, if we have the following directory structure, we won’t be able to use <code class="language-plaintext highlighter-rouge">\usepackage{dependency}</code> in <code class="language-plaintext highlighter-rouge">includes.tex</code>:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+-- paper.tex
++-- latex-tools
+|   +-- dependency.sty
+|   +-- includes.tex
+</code></pre></div></div> <p>The paths in <code class="language-plaintext highlighter-rouge">input</code> are always relative to the main file. Thus, we end up with an error:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>! LaTeX Error: File `dependency.sty' not found.
+</code></pre></div></div> <p>Fortunately, there’s an <a href="https://www.ctan.org/pkg/import"><code class="language-plaintext highlighter-rouge">import</code></a> package to the rescue! The last <code class="language-plaintext highlighter-rouge">/</code> in directory name is important, otherwise the path is not correctly processed.</p> <div class="language-latex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">\usepackage</span><span class="p">{</span>import<span class="p">}</span>
+<span class="k">\subimport</span><span class="p">{</span>latex-tools/<span class="p">}{</span>includes.tex<span class="p">}</span>
+</code></pre></div></div> <p>Thus, we can easily decompose LaTeX sources, tables, and graphics into a hierarchy of modules.</p>]]></content><author><name></name></author><category term="tips"/><category term="latex"/><summary type="html"><![CDATA[Recently, I started to gather the LaTeX tools, scripts, and useful imports in a single repository: latex-tools @ GitHub.com. I designed it to have a single entry point includes.tex, and for each paper, I could add this repository as a submodule.]]></summary></entry><entry><title type="html">C++ Toolchain with Taint Analysis</title><link href="/blog/2020/dataflow/" rel="alternate" type="text/html" title="C++ Toolchain with Taint Analysis"/><published>2020-02-24T08:00:00+00:00</published><updated>2020-02-24T08:00:00+00:00</updated><id>/blog/2020/dataflow</id><content type="html" xml:base="/blog/2020/dataflow/"><![CDATA[<p>Clang comes with a set of tools known as <em>sanitizers</em> that provide a runtime verification of common problems such as memory issues and undefined behavior. An interesting and a not well-known one is DfSan, a dataflow sanitizer. The name does not really reveal the true purpose: the library brings a compiler pass and runtime to implement <strong>taint analysis</strong><sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup>. The main purpose is to <strong>taint</strong> specific memory regions and automatically propagate taint labels to other locations in memory that are affected by originally tainted regions. Taint labels are stored separately, in a so-called shadow memory, and compiler pass instruments codes with taint propagation. Thus, it is possible for every variable in a program to detect which values have affected it. The analysis is not only fully inter-procedural but it is completely memory agnostic, which is a common issue for static compiler analyses. The sanitizer implements <strong>data-flow tainting</strong>, the most common way of propagating labels:</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kt">void</span> <span class="nf">f</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="c1">// Taint label input_parameter detected in y!</span>
+  <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="o">*</span><span class="n">x</span><span class="p">;</span>
+  <span class="n">do_something_important</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="n">input_parameter</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">taint</span><span class="p">(</span><span class="o">&amp;</span><span class="n">input_parameter</span><span class="p">,</span> <span class="s">"input_parameter"</span><span class="p">);</span>
+<span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">input_parameter</span> <span class="o">*</span> <span class="mi">10</span><span class="p">;</span>
+<span class="n">f</span><span class="p">(</span><span class="o">&amp;</span><span class="n">x</span><span class="p">);</span>
+</code></pre></div></div> <p>As a sidenote, we notice that variables can be affected through control-flow decision as well:</p> <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">;</span>
+<span class="n">taint</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m</span><span class="p">,</span> <span class="s">"m"</span><span class="p">);</span>
+<span class="n">taint</span><span class="p">(</span><span class="o">&amp;</span><span class="n">n</span><span class="p">,</span> <span class="s">"n"</span><span class="p">);</span>
+<span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="c1">// sum is m * n</span>
+<span class="c1">// sum should have both `m` and `n` as taint labels</span>
+<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+  <span class="n">sum</span> <span class="o">+=</span> <span class="n">n</span><span class="p">;</span>
+</code></pre></div></div> <p>The feature of control-flow tainting<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote" rel="footnote">2</a></sup> has not been implemented in DfSan yet.</p> <p>To be fully precise, DfSan needs to instrument all library functions by propagating taint labels across function arguments and return values. As a result, it creates a wrapper function for each function found in the program. When handling functions that cannot be instrumented, e.g. library functions for which only declaration is available, the function will be considered as potentially problematic unless dfsan is notified through an ABI blacklist that this function does not write into user-accessible memory. For such function there can be no taint propagation or the taint label of return value from the function is overapproximated as a combination of taint labels in all input variables.</p> <p>To make sure that we cover everything, we have to instrument all libraries used by the program, including the standard C++ library.</p> <h3 id="goal">Goal</h3> <p>The main goal is to assemble a complete C++ toolchain with a support for dataflow (taint) analysis. According to Clang documentation<sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote" rel="footnote">3</a></sup>, the complete pipeline includes not only a compiler, but a linker, language standard library implementation and a runtime library. First, we’re going to <a href="#build-clang-with-sanitizers">build Clang with compiler runtime</a>. Afterwards, we’re going to use the new build of clang to <a href="#c-standard-library">prepare sanitized build of libc++</a>. Finally, we build libunwind, the library implementing stack unwinding which is necessary for exception handling, and <a href="#complete-toolchain">assemble the toolchain in a Docker image </a> to form a single distribution of a C++ dfsan pipeline. To demonstrate the tool usability for HPC software, we’re going to take a look on builds with <a href="#openmp">OpenMP</a> and <a href="#mpi">MPI</a>.</p> <h3 id="shared-libraries">Shared libraries</h3> <p>Static libraries are prefered for dfsan to avoid issues with memory mappings. However, statical link of libraries might lead to serious issues when a specific library is linked more than once. For example, an application might link both OpenMP and a library already using OpenMP, leading to a scenario where two OpenMP runtimes are present. That could have catastrophic effects on the performance but it’s not something that we should worry about when trying to instrument an application<sup id="fnref:4" role="doc-noteref"><a href="#fn:4" class="footnote" rel="footnote">4</a></sup>.</p> <h3 id="using-dfsan">Using DfSan</h3> <p>Dfsan might produce a huge number of warnings related on uninstrumented functions. It’s quite benefitial to look through the log at least. Although a significant part of libc is uninstrumented and <code class="language-plaintext highlighter-rouge">sqrt</code> computing square root is marked as functional, implying that taint label of return value is infered from labels of input arguments, the cubic root function <code class="language-plaintext highlighter-rouge">cbrt</code> is marked only as <code class="language-plaintext highlighter-rouge">uninstrumented</code>. Afterwards it’s better to disable the output log entirely with the environment variable:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DFSAN_OPTIONS=warn_unimplemented=0
+</code></pre></div></div> <h2 id="build-clang-with-sanitizers">Build Clang with sanitizers</h2> <p>First, we need to get LLVM and clang with the support to sanitizers - we’re going to use dataflow sanitizer (dfsan). There are three ways to achieve that:</p> <ul> <li>get prebuilt packages via APT for Debian-based systems: https://apt.llvm.org/</li> <li>build from sources, starting with cloning the <a href="https://github.com/llvm/llvm-project">repository</a> and switching to branch corresponding to selected release</li> <li>download sources or prebuilt binaries from <a href="http://releases.llvm.org/download.html">sources</a>. The important part is we need to build Clang with compiler-rt since the latter provides sanitizers.</li> </ul> <p>The build itself is quite straightforward as long as all projects are placed together, just like in a clone from directory, or in a common directory i.e. with directories <code class="language-plaintext highlighter-rouge">clang</code> and <code class="language-plaintext highlighter-rouge">compiler-rt</code> along <code class="language-plaintext highlighter-rouge">LLVM</code>. The CMake configuration with sanitizers and in release mode is as follows:</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmake <span class="nt">-DLLVM_TARGETS_TO_BUILD</span><span class="o">=</span><span class="s2">"X86"</span><span class="se">\</span>
+  <span class="o">&amp;&amp;</span> <span class="nt">-DLLVM_ENABLE_PROJECTS</span><span class="o">=</span><span class="s2">"clang;compiler-rt"</span><span class="se">\</span>
+  <span class="o">&amp;&amp;</span> <span class="nt">-DCMAKE_BUILD_TYPE</span><span class="o">=</span>Release<span class="se">\</span>
+  <span class="o">&amp;&amp;</span> <span class="nt">-DCMAKE_INSTALL_PREFIX</span><span class="o">=</span>/path/to/install<span class="se">\</span>
+  <span class="o">&amp;&amp;</span> /path/to/llvm
+</code></pre></div></div> <p>We can use dataflow sanitizer to propagate taint labels in a dataflow manner! We do a sanity check by running a shortened version of the <a href="https://clang.llvm.org/docs/DataFlowSanitizer.html">simple example from docs</a>:</p> <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;sanitizer/dfsan_interface.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;assert.h&gt;</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="n">dfsan_label</span> <span class="n">i_label</span> <span class="o">=</span> <span class="n">dfsan_create_label</span><span class="p">(</span><span class="s">"i"</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="n">dfsan_set_label</span><span class="p">(</span><span class="n">i_label</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">i</span><span class="p">));</span>
+
+  <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="n">dfsan_label</span> <span class="n">j_label</span> <span class="o">=</span> <span class="n">dfsan_create_label</span><span class="p">(</span><span class="s">"j"</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="n">dfsan_set_label</span><span class="p">(</span><span class="n">j_label</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">j</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">j</span><span class="p">));</span>
+
+  <span class="kt">int</span> <span class="n">test</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">;</span>
+  <span class="n">dfsan_label</span> <span class="n">test_label</span> <span class="o">=</span> <span class="n">dfsan_read_label</span><span class="p">(</span><span class="o">&amp;</span><span class="n">test</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">test</span><span class="p">));</span>
+  <span class="n">assert</span><span class="p">(</span><span class="n">dfsan_has_label</span><span class="p">(</span><span class="n">test_label</span><span class="p">,</span> <span class="n">i_label</span><span class="p">));</span>
+  <span class="n">assert</span><span class="p">(</span><span class="n">dfsan_has_label</span><span class="p">(</span><span class="n">test_label</span><span class="p">,</span> <span class="n">j_label</span><span class="p">));</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>Which can be built with just a single additional compiler flag:</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span>/install/path/bin:<span class="nv">$PATH</span>
+<span class="c"># make sure we use the correct version</span>
+which clang++
+clang++ <span class="nt">-fsanitize</span><span class="o">=</span>dataflow dfsan_test.cpp <span class="nt">-o</span> dfsan_test.exe
+./dfsan_test.exe
+</code></pre></div></div> <p>The <strong>Docker image</strong> with the complete build is available as <a href="https://hub.docker.com/repository/docker/mcopik/clang-dfsan/tags"><code class="language-plaintext highlighter-rouge">mcopik/clang-dfsan:clang-${VERSION}</code></a>.</p> <h2 id="c-standard-library">C++ Standard Library</h2> <p>We want to build both <a href="https://libcxx.llvm.org/">libcxx</a> and <a href="https://libcxxabi.llvm.org/">libcxxabi</a> to provide a fully sanitized standard library implementation that can be used by C++ applications. The libraries are easily built as a part of LLVM tree by selectin LLVM projects <code class="language-plaintext highlighter-rouge">libcxx</code> and <code class="language-plaintext highlighter-rouge">libcxxabi</code>, similarly to the previous setup. However, this requires generation of targets for the entire LLVM project and we can’t easily reuse previous build step because compiler flags are now different.</p> <p>Fortunately, the libraries support a standalone build although it is a bit more complicated due to a cyclic dependency: <code class="language-plaintext highlighter-rouge">libcxx</code> requires <code class="language-plaintext highlighter-rouge">libcxxabi</code> whereas <code class="language-plaintext highlighter-rouge">libcxxabi</code> requires existence of <code class="language-plaintext highlighter-rouge">libcxx</code> headers. The most generic approach would be to build <code class="language-plaintext highlighter-rouge">libcxx</code> against a different ABI, such as <code class="language-plaintext highlighter-rouge">libstdc++</code>, build <code class="language-plaintext highlighter-rouge">libcxxabi</code> and then finally rebuild <code class="language-plaintext highlighter-rouge">libcxx</code> with a proper ABI. But we can take a shortcut here since <code class="language-plaintext highlighter-rouge">libcxxabi</code> requires only headers from the other library, and for that reason we don’t need a full build.</p> <p>First, let’s create a static build of <code class="language-plaintext highlighter-rouge">libcxxabi</code></p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmake <span class="nt">-G</span> <span class="s2">"Ninja"</span><span class="se">\</span>
+  <span class="nt">-DCMAKE_BUILD_TYPE</span><span class="o">=</span>MinSizeRel<span class="se">\</span>
+  <span class="nt">-DCMAKE_INSTALL_PREFIX</span><span class="o">=</span>/path/to/install<span class="se">\</span>
+  <span class="nt">-DCMAKE_C_COMPILER</span><span class="o">=</span>clang<span class="se">\</span>
+  <span class="nt">-DCMAKE_CXX_COMPILER</span><span class="o">=</span>clang++<span class="se">\</span>
+  <span class="nt">-DCMAKE_C_FLAGS</span><span class="o">=</span><span class="nt">-fsanitize</span><span class="o">=</span>dataflow<span class="se">\</span>
+  <span class="nt">-DCMAKE_CXX_FLAGS</span><span class="o">=</span><span class="nt">-fsanitize</span><span class="o">=</span>dataflow<span class="se">\</span>
+  <span class="nt">-DLLVM_PATH</span><span class="o">=</span>/path/to/llvm/install<span class="se">\</span>
+  <span class="nt">-DLIBCXXABI_ENABLE_SHARED</span><span class="o">=</span>NO<span class="se">\</span>
+  <span class="nt">-DLIBCXXABI_LIBCXX_PATH</span><span class="o">=</span>../libcxx<span class="se">\</span>
+  ../libcxxabi
+</code></pre></div></div> <p>This will create a single static library file <code class="language-plaintext highlighter-rouge">lib/libc++abi.a</code>. Then, we can get a libc++. In addition, we can use the experimental option <code class="language-plaintext highlighter-rouge">LIBCXX_ENABLE_STATIC_ABI_LIBRARY</code> to link the contents of <code class="language-plaintext highlighter-rouge">libcxxabi</code> with our static copy of <code class="language-plaintext highlighter-rouge">libcxx</code>. This simplifies further usage since <code class="language-plaintext highlighter-rouge">libc++abi.a</code> does not have to be specified every time as link-time dependency.</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmake <span class="nt">-G</span> <span class="s2">"Ninja"</span><span class="se">\</span>
+  <span class="nt">-DCMAKE_BUILD_TYPE</span><span class="o">=</span>MinSizeRel<span class="se">\</span>
+  <span class="nt">-DCMAKE_INSTALL_PREFIX</span><span class="o">=</span>/opt/llvm<span class="se">\</span>
+  <span class="nt">-DCMAKE_C_COMPILER</span><span class="o">=</span>clang<span class="se">\</span>
+  <span class="nt">-DCMAKE_CXX_COMPILER</span><span class="o">=</span>clang++<span class="se">\</span>
+  <span class="nt">-DCMAKE_C_FLAGS</span><span class="o">=</span><span class="nt">-fsanitize</span><span class="o">=</span>dataflow<span class="se">\</span>
+  <span class="nt">-DCMAKE_CXX_FLAGS</span><span class="o">=</span><span class="nt">-fsanitize</span><span class="o">=</span>dataflow<span class="se">\</span>
+  <span class="nt">-DLIBCXX_ENABLE_SHARED</span><span class="o">=</span>OFF<span class="se">\</span>
+  <span class="nt">-DLIBCXX_CXX_ABI</span><span class="o">=</span>libcxxabi<span class="se">\</span>
+  <span class="nt">-DLIBCXX_ENABLE_STATIC_ABI_LIBRARY</span><span class="o">=</span>ON<span class="se">\</span>
+  <span class="nt">-DLIBCXX_CXX_ABI_INCLUDE_PATHS</span><span class="o">=</span>../libcxxabi/include/<span class="se">\</span>
+  <span class="nt">-DLIBCXX_CXX_ABI_LIBRARY_PATH</span><span class="o">=</span>../build_libcxxabi/lib/<span class="se">\</span>
+  ../libcxx
+</code></pre></div></div> <p>Afterwards we should only <code class="language-plaintext highlighter-rouge">libc++.a</code> in the <code class="language-plaintext highlighter-rouge">${INSTALL}/lib</code> directory. Let’s do a simple sanity check to verify that our new build works correctly:</p> <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;numeric&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;cassert&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;sanitizer/dfsan_interface.h&gt;</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+
+  <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="n">dfsan_label</span> <span class="n">i_label</span> <span class="o">=</span> <span class="n">dfsan_create_label</span><span class="p">(</span><span class="s">"i"</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="n">dfsan_set_label</span><span class="p">(</span><span class="n">i_label</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">i</span><span class="p">));</span>
+
+  <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="n">dfsan_label</span> <span class="n">j_label</span> <span class="o">=</span> <span class="n">dfsan_create_label</span><span class="p">(</span><span class="s">"j"</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="n">dfsan_set_label</span><span class="p">(</span><span class="n">j_label</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">j</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">j</span><span class="p">));</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">vec</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="p">};</span>
+  <span class="n">dfsan_label</span> <span class="n">test_label</span> <span class="o">=</span> <span class="n">dfsan_read_label</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vec</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+  <span class="n">assert</span><span class="p">(</span><span class="n">dfsan_has_label</span><span class="p">(</span><span class="n">test_label</span><span class="p">,</span> <span class="n">i_label</span><span class="p">));</span>
+
+  <span class="kt">int</span> <span class="n">test</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">accumulate</span><span class="p">(</span><span class="n">vec</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">vec</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">j</span><span class="p">);</span>
+  <span class="n">test_label</span> <span class="o">=</span> <span class="n">dfsan_read_label</span><span class="p">(</span><span class="o">&amp;</span><span class="n">test</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">test</span><span class="p">));</span>
+  <span class="n">assert</span><span class="p">(</span><span class="n">dfsan_has_label</span><span class="p">(</span><span class="n">test_label</span><span class="p">,</span> <span class="n">i_label</span><span class="p">));</span>
+  <span class="n">assert</span><span class="p">(</span><span class="n">dfsan_has_label</span><span class="p">(</span><span class="n">test_label</span><span class="p">,</span> <span class="n">j_label</span><span class="p">));</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>To build this, we need to specify in clang arguments that <code class="language-plaintext highlighter-rouge">libc++</code> should be used. Furthermore, we need to provide include and library directories to libc++, unless the standard library was installed in the same directory tree as clang. In such case, the compiler will be able to pick up paths automatically. The link with <code class="language-plaintext highlighter-rouge">libc++abi</code> is unnecesary when libraries were merged in the last build step.</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>clang++ <span class="nt">-I</span> /path/to/libc++/installation/include/c++/v1<span class="se">\</span>
+  <span class="nt">-fsanitize</span><span class="o">=</span>dataflow<span class="se">\</span>
+  <span class="nt">-L</span> /path/to/libc++/installation/lib<span class="se">\</span>
+  <span class="nt">-Wl</span>,--start-group,-lc++abi<span class="se">\</span>
+  <span class="nt">-stdlib</span><span class="o">=</span>libc++ dfsan_test.cpp<span class="se">\</span>
+  <span class="nt">-o</span> dfsan_test.exe
+</code></pre></div></div> <p>The <strong>Docker image</strong> with the complete build is available as <a href="https://hub.docker.com/repository/docker/mcopik/clang-dfsan/tags">`mcopik/clang-dfsan:libcxx-${VERSION}</a>.</p> <h2 id="complete-toolchain">Complete Toolchain</h2> <p>Finally, we can assemble a complete C++ toolchain. In addition to standard C++ library, the compilation workflow has several dependencies such as linker, runtime library or implementation of exceptions. One could use standard, widely-used and easily available tools or try to build a pure LLVM pipeline.</p> <h3 id="gcc">GCC</h3> <p>The required packages on a Ubuntu-based distro are <strong>binutils</strong> for standard GNU linker <strong>ld</strong>, <strong>libc-dev</strong> for standard C library and <strong>libgcc-${VERSION}-dev</strong> to provide runtime library and stack unwinder. Atomics require additional libraries<sup id="fnref:2:1" role="doc-noteref"><a href="#fn:2" class="footnote" rel="footnote">2</a></sup>.</p> <h3 id="clang">Clang</h3> <p>On Debian-based distributions, I recommend to use <strong>libc-6-dev</strong> since it’s perfectly compatible with clang programs. The necessary runtime functions are already provided with <strong>compiler-rt</strong>. Common alternatives to <strong>GNU ld</strong> linker are <strong>GNU gold</strong> or <strong>LLVM lld</strong>.</p> <p>Again, the <strong>Docker image</strong> with the complete build is available as <a href="https://hub.docker.com/repository/docker/mcopik/clang-dfsan/tags"><code class="language-plaintext highlighter-rouge">mcopik/clang-dfsan:dfsan-${VERSION}</code></a>. It comes with two wrappers, <code class="language-plaintext highlighter-rouge">clang-dfsan</code> and <code class="language-plaintext highlighter-rouge">clang++-dfsan</code>, that include flags necessary to enable dataflow sanitization and link against dedicated build of <code class="language-plaintext highlighter-rouge">libc++</code>.</p> <h2 id="openmp">OpenMP</h2> <p>LLVM has a separate implementation of <a href="https://openmp.llvm.org/">OpenMP</a>, a widely-used library for multithreading and shared-memory parallelism. The build steps are similar to other project, with minor differences. First, an additional CMake parameter <code class="language-plaintext highlighter-rouge">LIBOMP_ENABLE_SHARED=Off</code> is used to enforce building a static library. Second, there are several functions that cannot be instrumented because their implementations are provided only in assembly. On Linux, these functions are provided in <code class="language-plaintext highlighter-rouge">runtime/src/z_Linux_asm.S</code> and dfsan blacklist has to be updated:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fun:__kmp_x86_cpuid=uninstrumented
+fun:__kmp_x86_cpuid=discard
+fun:__kmp_store_x87_fpu_control_word=uninstrumented
+fun:__kmp_store_x87_fpu_control_word=discard
+fun:__kmp_load_x87_fpu_control_word=uninstrumented
+fun:__kmp_load_x87_fpu_control_word=discard
+fun:__kmp_clear_x87_fpu_status_word=uninstrumented
+fun:__kmp_clear_x87_fpu_status_word=functional
+fun:__kmp_hardware_timestamp=uninstrumented
+fun:__kmp_hardware_timestamp=discard
+
+fun:__kmp_fork_call=uninstrumented
+fun:__kmp_fork_call=functional
+fun:__kmp_serialized_parallel=uninstrumented
+fun:__kmp_serialized_parallel=functional
+fun:__kmp_invoke_microtask=uninstrumented
+fun:__kmp_invoke_microtask=functional
+</code></pre></div></div> <p>The library can be build similarly to the previous step:</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cmake <span class="nt">-G</span> <span class="s2">"Ninja"</span><span class="se">\</span>
+  <span class="nt">-DCMAKE_BUILD_TYPE</span><span class="o">=</span>MinSizeRel<span class="se">\</span>
+  <span class="nt">-DCMAKE_INSTALL_PREFIX</span><span class="o">=</span>/opt/llvm<span class="se">\</span>
+  <span class="nt">-DCMAKE_C_COMPILER</span><span class="o">=</span>clang<span class="se">\</span>
+  <span class="nt">-DCMAKE_CXX_COMPILER</span><span class="o">=</span>clang++<span class="se">\</span>
+  <span class="nt">-DCMAKE_C_FLAGS</span><span class="o">=</span><span class="s2">"-fsanitize=dataflow -fsanitize-blacklist=/dfsan_abilist.txt"</span><span class="se">\</span>
+  <span class="nt">-DCMAKE_CXX_FLAGS</span><span class="o">=</span><span class="s2">"-fsanitize=dataflow -fsanitize-blacklist=/dfsan_abilist.txt"</span><span class="se">\</span>
+  <span class="nt">-DLIBCXX_ENABLE_SHARED</span><span class="o">=</span>OFF<span class="se">\</span>
+  <span class="nt">-DLIBCXX_CXX_ABI</span><span class="o">=</span>libcxxabi<span class="se">\</span>
+  <span class="nt">-DLIBCXX_ENABLE_STATIC_ABI_LIBRARY</span><span class="o">=</span>ON<span class="se">\</span>
+  <span class="nt">-DLIBCXX_CXX_ABI_INCLUDE_PATHS</span><span class="o">=</span>../libcxxabi/include/<span class="se">\</span>
+  <span class="nt">-DLIBCXX_CXX_ABI_LIBRARY_PATH</span><span class="o">=</span>../build_libcxxabi/lib/<span class="se">\</span>
+  ../libcxx
+</code></pre></div></div> <p>Finally, we can try to compile a program parallelized with OpenMP by adding the flags <code class="language-plaintext highlighter-rouge">-I/path/to/openmp/include -fopenmp /path/to/openmp/lib/libiomp5.a</code>.</p> <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;numeric&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;cassert&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;omp.h&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;sanitizer/dfsan_interface.h&gt;</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+
+  <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="n">dfsan_label</span> <span class="n">m_label</span> <span class="o">=</span> <span class="n">dfsan_create_label</span><span class="p">(</span><span class="s">"m"</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="n">dfsan_set_label</span><span class="p">(</span><span class="n">m_label</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">m</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">m</span><span class="p">));</span>
+  <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+
+  <span class="cp">#pragma omp parallel
+</span>  <span class="p">{</span>
+    <span class="kt">int</span> <span class="o">*</span> <span class="n">sum</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">[</span><span class="n">omp_get_num_threads</span><span class="p">()];</span>
+    <span class="cp">#pragma omp for
+</span>    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+      <span class="n">sum</span><span class="p">[</span><span class="n">omp_get_thread_num</span><span class="p">()]</span> <span class="o">+=</span> <span class="n">m</span><span class="p">;</span>
+    <span class="n">dfsan_label</span> <span class="n">test_label</span> <span class="o">=</span> <span class="n">dfsan_read_label</span><span class="p">(</span><span class="o">&amp;</span><span class="n">sum</span><span class="p">[</span><span class="n">omp_get_thread_num</span><span class="p">()],</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+    <span class="n">assert</span><span class="p">(</span><span class="n">dfsan_has_label</span><span class="p">(</span><span class="n">test_label</span><span class="p">,</span> <span class="n">m_label</span><span class="p">));</span>
+    <span class="k">delete</span><span class="p">[]</span> <span class="n">sum</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div> <h2 id="mpi">MPI</h2> <p>The MPI can be compiled with dfsan support, an example of build for OpenMPI:</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">CC</span><span class="o">=</span><span class="k">${</span><span class="nv">CLANG</span><span class="k">}</span> <span class="nv">CFLAGS</span><span class="o">=</span><span class="s2">"-fsanitize=dataflow"</span><span class="se">\</span>
+  <span class="o">&amp;&amp;</span> <span class="k">${</span><span class="nv">OPENMPI_DIR</span><span class="k">}</span>/configure<span class="se">\</span>
+  <span class="o">&amp;&amp;</span> <span class="nt">--enable-static</span><span class="o">=</span><span class="nb">yes</span><span class="se">\</span>
+  <span class="o">&amp;&amp;</span> <span class="nt">--enable-shared</span><span class="o">=</span><span class="nb">false</span>
+</code></pre></div></div> <p>Compiling the library requires additional blacklist update because small assembly functions are used during the configuration to test the compiler:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fun:gsym_test_func=uninstrumented
+</code></pre></div></div> <p>Apart from that change, the compilation should work seamlessly. C++ compiler should be unnecessary because C++ bindings are deprecated and not built by default</p> <p>An entirely different question is if instrumenting MPI is even necessary? MPI operations tend to overwrite memory content with data received from network and it requires an additional library to handle label propagation through MPI messages. Furthermore, using a dedicated build prevents from running the program on a supercomputer. Thus, a better option might be to simply put MPI functions in the blacklist.</p> <h2 id="references">References</h2> <div class="footnotes" role="doc-endnotes"> <ol> <li id="fn:1" role="doc-endnote"> <p><a href="https://en.wikipedia.org/wiki/Taint_checking">Taint checking on Wikipedia</a> <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p> </li> <li id="fn:2" role="doc-endnote"> <p><a href="http://bitblaze.cs.berkeley.edu/papers/dta++-ndss11.pdf">Kang et al., “DTA++: Dynamic Taint Analysis withTargeted Control-Flow Propagation”</a> <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:2:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p> </li> <li id="fn:3" role="doc-endnote"> <p><a href="https://clang.llvm.org/docs/Toolchain.html">Clang: Assembling a Complete Toolchain</a> <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p> </li> <li id="fn:4" role="doc-endnote"> <p><a href="http://lists.llvm.org/pipermail/openmp-dev/2016-January/001051.html">January 2016, [Openmp-dev] Building a static LLVM OpenMP library?</a> <a href="#fnref:4" class="reversefootnote" role="doc-backlink">&#8617;</a></p> </li> </ol> </div>]]></content><author><name></name></author><category term="c++"/><category term="c++"/><category term="llvm"/><category term="taint"/><summary type="html"><![CDATA[Clang comes with a set of tools known as sanitizers that provide a runtime verification of common problems such as memory issues and undefined behavior. An interesting and a not well-known one is DfSan, a dataflow sanitizer. The name does not really reveal the true purpose: the library brings a compiler pass and runtime to implement taint analysis1. The main purpose is to taint specific memory regions and automatically propagate taint labels to other locations in memory that are affected by originally tainted regions. Taint labels are stored separately, in a so-called shadow memory, and compiler pass instruments codes with taint propagation. Thus, it is possible for every variable in a program to detect which values have affected it. The analysis is not only fully inter-procedural but it is completely memory agnostic, which is a common issue for static compiler analyses. The sanitizer implements data-flow tainting, the most common way of propagating labels: Taint checking on Wikipedia &#8617;]]></summary></entry><entry><title type="html">Measuring Azure Functions performance</title><link href="/blog/2020/azure-functions-monitoring/" rel="alternate" type="text/html" title="Measuring Azure Functions performance"/><published>2020-01-20T08:00:00+00:00</published><updated>2020-01-20T08:00:00+00:00</updated><id>/blog/2020/azure-functions-monitoring</id><content type="html" xml:base="/blog/2020/azure-functions-monitoring/"><![CDATA[<p>Some time ago, I wrote <a href="https://mcopik.github.io/serverless/2019/12/24/aws-lambda-durations/">a short note</a> on measuring serverless functions durations and memory consumption on AWS Lambda. This time we will take a look at Azure Functions, where the situation is a bit more complicated. Microsoft serverless offerings do not offer a similar level of comfort since the function response does not involve any information on function execution. For that purpose, we need to query logs using <a href="https://docs.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview">Azure Application Insights</a>.</p> <p>We can access Application Insights using <a href="https://docs.microsoft.com/en-us/cli/azure/ext/application-insights/monitor/app-insights/events?view=azure-cli-latest">CLI</a> and a <a href="https://dev.applicationinsights.io/quickstart">REST API</a>. For the former, it’s sufficient to be logged in and identify the ID of the application, while for the latter, we need to <a href="https://docs.microsoft.com/en-us/cli/azure/ext/application-insights/monitor/app-insights/api-key?view=azure-cli-latest#ext-application-insights-az-monitor-app-insights-api-key-create">generate an API key</a>. Bear in mind that the App Insights ID is different than identification numbers used anywhere else.</p> <h3 id="time">Time</h3> <p>First, we need to get Azure CLI running. You might use a <a href="https://gist.github.com/mcopik/20ffbc1a5a70cb3fa4def3677bc06f17">Dockerfile</a> that provides an image with Azure CLI and Azure Function Tools and log in with the help of a browser. Alternatively, you can read my previous post on non-interactive login in Azure CLI. To use application insights in a CLI mode, it is necessary to install an extension - for some reason, it is not provided by default on Linux platforms:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az monitor: 'app-insights' is not in the 'az monitor' command group.
+See 'az monitor --help'. If the command is from an extension, please make sure the
+corresponding extension is installed. To learn more about extensions, please visit
+https://docs.microsoft.com/en-us/cli/azure/azure-cli-extensions-overview
+az extension add --name application-insights
+</code></pre></div></div> <p>First, we need to identify the ID by using App Insights components:</p> <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">az monitor app-insights component show
+[
+  {
+    "appId": "XXX-XXX-XXX",
+</span><span class="c">    ...
+</span><span class="go">    "name": "XXXXX",
+</span><span class="c">    ...
+</span><span class="go">  }
+]
+</span></code></pre></div></div> <p>Afterward, we can run queries on metrics or access all events related to a specific function, using <a href="https://docs.microsoft.com/en-us/cli/azure/ext/application-insights/monitor/app-insights/events?view=azure-cli-latest">az monitor app-insights events</a>. For example, receiving all execution requests of a function for the last 12h will look like this, including much more verbose output with all details on execution:</p> <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">az monitor app-insights events show --type requests --app $</span><span class="o">{</span>appID<span class="o">}</span> <span class="nt">--offset</span> 12h
+<span class="go">{
+  "value": [
+    {
+</span><span class="c">      ...
+</span><span class="go">      "request": {
+        "duration": 606.0171,
+        "id": "1a47461ed084a14a",
+        "name": "handler",
+        "performanceBucket": "500ms-1sec",
+        "resultCode": "200",
+        "source": "",
+        "success": "True",
+        "url": "https://411-image-recognition-python-3d785dee.azurewebsites.net/api/handler"
+      },
+</span><span class="c">      ...
+</span><span class="go">    },
+</span><span class="c">    ...
+</span><span class="go">  ]
+}
+</span></code></pre></div></div> <p>Flags <code class="language-plaintext highlighter-rouge">--start-time</code> and <code class="language-plaintext highlighter-rouge">--end-time</code> can be used to specify the exact time series for a data query. Events corresponding to function app execution contain additional data in <code class="language-plaintext highlighter-rouge">customDimensions</code> field. This data can be used to find out the function invocation by using the <code class="language-plaintext highlighter-rouge">InvocationId</code> field.</p> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">"customDimensions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"ai_legacyRequestId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XXXX"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"FunctionExecutionTimeMs"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2279.5392"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"TriggerReason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This function was programmatically called via the host APIs."</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"FullName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Functions.handler"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"LogLevel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Information"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"Category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Host.Results"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"InvocationId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XXXX"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"HostInstanceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XXXX"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"ProcessId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"37"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"HttpMethod"</span><span class="p">:</span><span class="w"> </span><span class="s2">"POST"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"HttpPath"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/handler"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <p>However, this data is not available when using Azure CLI. It can always be accessed through the <a href="https://dev.applicationinsights.io/">REST API</a>, though. To access it, we need the application ID accessed earlier and an API key created with <code class="language-plaintext highlighter-rouge">az monitor app-insights api-key create</code> command. However, the API does not allow to specify a detailed time interval which could be helpful to process a subset of requests easily.</p> <p>Finally, we can achieve the goal of finding correct requests by using detailed time filtering with queries. For example, the following query looks for requests with a given function app, function name and executed in a given time interval. Results include a timestamp of the event, function name, boolean value signalizing whether the execution was successful, result code, duration of the event, function app name, invocation ID, and function execution time.</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>requests
+| project timestamp, operation_Name, success, resultCode, duration, cloud_RoleName, invocationId=customDimensions['InvocationId'], functionTime=customDimensions['FunctionExecutionTimeMs']
+| where cloud_RoleName =~ 'FUNC_APP_NAME' and operation_Name =~ 'FUNC_NAME'
+| where timestamp &gt; todatetime('2020-01-22 17:25:02 +01:00') and timestamp &lt; todatetime('2020-01-22 17:26:02 +01:00')
+| order by timestamp desc
+</code></pre></div></div> <p>This query can be executed with Azure CLI as well:</p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az monitor app-insights query <span class="nt">--app</span> <span class="k">${</span><span class="nv">APP_ID</span><span class="k">}</span> <span class="nt">--analytics-query</span>
+<span class="s2">"requests | project timestamp, operation_Name, success, resultCode, duration, cloud_RoleName,
+invocationId=customDimensions['InvocationId'],
+functionTime=customDimensions['FunctionExecutionTimeMs']"</span>
+<span class="nt">--start-time</span> 2020-01-22 17:25:02 +01:00
+<span class="nt">--end-time</span> 2020-01-22 17:26:02 +01:00
+<span class="o">{</span>
+  <span class="s2">"tables"</span>: <span class="o">[</span>
+    <span class="o">{</span>
+      <span class="s2">"columns"</span>: <span class="o">[</span>
+        <span class="o">{</span>
+          <span class="s2">"name"</span>: <span class="s2">"timestamp"</span>,
+          <span class="s2">"type"</span>: <span class="s2">"datetime"</span>
+        <span class="o">}</span>,
+        <span class="o">{</span>
+          <span class="s2">"name"</span>: <span class="s2">"operation_Name"</span>,
+          <span class="s2">"type"</span>: <span class="s2">"string"</span>
+        <span class="o">}</span>,
+        <span class="o">{</span>
+          <span class="s2">"name"</span>: <span class="s2">"success"</span>,
+          <span class="s2">"type"</span>: <span class="s2">"string"</span>
+        <span class="o">}</span>,
+        <span class="o">{</span>
+          <span class="s2">"name"</span>: <span class="s2">"resultCode"</span>,
+          <span class="s2">"type"</span>: <span class="s2">"string"</span>
+        <span class="o">}</span>,
+        <span class="o">{</span>
+          <span class="s2">"name"</span>: <span class="s2">"duration"</span>,
+          <span class="s2">"type"</span>: <span class="s2">"real"</span>
+        <span class="o">}</span>,
+        <span class="o">{</span>
+          <span class="s2">"name"</span>: <span class="s2">"cloud_RoleName"</span>,
+          <span class="s2">"type"</span>: <span class="s2">"string"</span>
+        <span class="o">}</span>,
+        <span class="o">{</span>
+          <span class="s2">"name"</span>: <span class="s2">"invocationId"</span>,
+          <span class="s2">"type"</span>: <span class="s2">"dynamic"</span>
+        <span class="o">}</span>,
+        <span class="o">{</span>
+          <span class="s2">"name"</span>: <span class="s2">"functionTime"</span>,
+          <span class="s2">"type"</span>: <span class="s2">"dynamic"</span>
+        <span class="o">}</span>
+      <span class="o">]</span>,
+      <span class="s2">"name"</span>: <span class="s2">"PrimaryResult"</span>,
+      <span class="s2">"rows"</span>: <span class="o">[</span>
+        <span class="o">[</span>
+          <span class="s2">"2020-01-22T16:25:02.9820857Z"</span>,
+          <span class="s2">"handler"</span>,
+          <span class="s2">"True"</span>,
+          <span class="s2">"200"</span>,
+          7691.1008,
+          <span class="s2">"111-dynamic-html-python-1489d84c"</span>,
+          <span class="s2">"XXXX"</span>,
+          <span class="s2">"2279.5392"</span>
+        <span class="o">]</span>
+      <span class="o">]</span>
+    <span class="o">}</span>
+  <span class="o">]</span>
+<span class="o">}</span>
+</code></pre></div></div> <h3 id="memory">Memory</h3> <p>Azure Functions hosts function executions from a single function app inside the same process, making it quite difficult to measure memory consumption of a single function, as <a href="https://github.com/Azure/azure-functions-host/issues/1451">confirmed by the Azure Functions team</a>. Even though memory is an important metric and it’s necessary to understand billing and resource requirements correctly, this feature does not seem to be a priority for the team.</p> <p>What can we do? Instead of periodically measuring memory consumption, as it is possible in some languages, <a href="https://nodejs.org/api/process.html#process_process_memoryusage">like NodeJS</a>, we can use Azure Metrics to obtain averaged values. Obviously, such data is only valid and meaningful for function apps consisting of a single function. Otherwise, the data can represent a value averaged across completely different functions.</p> <p>If we want to take a look at memory consumption of an entire function app, <a href="https://docs.microsoft.com/en-us/azure/azure-functions/functions-consumption-costs">the recommended solution</a> is to run a query on performance counters to find out values of <code class="language-plaintext highlighter-rouge">Private Bytes</code> counter:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>performanceCounters
+| project timestamp, name, counter, value, cloud_RoleName
+| where cloud_RoleName =~ 'FUNCTION_APP'
+| project-away cloud_RoleName 
+| order by timestamp desc
+</code></pre></div></div> <p>This command can return values such as:</p> <table> <thead> <tr> <th style="text-align: center">timestamp [UTC]</th> <th style="text-align: center">counter</th> <th style="text-align: center">value</th> </tr> </thead> <tbody> <tr> <td style="text-align: center">1/22/2020, 3:04:30.763 PM</td> <td style="text-align: center">Private Bytes</td> <td style="text-align: center">0</td> </tr> <tr> <td style="text-align: center">1/22/2020, 3:04:30.763 PM</td> <td style="text-align: center">% Processor Time Normalized</td> <td style="text-align: center">0.425</td> </tr> <tr> <td style="text-align: center">1/22/2020, 3:04:30.762 PM</td> <td style="text-align: center">% Processor Time</td> <td style="text-align: center">0.85</td> </tr> </tbody> </table> <p>In my case, the memory consumption is not counted correctly for Python function apps on the Linux system. <a href="https://github.com/Azure/Azure-Functions/issues/1462">Hopefully, the problem will be resolved soon!</a>.</p>]]></content><author><name></name></author><category term="serverless"/><category term="serverless"/><category term="azure"/><summary type="html"><![CDATA[Some time ago, I wrote a short note on measuring serverless functions durations and memory consumption on AWS Lambda. This time we will take a look at Azure Functions, where the situation is a bit more complicated. Microsoft serverless offerings do not offer a similar level of comfort since the function response does not involve any information on function execution. For that purpose, we need to query logs using Azure Application Insights.]]></summary></entry><entry><title type="html">Measuring AWS Lambda performance</title><link href="/blog/2020/aws-lambda-durations/" rel="alternate" type="text/html" title="Measuring AWS Lambda performance"/><published>2020-01-09T08:00:00+00:00</published><updated>2020-01-09T08:00:00+00:00</updated><id>/blog/2020/aws-lambda-durations</id><content type="html" xml:base="/blog/2020/aws-lambda-durations/"><![CDATA[<p>Measuring AWS Lambda execution times can be in three ways: measure total time of synchronous execution on client side when using HTTP trigger, measure function runtime and return time with the result, as seen below, and use measurements provided by cloud service. The first option is far from ideal since measurements include the cost and variability of client-cloud communication. Such a setup is useful only when measuring the effect of using different cloud regions. The second approach does not include overheads of initialization, and we have no way of measuring cold starts.</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="kn">import</span> <span class="n">function</span>
+
+<span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+    <span class="n">begin</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="nf">now</span><span class="p">()</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">function</span><span class="p">.</span><span class="nf">handler</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="nf">now</span><span class="p">()</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="sh">"</span><span class="s">time</span><span class="sh">"</span> <span class="p">:</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">begin</span><span class="p">)</span> <span class="o">/</span> <span class="n">datetime</span><span class="p">.</span><span class="nf">timedelta</span><span class="p">(</span><span class="n">microseconds</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+        <span class="sh">"</span><span class="s">message</span><span class="sh">"</span><span class="p">:</span> <span class="n">ret</span>
+    <span class="p">}</span>
+</code></pre></div></div> <p>This leaves us an only option: rely on the cloud to share with us exact measurements. On AWS, we can access metrics stored in <a href="https://aws.amazon.com/cloudwatch/">AWS CloudWatch</a>, <strong>as long as our function has permissions to access CloudWatch metrics</strong>. We can use Python SDK to access metrics with <a href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudwatch.html#CloudWatch.Client.get_metric_data"><code class="language-plaintext highlighter-rouge">get_metric_data</code></a>. The query requires multiple parameters and some of them are not that obvious. So we start with listing available metrics:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">boto3</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">boto3</span><span class="p">.</span><span class="nf">client</span><span class="p">(</span><span class="sh">'</span><span class="s">cloudwatch</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">us-east-1</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">client</span><span class="p">.</span><span class="nf">list_metrics</span><span class="p">()</span>
+</code></pre></div></div> <p>The returned JSON includes multiple various metrics; here, we show those relevant to AWS Lambda:</p> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"Metrics"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"Namespace"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AWS/Lambda"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"MetricName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Throttles"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Dimensions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FunctionName"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"Value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"111_dynamic_html_python_128"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"Namespace"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AWS/Lambda"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"MetricName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Errors"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Dimensions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FunctionName"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"Value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"111_dynamic_html_python_128"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"Namespace"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AWS/Lambda"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"MetricName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invocations"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Dimensions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FunctionName"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"Value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"111_dynamic_html_python_128"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"Namespace"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AWS/Lambda"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"MetricName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Duration"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Dimensions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FunctionName"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"Value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"111_dynamic_html_python_128"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"Namespace"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AWS/Lambda"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"MetricName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ConcurrentExecutions"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Dimensions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FunctionName"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"Value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"111_dynamic_html_python_128"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"ResponseMetadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"RequestId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4569d7d8-324e-49a1-b7a9-46893833133a"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"HTTPStatusCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"HTTPHeaders"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"x-amzn-requestid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4569d7d8-324e-49a1-b7a9-46893833133a"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"content-type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text/xml"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"content-length"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9038"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"vary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"accept-encoding"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Thu, 09 Jan 2020 17:06:44 GMT"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"RetryAttempts"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div> <p>As we can see, for each function, we can measure the number of invocations, execution times, concurrency and errors. Continuing with Python API, we can run queries such as the one below, computing average duration for all one-hour periods on the 9th of January.</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">client</span><span class="p">.</span><span class="nf">get_metric_data</span><span class="p">(</span>
+  <span class="n">MetricDataQueries</span><span class="o">=</span><span class="p">[{</span>
+    <span class="sh">"</span><span class="s">Id</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">myRequest</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">Label</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">myRequestLabel</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">ReturnData</span><span class="sh">"</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">MetricStat</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="sh">"</span><span class="s">Period</span><span class="sh">"</span><span class="p">:</span> <span class="mi">3600</span><span class="p">,</span>
+      <span class="sh">"</span><span class="s">Unit</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">Milliseconds</span><span class="sh">"</span><span class="p">,</span>
+      <span class="sh">"</span><span class="s">Stat</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">Average</span><span class="sh">"</span><span class="p">,</span>
+      <span class="sh">"</span><span class="s">Metric</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="sh">"</span><span class="s">Namespace</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">AWS/Lambda</span><span class="sh">"</span><span class="p">,</span>
+        <span class="sh">"</span><span class="s">MetricName</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">Duration</span><span class="sh">"</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}],</span>
+  <span class="n">StartTime</span><span class="o">=</span><span class="n">datetime</span><span class="p">.</span><span class="nf">datetime</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
+  <span class="n">EndTime</span><span class="o">=</span><span class="n">datetime</span><span class="p">.</span><span class="nf">datetime</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+</code></pre></div></div> <p>The query provides results for each time period:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+  <span class="sh">'</span><span class="s">MetricDataResults</span><span class="sh">'</span><span class="p">:</span> <span class="p">[{</span>
+    <span class="sh">'</span><span class="s">Id</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">myRequest</span><span class="sh">'</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">Label</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">myRequestLabel</span><span class="sh">'</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">Timestamps</span><span class="sh">'</span><span class="p">:</span> <span class="p">[</span>
+      <span class="n">datetime</span><span class="p">.</span><span class="nf">datetime</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="nf">tzutc</span><span class="p">()),</span>
+      <span class="n">datetime</span><span class="p">.</span><span class="nf">datetime</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="nf">tzutc</span><span class="p">()),</span>
+      <span class="n">datetime</span><span class="p">.</span><span class="nf">datetime</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="nf">tzutc</span><span class="p">()),</span>
+      <span class="n">datetime</span><span class="p">.</span><span class="nf">datetime</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="nf">tzutc</span><span class="p">()),</span>
+      <span class="n">datetime</span><span class="p">.</span><span class="nf">datetime</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="nf">tzutc</span><span class="p">()),</span>
+      <span class="n">datetime</span><span class="p">.</span><span class="nf">datetime</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="nf">tzutc</span><span class="p">()),</span>
+      <span class="n">datetime</span><span class="p">.</span><span class="nf">datetime</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="nf">tzutc</span><span class="p">()),</span>
+      <span class="n">datetime</span><span class="p">.</span><span class="nf">datetime</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="nf">tzutc</span><span class="p">())</span>
+    <span class="p">],</span>
+    <span class="sh">'</span><span class="s">Values</span><span class="sh">'</span><span class="p">:</span> <span class="p">[</span>
+      <span class="mf">3529.3</span><span class="p">,</span> <span class="mf">3583.6459999999997</span><span class="p">,</span> <span class="mf">87.735</span><span class="p">,</span> <span class="mf">114.9690909090909</span><span class="p">,</span>
+      <span class="mf">49.782000000000004</span><span class="p">,</span> <span class="mf">8.254999999999999</span><span class="p">,</span> <span class="mf">0.34</span><span class="p">,</span> <span class="mf">0.27</span>
+    <span class="p">],</span>
+    <span class="sh">'</span><span class="s">StatusCode</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Complete</span><span class="sh">'</span>
+  <span class="p">}],</span>
+  <span class="sh">'</span><span class="s">Messages</span><span class="sh">'</span><span class="p">:</span> <span class="p">[],</span>
+  <span class="sh">'</span><span class="s">ResponseMetadata</span><span class="sh">'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="sh">'</span><span class="s">RequestId</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">48c7aedc-e87d-45bb-9045-adf8156be358</span><span class="sh">'</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">HTTPStatusCode</span><span class="sh">'</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">HTTPHeaders</span><span class="sh">'</span><span class="p">:</span> <span class="p">{</span>
+      <span class="sh">'</span><span class="s">x-amzn-requestid</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">48c7aedc-e87d-45bb-9045-adf8156be358</span><span class="sh">'</span><span class="p">,</span>
+      <span class="sh">'</span><span class="s">content-type</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">text/xml</span><span class="sh">'</span><span class="p">,</span>
+      <span class="sh">'</span><span class="s">content-length</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">1240</span><span class="sh">'</span><span class="p">,</span>
+      <span class="sh">'</span><span class="s">date</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">Fri, 10 Jan 2020 12:19:11 GMT</span><span class="sh">'</span><span class="p">},</span>
+    <span class="sh">'</span><span class="s">RetryAttempts</span><span class="sh">'</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>Although the <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic">set of available statistics</a> is quite extensive, including even percentiles to measure tail latency, it is not possible to access raw data since the lowest sampling period is 60 seconds. While it’s definitely useful for large applications where functions could be executed dozens of thousands of times per day, we can’t do detailed experiments and obtain histogram to understand stragglers and outliers.</p> <p>Fortunately, more detailed data is available in CloudWatch logs. Each function execution is followed by the message summarizing not only compute but also initialization time:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>START RequestId: bb6b75bb-e119-464c-8e24-1db141d951fa Version: $LATEST
+END RequestId: bb6b75bb-e119-464c-8e24-1db141d951fa
+REPORT RequestId: bb6b75bb-e119-464c-8e24-1db141d951fa
+  Duration: 33.99 ms
+  Billed Duration: 100 ms
+  Memory Size: 128 MB
+  Max Memory Used: 57 MB
+  Init Duration: 55.74 ms
+</code></pre></div></div> <p>To obtain that information, we don’t have to query logs since it can be returned with every function call when we provide Tail as log type in function invocation. The return will include a base64-encoded log which can be parased with the following code to obtain exact time measurements in milliseconds precision.</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ret</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="nf">invoke</span><span class="p">(</span>
+  <span class="n">FunctionName</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+  <span class="n">Payload</span><span class="o">=</span><span class="n">payload</span><span class="p">,</span>
+  <span class="n">LogType</span><span class="o">=</span><span class="sh">'</span><span class="s">Tail</span><span class="sh">'</span>
+<span class="p">)</span>
+<span class="k">if</span> <span class="sh">'</span><span class="s">FunctionError</span><span class="sh">'</span> <span class="ow">in</span> <span class="n">ret</span><span class="p">:</span>
+  <span class="n">logging</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="sh">'</span><span class="s">Invocation of {} failed!</span><span class="sh">'</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+  <span class="n">logging</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="sh">'</span><span class="s">Input: {}</span><span class="sh">'</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="nf">decode</span><span class="p">(</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">)))</span>
+  <span class="k">raise</span> <span class="nc">RuntimeError</span><span class="p">()</span>
+<span class="n">log</span> <span class="o">=</span> <span class="n">base64</span><span class="p">.</span><span class="nf">b64decode</span><span class="p">(</span><span class="n">ret</span><span class="p">[</span><span class="sh">'</span><span class="s">LogResult</span><span class="sh">'</span><span class="p">])</span>
+<span class="n">vals</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">log</span><span class="p">.</span><span class="nf">decode</span><span class="p">(</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">).</span><span class="nf">split</span><span class="p">(</span><span class="sh">'</span><span class="se">\t</span><span class="sh">'</span><span class="p">):</span>
+  <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="p">.</span><span class="nf">isspace</span><span class="p">():</span>
+    <span class="n">split</span> <span class="o">=</span> <span class="n">line</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="sh">'</span><span class="s">:</span><span class="sh">'</span><span class="p">)</span>
+    <span class="n">vals</span><span class="p">[</span><span class="n">split</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">split</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nf">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">return</span> <span class="n">vals</span>
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+  <span class="sh">'</span><span class="s">START RequestId</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">2430372f-9fcb-4b9c-8179-8b4b71c86f28</span><span class="sh">'</span><span class="p">,</span>
+  <span class="sh">'</span><span class="s">Duration</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">18.37</span><span class="sh">'</span><span class="p">,</span>
+  <span class="sh">'</span><span class="s">Billed Duration</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">100</span><span class="sh">'</span><span class="p">,</span>
+  <span class="sh">'</span><span class="s">Memory Size</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">128</span><span class="sh">'</span><span class="p">,</span>
+  <span class="sh">'</span><span class="s">Max Memory Used</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">57</span><span class="sh">'</span><span class="p">,</span>
+  <span class="sh">'</span><span class="s">Init Duration</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">60.74</span><span class="sh">'</span>
+<span class="p">}</span>
+</code></pre></div></div> <h3 id="query-cloudwatch-logs">Query CloudWatch logs</h3> <p>However, the solution presented above works quite well only when we invoke the function synchronously. If we choose ‘Event’ invoke type, the return value consists only of return code, <code class="language-plaintext highlighter-rouge">202</code> in case of a correct enqueue of function invocation to AWS queue. It’s a useful feature when we want test our function or evaluate performance by scheduling multiple invocations at the same time. How can we query the function log afterwards? The only option is to use the <a href="https://aws.amazon.com/cloudwatch/">AWS CloudWatch</a>. The query language description with samples is available in <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax-examples.html">AWS docs</a>, here we focus only on getting <code class="language-plaintext highlighter-rouge">REPORT</code> events that contain information interesting to us.</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">region</span> <span class="o">=</span> <span class="sh">''</span>
+<span class="n">lambda_function</span> <span class="o">=</span> <span class="sh">''</span>
+<span class="n">startTime</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># seconds from epoch
+</span><span class="n">endTime</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># seconds from epoch
+</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">boto3</span><span class="p">.</span><span class="nf">client</span><span class="p">(</span><span class="sh">'</span><span class="s">logs</span><span class="sh">'</span><span class="p">,</span> <span class="n">region</span><span class="p">)</span>
+<span class="n">query</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">start_query</span><span class="p">(</span>
+    <span class="n">logGroupName</span><span class="o">=</span><span class="sh">'</span><span class="s">/aws/lambda/{}</span><span class="sh">'</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">lambda_function</span><span class="p">),</span>
+    <span class="n">queryString</span><span class="o">=</span><span class="sh">"</span><span class="s">filter @message like /REPORT/</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">startTime</span><span class="o">=</span><span class="n">startTime</span><span class="p">,</span>
+    <span class="n">endTime</span><span class="o">=</span><span class="n">endTime</span>
+<span class="p">)</span>
+<span class="n">query_id</span> <span class="o">=</span> <span class="n">query</span><span class="p">[</span><span class="sh">'</span><span class="s">queryId</span><span class="sh">'</span><span class="p">]</span>
+<span class="n">response</span> <span class="o">=</span> <span class="bp">None</span>
+
+<span class="k">while</span> <span class="n">response</span> <span class="o">==</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">response</span><span class="p">[</span><span class="sh">'</span><span class="s">status</span><span class="sh">'</span><span class="p">]</span> <span class="o">==</span> <span class="sh">'</span><span class="s">Running</span><span class="sh">'</span><span class="p">:</span>
+    <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">get_query_results</span><span class="p">(</span>
+        <span class="n">queryId</span><span class="o">=</span><span class="n">query_id</span>
+    <span class="p">)</span>
+</code></pre></div></div> <p>The query result will contain information on results selected</p> <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">"statistics": {
+  "recordsMatched": 15.0,
+  "recordsScanned": 63.0,
+  "bytesScanned": 11802.0
+}
+</span></code></pre></div></div> <p>and a long array of function reports found for a given time period.</p> <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">[
+  {
+    "field": "@timestamp",
+    "value": "2020-01-21 15:24:18.198"
+  },
+  {
+    "field": "@message",
+    "value": "REPORT RequestId: 33792b95-4e1f-4c69-a5f5-5dacea2067cd\tDuration: 25.98 ms\tBilled Duration: 100 ms\tMemory Size: 512 MB\tMax Memory Used: 54 MB\tInit Duration: 1.01 ms\t\n"
+  },
+  {
+    "field": "@ptr",
+    "value": "CnYKPQo5MjYxNDkwODAzNzQ5Oi9hd3MvbGFtYmRhLzQxMV9pbWFnZV9yZWNvZ25pdGlvbl9weXRob25fNTEyEAUSNRoYAgXVWRJZAAAAAMQBWcsABeJxcZAAAACSIAEolaPRxfwtMJaj0cX8LTgDQNwESJ8XUJ0REAIYAQ=="
+  }
+]
+</span></code></pre></div></div> <p>And what about function result? Well, in that case it’s ignored and the only solution to retain it is to export function result into a dedicated S3 bucket. The <code class="language-plaintext highlighter-rouge">context</code> argument to every lambda function includes request identification `context.aws_request_id’ which can be used to connect output in storage with CloudWatch logs.</p>]]></content><author><name></name></author><category term="serverless"/><category term="serverless"/><category term="python"/><category term="aws"/><summary type="html"><![CDATA[Measuring AWS Lambda execution times can be in three ways: measure total time of synchronous execution on client side when using HTTP trigger, measure function runtime and return time with the result, as seen below, and use measurements provided by cloud service. The first option is far from ideal since measurements include the cost and variability of client-cloud communication. Such a setup is useful only when measuring the effect of using different cloud regions. The second approach does not include overheads of initialization, and we have no way of measuring cold starts.]]></summary></entry><entry><title type="html">Non-root Docker containers.</title><link href="/blog/2019/docker-non-root/" rel="alternate" type="text/html" title="Non-root Docker containers."/><published>2019-12-24T08:00:00+00:00</published><updated>2019-12-24T08:00:00+00:00</updated><id>/blog/2019/docker-non-root</id><content type="html" xml:base="/blog/2019/docker-non-root/"><![CDATA[<p>When running a Docker container, root privileges are required to manipulate namespaces and file descriptors. This leads to a common issue when users are not in the <code class="language-plaintext highlighter-rouge">docker</code> group and thus prevented from performing any action requiring assistance from the docker daemon. Let’s assume we configured our installation correctly, and we run the docker container as a local user. Since Docker containers share the same kernel with the host system, the host and container worlds of users and groups are the same. Users are identified by their ids and not by their names, ensuring that the same user id corresponds to the same user in different containers. We should expect our user to own files and processes created in the container, right?</p> <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">docker run -ti --entrypoint "/bin/bash" ubuntu
+</span><span class="gp">root@822ff39102a8:/#</span><span class="w"> </span><span class="nb">ls</span> <span class="nt">-l</span> <span class="nb">.</span>
+<span class="go">total 64
+drwxr-xr-x   2 root root 4096 Dec  2 12:43 bin
+drwxr-xr-x   2 root root 4096 Apr 24  2018 boot
+drwxr-xr-x   5 root root  360 Dec 24 13:26 dev
+drwxr-xr-x   1 root root 4096 Dec 24 13:26 etc
+</span></code></pre></div></div> <p>Surprise! We can confirm further that the entire process is owned by root:</p> <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">PID=$</span><span class="o">(</span>docker inspect <span class="nt">--format</span><span class="o">=</span><span class="s1">'{{ .State.Pid }}'</span> <span class="k">${</span><span class="nv">DOCKER_ID</span><span class="k">}</span><span class="o">)</span>
+<span class="gp">ps -fe | grep $</span>PID
+<span class="go">root      7694  7668  0 14:26 pts/0    00:00:00 /bin/bash
+</span></code></pre></div></div> <p>In the default configuration, Docker build and containers are executed with root as the user. Thus, all files created are owned by root, and Docker processes are root processes, as seen from the host. This result is often quite surprising and might be a potential security threat - container processes can escape the sandbox environment through multiple loopholes, as <a href="https://blog.dragonsector.pl/2019/02/cve-2019-5736-escape-from-docker-and.html?m=1">demonstrated here</a>. Although many projects use the default settings in their images, it is recommended by Docker <a href="https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#user">to run containers as a non-root process</a> and <a href="https://access.redhat.com/documentation/en-us/openshift_container_platform/3.11/html/creating_images/creating-images-guidelines">Red Hat’s OpenShift</a> to configure containers as executable by an arbitrary user ID.</p> <p>What happens if we try to define the user id when starting a standard container?</p> <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">USER=$</span><span class="o">(</span><span class="nb">id</span> <span class="nt">-u</span><span class="o">)</span>
+<span class="gp">GROUP=$</span><span class="o">(</span><span class="nb">id</span> <span class="nt">-g</span><span class="o">)</span>
+<span class="gp">docker run -ti --entrypoint "/bin/bash" --user="$</span>USER:<span class="nv">$GROUP</span><span class="s2">" ubuntu
+</span><span class="go">
+groups: cannot find name for group ID 1000
+I have no name!
+</span></code></pre></div></div> <p>An unexpected result but an easy one to understand - there’s no corresponding entry in neither <code class="language-plaintext highlighter-rouge">/etc/passwd</code> nor <code class="language-plaintext highlighter-rouge">/etc/group</code> for ids provided by us. And it gets even worse: now we not only have no home directory, but we can’t even touch the filesystem since root owns all files. Thus, this solution is not sufficient. What we need is to make the Docker image aware of a non-root user by explicitly specifying it during the build. We manually create a new user and use Dockerfile command <a href="https://docs.docker.com/engine/reference/builder/#user">USER</a> to specify to default user for <code class="language-plaintext highlighter-rouge">RUN</code>, <code class="language-plaintext highlighter-rouge">ENTRYPOINT</code>, and <code class="language-plaintext highlighter-rouge">CMD</code> operations.</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM ubuntu
+
+RUN useradd docker_user
+WORKDIR /home/docker_user
+USER docker_user:docker_user
+COPY test.py <span class="nb">.</span>
+</code></pre></div></div> <p>If we build and run this image as before, checking the permissions of <code class="language-plaintext highlighter-rouge">/home/docker_user</code> can only lead to a disappointment - the directory is still owned by root! Unfortunately, user change affects only consequent commands, and changing permissions manually with <code class="language-plaintext highlighter-rouge">chown -R docker_user:docker_user /home/docker_user</code> is necessary. Finally, we notice that while the user home directory has correct permissions, the test Python file is still owned by the root. For some reason, <code class="language-plaintext highlighter-rouge">COPY</code> commands are unaffected by user changes. We can provide file ownership as an optional argument to the command, and finally, we obtain the correct Dockerfile:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM ubuntu
+
+RUN useradd docker_user
+WORKDIR /home/docker_user
+RUN chown -R docker_user:docker_user /home/docker_user
+
+USER docker_user:docker_user
+COPY --chown=docker_user:docker_user test.py .
+</code></pre></div></div> <p>Creating a standard instance of the container, without additional overriding of user, executes the container with the user <code class="language-plaintext highlighter-rouge">docker_user</code> with user ID equal to the one used by user starting the container.</p> <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">docker run -ti --entrypoint "/bin/bash" ubuntu-user-test
+</span><span class="gp">docker_user@e53ebf506d92:~$</span><span class="w"> </span><span class="nb">id</span>
+<span class="go">uid=1000(docker_user) gid=1000(docker_user) groups=1000(docker_user) 
+</span><span class="gp">docker_user@e53ebf506d92:~$</span><span class="w"> </span><span class="nb">ls</span> <span class="nt">-l</span> <span class="nb">.</span> 
+<span class="go">total 0
+-rw-r--r-- 1 docker_user docker_user 0 Dec 24 16:24 test.py
+</span><span class="gp">docker_user@e53ebf506d92:~$</span><span class="w"> </span><span class="nb">rm </span>test.py
+<span class="gp">docker_user@e53ebf506d92:~$</span><span class="w"> </span><span class="nb">ls</span> | <span class="nb">wc</span> <span class="nt">-l</span>
+<span class="go">0
+</span></code></pre></div></div> <p>While on the host we observe the following:</p> <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">mcopik@mcopik-ThinkPad-T480s id
+uid=1000(mcopik) gid=1000(mcopik) [...]
+</span><span class="gp">mcopik@mcopik-ThinkPad-T480s ps -fe | grep $</span><span class="o">(</span>docker inspect <span class="nt">--format</span><span class="o">=</span><span class="s1">'{{ .State.Pid }}'</span> e53<span class="o">)</span>
+<span class="go">mcopik   21399 21375  0 21:29 pts/0    00:00:00 /bin/bash
+</span></code></pre></div></div> <p>We can test this change by mounting a volume to observe permissions of files created while executing in the container process.</p> <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">mcopik@mcopik-ThinkPad-T480s docker run -ti --entrypoint "/bin/bash" --volume $</span><span class="o">(</span><span class="nb">pwd</span><span class="o">)</span>/input-data:/mnt/data ubuntu-user-test
+<span class="gp">docker_user@379cedf1dd24:~$</span><span class="w"> </span><span class="nb">touch</span> /mnt/data/write_file
+<span class="gp">docker_user@379cedf1dd24:~$</span><span class="w"> </span><span class="nb">exit</span>
+<span class="go">mcopik@mcopik-ThinkPad-T480s ls -l input-data
+-rw-r--r-- 1 mcopik mcopik 0 Dec 24 21:35 write_file
+</span></code></pre></div></div> <p>This solution is not perfect by any means - it works as long as the user ID on the host and inside the container match. Furthermore, the process is executing as a non-root user, leading to a scenario where we can’t modify the container’s virtual filesystem freely. But we achieved a situation that is entirely sufficient for many scenarios: we can inspect container processes from the host, and all files and directories created in mounted volumes will no longer be root-owned.</p>]]></content><author><name></name></author><category term="docker"/><category term="docker"/><category term="linux"/><category term="bash"/><summary type="html"><![CDATA[When running a Docker container, root privileges are required to manipulate namespaces and file descriptors. This leads to a common issue when users are not in the docker group and thus prevented from performing any action requiring assistance from the docker daemon. Let’s assume we configured our installation correctly, and we run the docker container as a local user. Since Docker containers share the same kernel with the host system, the host and container worlds of users and groups are the same. Users are identified by their ids and not by their names, ensuring that the same user id corresponds to the same user in different containers. We should expect our user to own files and processes created in the container, right?]]></summary></entry></feed>
