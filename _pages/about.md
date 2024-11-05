@@ -28,9 +28,10 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-I'm a PhD student at the [Scalable Parallel Computing Laboratory](http://spcl.inf.ethz.ch/)
-at the [Department of Computer Science](https://inf.ethz.ch/) at [ETH Zürich](https://ethz.ch),
-advised by [Prof. Torsten Hoefler](http://unixer.de/).
+I'm a postdoctoral researcher student at the [Scalable Parallel Computing Laboratory](http://spcl.inf.ethz.ch/)
+at the [Department of Computer Science](https://inf.ethz.ch/) at [ETH Zürich](https://ethz.ch).
+I received my PhD in Computer Science from [ETH Zürich](https://ethz.ch)
+and I was advised by [Prof. Torsten Hoefler](http://unixer.de/).
 My main research goal is to develop **high-performance solutions for
 the new cloud paradigm of Function-as-a-Service (FaaS)** computing.
 The _serverless_ revolution brings new elastic and flexible resource allocation techniques,
@@ -46,8 +47,13 @@ where I had the opportunity to work at the [Institute of Theoretical and Applied
 with [Prof. Tadeusz Czachórski](https://www.iitis.pl/pl/person/tczachorski), Dr Artur Rataj,
 and [Dr Mateusz Nowak](https://www.iitis.pl/en/person/mnowak).
 
+## Contact
 
+If you are interested in collaborations, working with us on research ideas, using our open source software,
+or you have any questions about our papers - feel free to send an email!
 
+ETH students can find the thesis topics on [SPCL Website](https://spcl.inf.ethz.ch/SeMa/). This list is not exhaustive and not always up to date,
+and you can always reach out to me with your own ideas.
 
 ### Research Interests
 <div id="html" markdown="0">
