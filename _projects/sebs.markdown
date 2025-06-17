@@ -8,7 +8,7 @@ paper1: copik2020sebs
 paper1_description: Paper @ Middleware 2021
 zenodo: 10.5281/zenodo.5357597
 docker: spcleth/serverless-benchmarks
-importance: 2
+importance: 1
 category: serverless
 ---
 

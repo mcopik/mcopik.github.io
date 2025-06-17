@@ -7,7 +7,7 @@ github: spcl/serverless-benchmarks
 paper1: 2025sebsflow
 paper1_description: Paper @ EuroSys 2025 
 zenodo: 10.5281/zenodo.14907321
-importance: 3
+importance: 2
 category: serverless
 ---
 
