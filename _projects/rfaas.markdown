@@ -3,7 +3,7 @@ layout: page
 title: RDMA + FaaS = rFaaS
 description: Solving the high latency invocations problem of FaaS.
 img: /assets/img/rfaas/overview.png
-importance: 1
+importance: 3
 github: spcl/rfaas
 paper1: 2021rfaas
 paper1_description: Paper @ IPDPS 2023
