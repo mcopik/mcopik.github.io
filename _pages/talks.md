@@ -23,6 +23,32 @@ The list of talks, presentations, and public appearances.
 
 -----------
 
+## 2026
+
+* **HiPEAC 2026**, Kraków, Poland, Poland.
+_Cppless: Single-Source and High-Performance Serverless Programming in C++_,
+research paper presentation.
+[Slides](/assets/pdf/2026_hipeac_cppless_slides.pdf).
+
+* **HiPEAC 2026**, Kraków, Poland, Poland.
+_Demystifying Serverless Performance: A Hands-on Tutorial with Serverless Benchmark Suite SeBS_, tutorial. Slides: [first part](/assets/pdf/2026_hipeac_sebs_tutorial_1.pdf), [second part](/assets/pdf/2026_hipeac_sebs_tutorial_2.pdf), [third part](/assets/pdf/2026_hipeac_sebs_tutorial_3.pdf).
+
+## 2025
+
+* **ACM/IEEE Supercomputing (SC25)**, November, St. Louis, USA.
+_XaaS Containers: Performance-Portable Representation With Source and IR Containers_,
+research poster presentation. Presented by Torsten Hoefler.
+**Best Research Paper finalist**.
+[Slides](/assets/pdf/2025_xaas_paper_slides.pdf).
+
+* **SESAME Workshop at EuroSys 2025**, March, Amsterdam, Netherlands.
+_SeBS 2.0: Keeping up with the Clouds_, short paper presentation.
+[Slides](/assets/pdf/2025_sebs_20_slides.pdf).
+
+* **EuroSys 2025**, March, Amsterdam, Netherlands.
+_SeBS-Flow: Benchmarking Serverless Cloud Function Workflows_, research poster presentation. [Poster](/assets/pdf/2025_eurosys_sebs_flow_poster.pdf).
+
+
 ## 2024
 
 * **2024 ACM Symposium on Cloud Computing**, November, Redmond, USA.
