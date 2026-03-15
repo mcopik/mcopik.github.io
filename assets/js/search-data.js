@@ -72,7 +72,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-installing-fetchcontent-targets-in-cmake",
+        },{id: "post-c-for-serverless-always-faster",
+        
+          title: "C++ for Serverless - Always Faster?",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/lambda-cpp-opencv/";
+          
+        },
+      },{id: "post-installing-fetchcontent-targets-in-cmake",
         
           title: "Installing FetchContent targets in CMake",
         
