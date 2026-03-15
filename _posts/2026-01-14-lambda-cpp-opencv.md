@@ -519,9 +519,13 @@ In the results, there is one interesting outlier - cold performance. While the t
 
 In C++, the situation is slightly different. When we link the AWS C++ SDK, we need to initialize before the first use. In our case, we decided to implement it in the `main` function for simplicity, and this step could add up to 100 ms to the first invocation. Additionally, we noticed the function needs over 200 ms from the very beginning of initialization - as indicated by the `INIT_START` entry in AWS CloudWatch - to the very first line of our `main` function. This overhead could be at least partially caused by the static initialization of the AWS C++ SDK, which is difficult to hide unless we try to load the library dynamically with `dlopen`.
 
-Thus, we also executed the microbenchmark `010.sleep` that does not use the SDK. There, the init duration for the cold invocation was about ~150ms, which is lower but still higher than expected: we knew from our [Cppless paper](https://dl.acm.org/doi/10.1145/3708525) that the initialization overheads should be much lower!
+Thus, we also executed the microbenchmark `010.sleep` that does not use the SDK. There, the init duration for the cold invocation was about ~150ms, which is lower but still higher than expected: we knew from our [Cppless paper](https://mcopik.github.io/projects/cppless) that the initialization overheads should be much lower!
 
-![Picture of a Table 17 from the Cppless paper.](/assets/img/blogposts/2026_03_15_cppless.png)
+<div style="vertical-align:middle; text-align:center">
+  <a href="/assets/img/blogposts/2026_03_15_cppless.png">
+    <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/blogposts/2026_03_15_cppless.png' | relative_url }}" alt="Picture of a Table 17 from the Cppless paper" title="Cold initialization times reported in the Cppless paper."/>
+  </a>
+</div>
 
 These measurements were taken in June 2024. I began by redeploying a simple Cppless example, and the cold startup initialization time was now 90-100 ms:
 
@@ -587,6 +591,6 @@ int main(int, char*[])
 
 In the paper, we show that C++ functions provide excellent scalability and performance. We also demonstrate deployment to ARM environments (with a full toolchain integrated into LLVM) and integration into Google Cloud by compiling C++ to WebAssembly, invoked through the officially supported Node.js runtime (a small prototype so far).
 
-You can find more details in our [ACM TACO paper](https://dl.acm.org/doi/10.1145/3708525), which was presented in January 2026 at the [HiPEAC 2026 conference](https://www.hipeac.net/2026/krakow/).
+You can find more details in our [ACM TACO paper](https://mcopik.github.io/projects/cppless/), which was presented in January 2026 at the [HiPEAC 2026 conference](https://www.hipeac.net/2026/krakow/).
 At the same conference, I also presented the very first [tutorial on benchmarking serverless with SeBS](https://www.hipeac.net/2026/krakow/#/program/8250/) - if you missed it,
-you can find the materials in the [SeBS repository](https://github.com/spcl/serverless-benchmarks).
+you can find [the tutorial materials on GitHuB](https://github.com/spcl/serverless-benchmarks) and try them with [SeBS](https://github.com/spcl/serverless-benchmarks)!
