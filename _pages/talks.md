@@ -25,12 +25,17 @@ The list of talks, presentations, and public appearances.
 
 ## 2026
 
-* **HiPEAC 2026**, Kraków, Poland, Poland.
+* **17th Annual HPC-AI Swiss Conference 2026**, Locarno, Switzerland.
+_AXeleration as a Service (XaaS): From Batch Jobs to Elastic Services in Scientific Computing_,
+**keynote presentation**.
+[Slides](/assets/pdf/2026_hpc_ai_keynote.pdf).
+
+* **HiPEAC 2026**, Kraków, Poland.
 _Cppless: Single-Source and High-Performance Serverless Programming in C++_,
 research paper presentation.
 [Slides](/assets/pdf/2026_hipeac_cppless_slides.pdf).
 
-* **HiPEAC 2026**, Kraków, Poland, Poland.
+* **HiPEAC 2026**, Kraków, Poland.
 _Demystifying Serverless Performance: A Hands-on Tutorial with Serverless Benchmark Suite SeBS_, tutorial. Slides: [first part](/assets/pdf/2026_hipeac_sebs_tutorial_1.pdf), [second part](/assets/pdf/2026_hipeac_sebs_tutorial_2.pdf), [third part](/assets/pdf/2026_hipeac_sebs_tutorial_3.pdf).
 
 ## 2025
