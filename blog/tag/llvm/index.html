@@ -1,13 +1,624 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> llvm | Marcin Copik </title> <meta name="author" content="Marcin Copik"> <meta name="description" content="Personal webpage"> <meta name="keywords" content="serverless, high-performance computing, hpc, cloud, faas"> <link rel="stylesheet" href="/assets/css/bootstrap.min.css?a4b3f509e79c54a512b890d73235ef04"> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="/assets/css/academicons.min.css?f0b7046b84e425c55f3463ac249818f5"> <link defer rel="stylesheet" href="/assets/css/scholar-icons.css?62b2ac103a88034e6882a5be5f3e2772"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%94%A5&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?d41d8cd98f00b204e9800998ecf8427e"> <link rel="canonical" href="https://mcopik.github.io/blog/tag/llvm/"> <script src="/assets/js/theme.js?a81d82887dd692e91686b43de4542f18"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> llvm | Marcin Copik </title> <meta name="author" content="Marcin Copik"> <meta name="description" content="Personal webpage"> <meta name="keywords" content="jekyll, jekyll-theme, academic-website, portfolio-website"> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%94%A5&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=f0b101217084a90093badfe99ff9a7d1"> <link rel="canonical" href="https://mcopik.github.io/blog/tag/llvm/"> <script src="/assets/js/theme.js?v=7af685e2ba20b37fef545c97b8064050"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
     initTheme();
-  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> Marcin Copik </a> <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse text-right" id="navbarNav"> <ul class="navbar-nav ml-auto flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item "> <a class="nav-link" href="/news/">news </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/projects/">projects </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/repositories/">repositories </a> </li> <li class="nav-item "> <a class="nav-link" href="/talks/">talks </a> </li> <li class="nav-item "> <a class="nav-link" href="/students/">students </a> </li> <li class="nav-item "> <a class="nav-link" href="/misc/">misc </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">cv </a> </li> <li class="nav-item"> <button id="search-toggle" title="Search" onclick="openSearchModal()"> <span class="nav-link">ctrl k <i class="ti ti-search"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" title="Change theme"> <i class="ti ti-sun-moon" id="light-toggle-system"></i> <i class="ti ti-moon-filled" id="light-toggle-dark"></i> <i class="ti ti-sun-filled" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title"> <i class="fa-solid fa-hashtag fa-sm"></i> llvm</h1> <p class="post-description">an archive of posts with this tag</p> </header> <article class="archive"> <div class="table-responsive"> <table class="table table-sm table-borderless"> <tr> <th scope="row">Feb 24, 2020</th> <td> <a class="post-link" href="/blog/2020/dataflow/">C++ Toolchain with Taint Analysis</a> </td> </tr> <tr> <th scope="row">Feb 21, 2019</th> <td> <a class="post-link" href="/blog/2019/pintool/">Using LLVM to run Pintools on SPEC benchmarks</a> </td> </tr> <tr> <th scope="row">Oct 16, 2018</th> <td> <a class="post-link" href="/blog/2018/minimal-llvm-lit-config/">Minimal LLVM lit configuration</a> </td> </tr> <tr> <th scope="row">Oct 09, 2018</th> <td> <a class="post-link" href="/blog/2018/machine/">LLVM Machine Passes</a> </td> </tr> <tr> <th scope="row">Sep 21, 2018</th> <td> <a class="post-link" href="/blog/2018/twine/">Read the Freaking Documentation</a> </td> </tr> <tr> <th scope="row">Jul 28, 2018</th> <td> <a class="post-link" href="/blog/2018/string-format-optional/">String formatting with optional values</a> </td> </tr> </table> </div> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Marcin Copik. Powered by <a href="http://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Last updated: June 23, 2026. </div> </footer> <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> <script src="/assets/js/bootstrap.bundle.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?a0db7e5d5c70cc3252b3138b0c91dcaf" type="text/javascript"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/js/zoom.js?85ddb88934d28b74e78031fd54cf8308"></script> <script src="/assets/js/no_defer.js?2781658a0a2b13ed609542042a859126"></script> <script defer src="/assets/js/common.js?e0514a05c5c95ac1a93a8dfd5249b92e"></script> <script defer src="/assets/js/copy_code.js?c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?d9f17b6adc2311cbabd747f4538bb15f"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/js/mathjax-setup.js?a5bb4e6a542c546dd929b24b8b236dfd"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script async src="https://www.googletagmanager.com/gtag/js?id=G-SMNWMM80NC"></script> <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-
-    gtag('config', 'G-SMNWMM80NC');
-  </script> <script defer src="/assets/js/google-analytics-setup.js"></script> <script defer src="/assets/js/progress-bar.js?2f30e0e6801ea8f5036fa66e1ab0a71a" type="text/javascript"></script> <script src="/assets/js/vanilla-back-to-top.min.js?f40d453793ff4f64e238e420181a1d17"></script> <script>
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> Marcin Copik </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about </a> </li> <li class="nav-item "> <a class="nav-link" href="/news/">news </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item "> <a class="nav-link" href="/projects/">projects </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item "> <a class="nav-link" href="/repositories/">repositories </a> </li> <li class="nav-item "> <a class="nav-link" href="/talks/">talks </a> </li> <li class="nav-item "> <a class="nav-link" href="/students/">students </a> </li> <li class="nav-item "> <a class="nav-link" href="/misc/">misc </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">cv </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title"> <i class="fa-solid fa-hashtag fa-sm"></i> llvm</h1> <p class="post-description">an archive of posts with this tag</p> </header> <article class="archive"> <div class="table-responsive"> <table class="table table-sm table-borderless"> <tr> <th scope="row">Mar 11, 2025</th> <td> <a class="post-link" href="/blog/2025/lambda-arm-cpp/">Cross-compiling C++ to serverless ARM</a> </td> </tr> <tr> <th scope="row">Feb 24, 2020</th> <td> <a class="post-link" href="/blog/2020/dataflow/">C++ Toolchain with Taint Analysis</a> </td> </tr> <tr> <th scope="row">Feb 21, 2019</th> <td> <a class="post-link" href="/blog/2019/pintool/">Using LLVM to run Pintools on SPEC benchmarks</a> </td> </tr> <tr> <th scope="row">Oct 16, 2018</th> <td> <a class="post-link" href="/blog/2018/minimal-llvm-lit-config/">Minimal LLVM lit configuration</a> </td> </tr> <tr> <th scope="row">Oct 09, 2018</th> <td> <a class="post-link" href="/blog/2018/machine/">LLVM Machine Passes</a> </td> </tr> <tr> <th scope="row">Sep 21, 2018</th> <td> <a class="post-link" href="/blog/2018/twine/">Read the Freaking Documentation</a> </td> </tr> <tr> <th scope="row">Jul 28, 2018</th> <td> <a class="post-link" href="/blog/2018/string-format-optional/">String formatting with optional values</a> </td> </tr> </table> </div> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Marcin Copik. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. Photos from <a href="https://unsplash.com" target="_blank" rel="external nofollow noopener">Unsplash</a>. Last updated: July 13, 2026. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
     addBackToTop();
-  </script> <script type="module" src="/assets/js/search/ninja-keys.min.js?a3446f084dcaecc5f75aa1757d087dcf"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/js/search-setup.js?6c304f7b1992d4b60f7a07956e52f04a"></script> <script src="/assets/js/search-data.js"></script> <script src="/assets/js/shortcut-key.js?6f508d74becd347268a7f822bca7309d"></script> </body> </html>
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-news",
+          title: "news",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/news/";
+          },
+        },{id: "nav-blog",
+          title: "blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
+          },
+        },{id: "nav-projects",
+          title: "projects",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/projects/";
+          },
+        },{id: "nav-publications",
+          title: "publications",
+          description: "publications by categories in reversed chronological order. generated by jekyll-scholar.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/publications/";
+          },
+        },{id: "nav-repositories",
+          title: "repositories",
+          description: "Research software and open source projects.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/repositories/";
+          },
+        },{id: "nav-talks",
+          title: "talks",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/talks/";
+          },
+        },{id: "nav-students",
+          title: "students",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/students/";
+          },
+        },{id: "nav-misc",
+          title: "misc",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/misc/";
+          },
+        },{id: "nav-cv",
+          title: "cv",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "post-c-for-serverless-always-faster",
+        
+          title: "C++ for Serverless - Always Faster?",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/lambda-cpp-opencv/";
+          
+        },
+      },{id: "post-generating-documentation-with-ai-agents",
+        
+          title: "Generating documentation with AI Agents",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/llm-documentation/";
+          
+        },
+      },{id: "post-cross-compiling-c-to-serverless-arm",
+        
+          title: "Cross-compiling C++ to serverless ARM",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/lambda-arm-cpp/";
+          
+        },
+      },{id: "post-google-gemini-updates-flash-1-5-gemma-2-and-project-astra",
+        
+          title: 'Google Gemini updates: Flash 1.5, Gemma 2 and Project Astra <svg width="1.2rem" height="1.2rem" top=".5rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+        
+        description: "We’re sharing updates across our Gemini family of models and a glimpse of Project Astra, our vision for the future of AI assistants.",
+        section: "Posts",
+        handler: () => {
+          
+            window.open("https://blog.google/technology/ai/google-gemini-update-flash-ai-assistant-io-2024/", "_blank");
+          
+        },
+      },{id: "post-installing-fetchcontent-targets-in-cmake",
+        
+          title: "Installing FetchContent targets in CMake",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/cmake/";
+          
+        },
+      },{id: "post-google-summer-of-code-2023",
+        
+          title: "Google Summer of Code 2023",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2023/gsoc/";
+          
+        },
+      },{id: "post-debugging-the-debugger",
+        
+          title: "Debugging the debugger",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/gdb-bug/";
+          
+        },
+      },{id: "post-remote-bash-scripts-with-ssh",
+        
+          title: "Remote Bash scripts with SSH",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2022/bash-remote/";
+          
+        },
+      },{id: "post-displaying-external-posts-on-your-al-folio-blog",
+        
+          title: 'Displaying External Posts on Your al-folio Blog <svg width="1.2rem" height="1.2rem" top=".5rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.open("https://medium.com/@al-folio/displaying-external-posts-on-your-al-folio-blog-b60a1d241a0a?source=rss-17feae71c3c4------2", "_blank");
+          
+        },
+      },{id: "post-json-in-bash-and-cli-with-jq",
+        
+          title: "JSON in Bash and CLI with jq",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/jq/";
+          
+        },
+      },{id: "post-relative-paths-in-latex",
+        
+          title: "Relative paths in LaTeX.",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2021/latex-relative-include/";
+          
+        },
+      },{id: "post-c-toolchain-with-taint-analysis",
+        
+          title: "C++ Toolchain with Taint Analysis",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2020/dataflow/";
+          
+        },
+      },{id: "post-measuring-azure-functions-performance",
+        
+          title: "Measuring Azure Functions performance",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2020/azure-functions-monitoring/";
+          
+        },
+      },{id: "post-measuring-aws-lambda-performance",
+        
+          title: "Measuring AWS Lambda performance",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2020/aws-lambda-durations/";
+          
+        },
+      },{id: "post-azure-cli-login-in-2020",
+        
+          title: "Azure CLI login in 2020",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2019/azure-functions-cli/";
+          
+        },
+      },{id: "post-non-root-docker-containers",
+        
+          title: "Non-root Docker containers.",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2019/docker-non-root/";
+          
+        },
+      },{id: "post-implicit-function-prototypes-are-evil",
+        
+          title: "Implicit function prototypes are evil.",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2019/cffi-pointers/";
+          
+        },
+      },{id: "post-using-llvm-to-run-pintools-on-spec-benchmarks",
+        
+          title: "Using LLVM to run Pintools on SPEC benchmarks",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2019/pintool/";
+          
+        },
+      },{id: "post-minimal-llvm-lit-configuration",
+        
+          title: "Minimal LLVM lit configuration",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2018/minimal-llvm-lit-config/";
+          
+        },
+      },{id: "post-llvm-machine-passes",
+        
+          title: "LLVM Machine Passes",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2018/machine/";
+          
+        },
+      },{id: "post-read-the-freaking-documentation",
+        
+          title: "Read the Freaking Documentation",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2018/twine/";
+          
+        },
+      },{id: "post-string-formatting-with-optional-values",
+        
+          title: "String formatting with optional values",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2018/string-format-optional/";
+          
+        },
+      },{id: "post-processing-mixed-operands-and-arguments-with-getopts",
+        
+          title: "Processing mixed operands and arguments with getopts",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2017/processing-mixed-operands-and-arguments-with-getopts/";
+          
+        },
+      },{id: "post-yet-another-lesson-on-undefined-behavior",
+        
+          title: "Yet another lesson on undefined behavior",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2016/Return-statements-undefined-behaviour/";
+          
+        },
+      },{id: "post-between-fglrx-and-amdgu-amp-58-amd-devices-on-linux",
+        
+          title: "Between fglrx and AMDGU&amp;#58; AMD devices on Linux",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2016/amd-on-linux/";
+          
+        },
+      },{id: "books-the-godfather",
+          title: 'The Godfather',
+          description: "",
+          section: "Books",handler: () => {
+              window.location.href = "/books/the_godfather/";
+            },},{id: "news-sebs-our-serverless-benchmarking-paper-has-been-accepted-at-acm-ifip-middleware-2021",
+          title: 'SeBS, our serverless benchmarking paper has been accepted at ACM/IFIP Middleware 2021!',
+          description: "",
+          section: "News",},{id: "news-our-paper-on-work-stealing-prefix-scan-has-been-accepted-at-the-ieee-tpds",
+          title: 'Our paper on work-stealing prefix scan has been accepted at the IEEE TPDS!...',
+          description: "",
+          section: "News",},{id: "news-our-new-preprint-has-been-released-rfaas-rdma-accelerated-serverless",
+          title: 'Our new preprint has been released - rFaaS: RDMA-Accelerated Serverless!',
+          description: "",
+          section: "News",},{id: "news-i-have-received-the-microsoft-research-phd-fellowship-to-support-my-research-into-high-performance-serverless",
+          title: 'I have received the Microsoft Research PhD Fellowship to support my research into...',
+          description: "",
+          section: "News",},{id: "news-our-new-preprint-has-been-released-faaskeeper-a-blueprint-for-serverless-services",
+          title: 'Our new preprint has been released - FaaSKeeper: a Blueprint for Serverless Services!...',
+          description: "",
+          section: "News",},{id: "news-i-m-glad-to-share-that-we-received-cloud-research-credits-from-aws-and-google-cloud-the-grant-money-will-support-our-reseach-into-high-performance-computing-in-serverless-cloud",
+          title: 'I’m glad to share that we received cloud research credits from AWS and...',
+          description: "",
+          section: "News",},{id: "news-i-have-received-the-acm-ieee-cs-george-michael-memorial-hpc-fellowship-the-award-recognizes-our-work-on-the-convergence-of-hpc-and-serverless-cloud",
+          title: 'I have received the ACM-IEEE CS George Michael Memorial HPC Fellowship ! The...',
+          description: "",
+          section: "News",},{id: "news-our-poster-software-resource-disaggregation-for-hpc-with-serverless-computing-has-won-the-gold-medal-at-the-acm-student-research-competition-at-acm-ieee-supercomputing-2022",
+          title: 'Our poster Software Resource Disaggregation for HPC with Serverless Computing has won the...',
+          description: "",
+          section: "News",},{id: "news-our-paper-rfaas-rdma-enabled-faas-platform-for-serverless-high-performance-computing-has-been-accepted-at-ieee-ipdps-2023-conference",
+          title: 'Our paper rFaaS: RDMA-Enabled FaaS Platform for Serverless High-Performance Computing has been accepted...',
+          description: "",
+          section: "News",},{id: "news-i-will-be-attending-ipdps-23-where-i-will-present-our-paper-on-rfaas-and-present-my-phd-research-on-high-performance-serverless-at-the-phd-forum-and-paise-workshop",
+          title: 'I will be attending IPDPS’ 23 where I will present our paper on...',
+          description: "",
+          section: "News",},{id: "news-i-will-be-attending-acm-fcrc-and-ics-23-where-i-will-present-our-paper-on-fmi",
+          title: 'I will be attending ACM FCRC and ICS’ 23 where I will present...',
+          description: "",
+          section: "News",},{id: "news-i-will-be-attending-the-supercomputing-conference-this-year-i-will-be-working-as-a-student-volunteer-and-i-received-the-sighpc-travel-grant",
+          title: 'I will be attending the Supercomputing conference this year. I will be working...',
+          description: "",
+          section: "News",},{id: "news-our-paper-user-guided-page-merging-for-memory-deduplication-in-serverless-systems-has-been-accepted-at-ieee-big-data-2023-conference",
+          title: 'Our paper User-guided Page Merging for Memory Deduplication in Serverless Systems} has been...',
+          description: "",
+          section: "News",},{id: "news-i-will-be-giving-a-lightning-talk-at-the-llvm-hpc-workshop-at-sc23-where-i-will-present-our-work-on-cppless-c-compiler-for-serverless",
+          title: 'I will be giving a lightning talk at the LLVM-HPC workshop at SC23,...',
+          description: "",
+          section: "News",},{id: "news-our-paper-software-resource-disaggregation-for-hpc-with-serverless-computing-has-been-accepted-at-ieee-ipdps-2024-conference",
+          title: 'Our paper Software Resource Disaggregation for HPC with Serverless Computing has been accepted...',
+          description: "",
+          section: "News",},{id: "news-spcl-has-been-accepted-at-the-google-summer-of-code-2024-join-us-and-spend-the-summer-working-on-research-software-for-serverless-computing",
+          title: 'SPCL has been accepted at the Google Summer of Code 2024! Join us...',
+          description: "",
+          section: "News",},{id: "news-i-have-defended-my-phd-thesis-high-performance-serverless-for-hpc-and-clouds",
+          title: 'I have defended my PhD thesis “High-Performance Serverless for HPC and Clouds” 🎉!...',
+          description: "",
+          section: "News",},{id: "news-our-paper-xaas-acceleration-as-a-service-to-enable-productive-high-performance-cloud-computing-has-been-accepted-at-the-special-issue-of-the-ieee-computing-in-science-amp-amp-engineering-journal",
+          title: 'Our paper XaaS: Acceleration as a Service to Enable Productive High-Performance Cloud Computing...',
+          description: "",
+          section: "News",},{id: "news-our-paper-faaskeeper-learning-from-building-serverless-services-with-zookeeper-as-an-example-has-been-accepted-at-acm-hpdc-2024-conference",
+          title: 'Our paper FaaSKeeper: Learning from Building Serverless Services with ZooKeeper as an Example...',
+          description: "",
+          section: "News",},{id: "news-spcl-will-be-hosting-four-students-this-year-in-the-google-summer-of-code-program-they-will-be-working-with-us-on-serverless-benchmarking-suite-sebs-and-faaskeeper",
+          title: 'SPCL will be hosting four students this year in the Google Summer of...',
+          description: "",
+          section: "News",},{id: "news-i-have-started-a-new-position-as-postdoctoral-researcher-at-eth-zürich",
+          title: 'I have started a new position as postdoctoral researcher at ETH Zürich.',
+          description: "",
+          section: "News",},{id: "news-i-will-serve-on-the-program-committee-of-ipdps-2025-and-ahpc3-workshop-co-located-with-pdp-2025",
+          title: 'I will serve on the Program Committee of IPDPS 2025 and AHPC3 workshop...',
+          description: "",
+          section: "News",},{id: "news-i-received-the-sighpc-travel-grant-to-support-my-trip-to-the-supercomputing-2024",
+          title: 'I received the SIGHPC Travel Grant to support my trip to the Supercomputing...',
+          description: "",
+          section: "News",},{id: "news-our-research-poster-mignificient-fast-isolated-and-gpu-enabled-serverless-functions-has-been-accepted-at-supercomputing-2024",
+          title: 'Our research poster “MIGnificient: Fast, Isolated, and GPU-Enabled Serverless Functions” has been accepted...',
+          description: "",
+          section: "News",},{id: "news-our-paper-process-as-a-service-unifying-elastic-and-stateful-clouds-with-serverless-processes-has-been-accepted-at-acm-socc-2024-conference",
+          title: 'Our paper Process-as-a-Service: Unifying Elastic and Stateful Clouds with Serverless Processes has been...',
+          description: "",
+          section: "News",},{id: "news-our-paper-protocol-buffer-deserialization-dpu-offloading-in-the-rpc-datapath-has-been-accepted-at-ixpug-workshop-at-supercomputing-2024-conference",
+          title: 'Our paper Protocol Buffer Deserialization DPU Offloading in the RPC Datapath has been...',
+          description: "",
+          section: "News",},{id: "news-i-will-be-moderating-a-panel-xaas-acceleration-as-a-service-to-enable-productive-high-performance-cloud-computing-at-the-canopie-hpc-workshop-at-supercomputing-2024-join-us-at-the-workshop-on-sunday-at-11-40-am",
+          title: 'I will be moderating a panel “XaaS: Acceleration as a Service to Enable...',
+          description: "",
+          section: "News",},{id: "news-i-will-be-moderating-a-panel-serverless-hpc-challenges-opportunities-and-future-prospects-for-accelerated-cloud-computing-at-supercomputing-2024-join-us-on-thursday-at-10-30-am-in-room-b311",
+          title: 'I will be moderating a panel “Serverless HPC: Challenges, Opportunities, and Future Prospects...',
+          description: "",
+          section: "News",},{id: "news-our-research-poster-mignificient-fast-isolated-and-gpu-enabled-serverless-functions-has-been-awarded-the-best-research-research-poster-at-supercomputing-2024",
+          title: 'Our research poster “MIGnificient: Fast, Isolated, and GPU-Enabled Serverless Functions” has been awarded...',
+          description: "",
+          section: "News",},{id: "news-our-paper-sebs-flow-benchmarking-serverless-cloud-function-workflows-has-been-accepted-at-the-eurosys-2025-it-builds-up-on-our-sebs-project-and-extends-it-to-support-a-wider-category-of-serverless-workloads",
+          title: 'Our paper “SeBS-Flow: Benchmarking Serverless Cloud Function Workflows” has been accepted at the...',
+          description: "",
+          section: "News",},{id: "news-i-will-attend-eurosys-2025-where-i-will-present-a-poster-on-sebs-flow-and-the-work-in-progress-paper-on-sebs-evolution-at-the-sesame-25-workshop",
+          title: 'I will attend EuroSys 2025, where I will present a poster on SeBS-Flow...',
+          description: "",
+          section: "News",},{id: "news-our-paper-xaas-containers-performance-portable-representation-with-source-and-ir-containers-has-been-accepted-at-sc-2025-and-is-nominated-for-the-best-paper-award",
+          title: 'Our paper XaaS Containers: Performance-Portable Representation With Source and IR Containers has been...',
+          description: "",
+          section: "News",},{id: "news-our-paper-cppless-productive-and-performant-serverless-programming-in-c-has-been-accepted-at-acm-taco",
+          title: 'Our paper Cppless: Productive and Performant Serverless Programming in C++ has been accepted...',
+          description: "",
+          section: "News",},{id: "news-our-work-on-accelerating-climate-modeling-has-been-awarded-the-gordon-bell-award-in-climate-modeling-furthermore-it-has-been-recognized-as-top-hpc-enabled-scientific-achievement-by-hpc-wire",
+          title: 'Our work on accelerating climate modeling has been awarded the Gordon Bell Award...',
+          description: "",
+          section: "News",},{id: "news-i-attended-the-hipeac-26-conference-where-i-presented-two-of-our-works-cppless-the-serverless-programming-model-for-c-and-a-tutorial-on-the-serverless-benchmarking-suite-sebs",
+          title: 'I attended the HiPEAC’26 conference where I presented two of our works: Cppless,...',
+          description: "",
+          section: "News",},{id: "news-i-have-been-invited-to-give-the-keynote-talk-at-the-17th-annual-hpc-ai-swiss-conference-2026-i-will-present-our-work-on-accelerating-cloud-programming-models",
+          title: 'I have been invited to give the keynote talk at the 17th Annual...',
+          description: "",
+          section: "News",},{id: "projects-analysis-of-open-source-c-world",
+          title: 'Analysis of Open Source C++ World',
+          description: "Analyzing how the open-source community works with C++.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/cpp_analysis/";
+            },},{id: "projects-cppless-serverless-for-c",
+          title: 'cppless, serverless for C++',
+          description: "Single-source model for productive serverless programming in C++",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/cppless/";
+            },},{id: "projects-faaskeeper-building-serverless-services",
+          title: 'faaskeeper, building serverless services',
+          description: "Blueprint for serverless applications demonstrated on ZooKeeper.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/faaskeeper/";
+            },},{id: "projects-fmi-serverless-collectives",
+          title: 'fmi, serverless collectives',
+          description: "high-performance message passing and collective communication",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/fmi/";
+            },},{id: "projects-single-source-gpu-programming",
+          title: 'Single-source GPU programming',
+          description: "Incorporating Khronos SYCL into HPX.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/hpx_gpu/";
+            },},{id: "projects-performance-detective",
+          title: 'Performance-Detective',
+          description: "Cheap and accurate white-box performance models.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/perf_detective/";
+            },},{id: "projects-perf-taint",
+          title: 'perf-taint',
+          description: "Enhancing performance modeling with program analysis information.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/perf_taint/";
+            },},{id: "projects-praas-serverless-processes",
+          title: 'praas, serverless processes',
+          description: "new programming model for serverless",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/praas/";
+            },},{id: "projects-work-stealing-prefix-scan",
+          title: 'Work-stealing prefix scan',
+          description: "Developing new prefix scan algorithms for unbalanced workloads.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/prefix_scan/";
+            },},{id: "projects-gpu-accelerated-model-checking",
+          title: 'GPU-accelerated model checking',
+          description: "Bringing GPU acceleration to statistical model checking.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/prism_gpu/";
+            },},{id: "projects-rdma-faas-rfaas",
+          title: 'RDMA + FaaS = rFaaS',
+          description: "Solving the high latency invocations problem of FaaS.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/rfaas/";
+            },},{id: "projects-sebs-flow-benchmarking-serverless-workflows",
+          title: 'SeBS-Flow, benchmarking serverless workflows',
+          description: "Bringing SeBS to the next generation of serverless workloads",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/sebs-flow/";
+            },},{id: "projects-sebs-the-serverless-benchmark-suite",
+          title: 'SeBS, the serverless benchmark suite',
+          description: "Understanding performance challenges in the serverless world.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/sebs/";
+            },},{id: "projects-hpc-software-disaggregation",
+          title: 'HPC software disaggregation',
+          description: "high HPC utilization with serverless functions",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/softw_disaggregation/";
+            },},{id: "projects-upm-memory-deduplication-for-serverless",
+          title: 'upm, memory deduplication for serverless',
+          description: "User-Guided Page Merging (UPM) Single-source model for productive serverless programming in C++",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/upm/";
+            },},{id: "teachings-data-science-fundamentals",
+          title: 'Data Science Fundamentals',
+          description: "This course covers the foundational aspects of data science, including data collection, cleaning, analysis, and visualization. Students will learn practical skills for working with real-world datasets.",
+          section: "Teachings",handler: () => {
+              window.location.href = "/teachings/data-science-fundamentals/";
+            },},{id: "teachings-introduction-to-machine-learning",
+          title: 'Introduction to Machine Learning',
+          description: "This course provides an introduction to machine learning concepts, algorithms, and applications. Students will learn about supervised and unsupervised learning, model evaluation, and practical implementations.",
+          section: "Teachings",handler: () => {
+              window.location.href = "/teachings/introduction-to-machine-learning/";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%6D%63%6F%70%69%6B@%67%6D%61%69%6C.%63%6F%6D", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/mcopik", "_blank");
+        },
+      },{
+        id: 'social-orcid',
+        title: 'ORCID',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://orcid.org/0000-0002-7606-5519", "_blank");
+        },
+      },{
+        id: 'social-scholar',
+        title: 'Google Scholar',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://scholar.google.com/citations?user=JdXd8pQAAAAJ", "_blank");
+        },
+      },{
+        id: 'social-x',
+        title: 'X',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://twitter.com/copikmarcin", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>
