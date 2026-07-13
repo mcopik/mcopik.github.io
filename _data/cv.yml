@@ -1,124 +1,162 @@
-- title: General Information
-  type: map
-  contents:
-    - name: Full Name
-      value: Marcin Copik
-    - name: Languages
-      value: Polish, English, German
+cv:
+  name: Marcin Copik
+  label: Computer Scientist
+  email: mcopik@gmail.com
+  location: Zürich, Switzerland
 
-- title: Education
-  type: time_table
-  contents:
-    - title: PhD in Computer Science
-      institution: ETH Zürich, Zürich, Switzerland
-      year: 2024
-      description:
-        - Core focus - high-performance solutions for serverless computing.
-        - Published eight first-author publications.
-    - title: MSc in Simulation Sciences
-      institution: RWTH Aachen University, Aachen, Germany
-      year: 2017
-      description:
-        - Core focus - high-performance computing.
+  sections:
+    Education:
+      - institution: ETH Zürich
+        location: Zürich, Switzerland
+        area: Computer Science
+        studyType: PhD
+        start_date: 2019
+        end_date: 2024
+        highlights:
+          - Core focus - high-performance solutions for serverless computing.
+          - Published eight first-author publications.
 
-    - title: BSc in Computer Science
-      institution: Silesian University of Technology, Gliwice, Poland
-      year: 2014
-      description:
-        - Core focus - software engineering.
+      - institution: RWTH Aachen University
+        location: Aachen, Germany
+        area: Simulation Sciences
+        studyType: MSc
+        start_date: 2014
+        end_date: 2017
+        highlights:
+          - Core focus - high-performance computing.
 
-- title: Experience
-  type: time_table
-  contents:
-    - title: Research Intern
-      institution: Microsoft Research, Redmond, USA
-      year: 2019
-      description:
-        - Analyzing microarchitectural implications of serverless workloads.
+      - institution: Silesian University of Technology
+        location: Gliwice, Poland
+        area: Computer Science
+        studyType: BSc
+        start_date: 2011
+        end_date: 2014
+        highlights:
+          - Core focus - software engineering.
 
-    - title: Research Assistant
-      institution: Louisiana State University, Baton Rouge, USA
-      year: 2016
-      description:
-        - Integrating single-source GPU programming in HPX.
+    Experience:
+      - title: Research Intern
+        company: Microsoft Research
+        location: Redmond, USA
+        start_date: 2019
+        end_date: 2019
+        highlights:
+          - Analyzing microarchitectural implications of serverless workloads.
 
-    - title: Software Engineer, Mentor
-      institution: Google Summer of Code
-      year: 2014-2018
-      description:
-        - Improving statistical model checking in PRISM model checker.
-        - Integrating single-source GPU programming in HPX.
-        - Mentoring students working on HPX.
+      - title: Research Assistant
+        company: Louisiana State University
+        location: Baton Rouge, USA
+        start_date: 2016
+        end_date: 2016
+        highlights:
+          - Integrating single-source GPU programming in HPX.
 
-    - title: Student Assistant 
-      institution: Jülich Supercomputing Centre, Jülich, Germany
-      year: 2014-2016
-      description:
-        - Developing tools for performance analysis of parallel applications at Scalasca.
+      - title: Software Engineer, Mentor
+        company: Google Summer of Code
+        start_date: 2014
+        end_date: 2018
+        highlights:
+          - Improving statistical model checking in PRISM model checker.
+          - Integrating single-source GPU programming in HPX.
+          - Mentoring students working on HPX.
 
-    - title: Student Assistant 
-      institution: Silesian University of Technology, Gliwice, Poland
-      year: 2012-2014
-      description:
-        - Implementing versions of ICP algorithm for registration of respiratory motion.
+      - title: Student Assistant
+        company: Jülich Supercomputing Centre
+        location: Jülich, Germany
+        start_date: 2014
+        end_date: 2016
+        highlights:
+          - Developing tools for performance analysis of parallel applications at Scalasca.
 
-    - title: Student Assistant 
-      institution: The Institute of Theoretical and Applied Informatics of the Polish Academy of Sciences, Gliwice, Poland
-      year: 2012-2013
-      description:
-        - Implementing GPU simulator of Markov Chains.
+      - title: Student Assistant
+        company: Silesian University of Technology
+        location: Gliwice, Poland
+        start_date: 2012
+        end_date: 2014
+        highlights:
+          - Implementing versions of ICP algorithm for registration of respiratory motion.
 
-- title: Honors and Awards
-  type: time_table
-  contents:
-    - year: 2025
-      items: 
-        - <b>SIGHPC Doctoral Dissertation Award</b>
-        - <b>Best Paper Award Finalist</b>, ACM/IEEE Supercomputing
-        - <b>Gordon Bell Award in Climate Modeling</b>, ACM/IEEE Supercomputing
-    - year: 2024
-      items: 
-        - SIGHPC Travel Grant
-        - <b>Best Research Poster Award</b>, ACM/IEEE Supercomputing
-    - year: 2023
-      items: 
-        - SIGHPC Travel Grant
-    - year: 2022
-      items: 
-        - ACM/IEEE George Michael Memorial HPC Fellowship
-        - <b>Gold Medal at the ACM Student Research Competition</b>, ACM/IEEE Supercomputing
-        - AWS Cloud Credits for Research Applications
-        - Google Cloud Research Credits
-    - year: 2021
-      items: 
-        - <b>Microsoft Research PhD Fellowship</b>
-    - year: 2019
-      items: 
-        - <b>Gold Medal at the ACM Student Research Competition</b>, ACM/IEEE Supercomputing
+      - title: Student Assistant
+        company: The Institute of Theoretical and Applied Informatics of the Polish Academy of Sciences
+        location: Gliwice, Poland
+        start_date: 2012
+        end_date: 2013
+        highlights:
+          - Implementing GPU simulator of Markov Chains.
 
-- title: Open Source Projects
-  type: time_table
-  contents:
-    - title: <a href="https://github.com/spcl/serverless-benchmarks">SeBS, Serverless Benchmark Suite</a>
-      year: 2020 - now
-      description: A comprehensive benchmarking suite for serverless computing.
-    - title: <a href="https://github.com/spcl/rfaas">rFaaS</a>
-      year: 2021 - now
-      description: FaaS platform with RDMA acceleration and decentralized allocations for high-performance computing.
-    - title: <a href="https://github.com/spcl/faaskeeper">FaaSKeeper</a>
-      year: 2021 - now
-      description: Serverless storage system supporting ZooKeeper synchronizationd and consistency model.
+    Awards:
+      - date: 2025
+        title: SIGHPC Doctoral Dissertation Award
+      - date: 2025
+        title: Best Paper Award Finalist
+        awarder: ACM/IEEE Supercomputing
+      - date: 2025
+        title: Gordon Bell Award in Climate Modeling
+        awarder: ACM/IEEE Supercomputing
+      - date: 2024
+        title: SIGHPC Travel Grant
+      - date: 2024
+        title: Best Research Poster Award
+        awarder: ACM/IEEE Supercomputing
+      - date: 2023
+        title: SIGHPC Travel Grant
+      - date: 2022
+        title: ACM/IEEE George Michael Memorial HPC Fellowship
+      - date: 2022
+        title: Gold Medal at the ACM Student Research Competition
+        awarder: ACM/IEEE Supercomputing
+      - date: 2022
+        title: AWS Cloud Credits for Research Applications
+      - date: 2022
+        title: Google Cloud Research Credits
+      - date: 2021
+        title: Microsoft Research PhD Fellowship
+      - date: 2019
+        title: Gold Medal at the ACM Student Research Competition
+        awarder: ACM/IEEE Supercomputing
 
-- title: Experience
-  type: nested_list
-  contents:
-    - title: Programming Languages
-      items: 
-        - <b>Experienced</b> C++, Python, Java
-        - <b>Familiar</b> Matlab, Julia, Mathematica, R, Pascal, JavaScript, x86 assembly.
-    - title: Technologies
-      items: 
-        - <b>Software Engineering</b> git, SVN, Mercurial, CMake, LLVM
-        - <b>HPC</b> MPI, OpenMP, OpenCL, SYCL, C++AMP, SLURM
-        - <b>Cloud</b> FaaS, Docker, Kubernetes, AWS
+    Projects:
+      - name: SeBS, Serverless Benchmark Suite
+        date: 2020 - now
+        url: https://github.com/spcl/serverless-benchmarks
+        highlights:
+          - A comprehensive benchmarking suite for serverless computing.
 
+      - name: rFaaS
+        date: 2021 - now
+        url: https://github.com/spcl/rfaas
+        highlights:
+          - FaaS platform with RDMA acceleration and decentralized allocations for high-performance computing.
+
+      - name: FaaSKeeper
+        date: 2021 - now
+        url: https://github.com/spcl/faaskeeper
+        highlights:
+          - Serverless storage system supporting ZooKeeper synchronizationd and consistency model.
+
+      - name: XaaS
+        date: 2025 - now
+        url: https://github.com/spcl/xaas-containers
+        highlights:
+          - Performance-portable and reconfigurable containers for cloud and HPC systems.
+
+    Technologies:
+      - label: Programming Languages
+        details: "Experienced: C++, Python, Java | Familiar: Matlab, Julia, Mathematica, R, Pascal, JavaScript, x86 assembly"
+
+      - label: Software Engineering
+        details: "git, SVN, Mercurial, CMake, LLVM"
+
+      - label: HPC
+        details: "MPI, OpenMP, OpenCL, SYCL, C++AMP, SLURM"
+
+      - label: Cloud
+        details: "FaaS, Docker, Kubernetes, AWS"
+
+    Languages:
+      - language: Polish
+        fluency: Native
+      - language: English
+        fluency: Fluent
+      - language: German
+        fluency: Intermediate
