@@ -1,5 +1,5 @@
 metadata:
-  last_updated: '2026-07-24'
+  last_updated: '2026-08-12'
 papers:
   JdXd8pQAAAAJ:2tRrZ1ZAMYUC:
     citations: 21
@@ -18,7 +18,7 @@ papers:
     title: 'ADELIA: Automatic Differentiation for Efficient Laplace Inference Approximations'
     year: '2026'
   JdXd8pQAAAAJ:9yKSN-GCB0IC:
-    citations: 20
+    citations: 19
     title: The generalized matrix chain algorithm
     year: '2018'
   JdXd8pQAAAAJ:AZju0d2GQJ0C:
@@ -26,7 +26,7 @@ papers:
     title: 'AI Factories: It''s time to rethink the Cloud-HPC divide'
     year: '2025'
   JdXd8pQAAAAJ:BOlwja0KXvYC:
-    citations: 3
+    citations: 2
     title: 'Cppless: Single-Source and High-Performance Serverless Programming in C++'
     year: '2024'
   JdXd8pQAAAAJ:C33y2ycGS3YC:
@@ -45,6 +45,10 @@ papers:
     citations: 11
     title: 'Core hours and carbon credits: Incentivizing sustainability in hpc'
     year: '2025'
+  JdXd8pQAAAAJ:M0leSnx2MbUC:
+    citations: 0
+    title: 'Hazel: Secure and Efficient Disaggregated Storage'
+    year: '2025'
   JdXd8pQAAAAJ:NxmKEeNBbOMC:
     citations: 1
     title: Protocol Buffer Deserialization DPU Offloading in the RPC Datapath
@@ -58,7 +62,7 @@ papers:
     title: 'STEllAR-GROUP/hpx: HPX V1. 7.1: The C++ standards library for parallelism and concurrency'
     year: '2020'
   JdXd8pQAAAAJ:QVtou7C4vgoC:
-    citations: 9
+    citations: 11
     title: Affordable AI Assistants with Knowledge Graph of Thoughts
     year: '2025'
   JdXd8pQAAAAJ:Tyk-4Ss8FVUC:
@@ -78,7 +82,7 @@ papers:
     title: 'perf-taint: Taint Analysis for Automatic Many-Parameter Performance Modeling'
     year: '2019'
   JdXd8pQAAAAJ:VN7nJs4JPk0C:
-    citations: 37
+    citations: 35
     title: 'Topologies of reasoning: Demystifying chains, trees, and graphs of thoughts'
     year: '2024'
   JdXd8pQAAAAJ:XD-gHx7UXLsC:
@@ -90,15 +94,15 @@ papers:
     title: Extracting clean performance models from tainted programs
     year: '2021'
   JdXd8pQAAAAJ:YsMSGLbcyi4C:
-    citations: 151
+    citations: 154
     title: 'SISA: Set-centric instruction set architecture for graph mining on processing-in-memory systems'
     year: '2021'
   JdXd8pQAAAAJ:__bU50VfleQC:
-    citations: 17
+    citations: 19
     title: 'SeBS-Flow: Benchmarking Serverless Cloud Function Workflows'
     year: '2025'
   JdXd8pQAAAAJ:aIdbFUkbNIkC:
-    citations: 73
+    citations: 79
     title: Demystifying chains, trees, and graphs of thoughts
     year: '2025'
   JdXd8pQAAAAJ:artPoR2Yc-kC:
@@ -110,11 +114,11 @@ papers:
     title: Methods for abdominal respiratory motion tracking
     year: '2014'
   JdXd8pQAAAAJ:eI34FqJmdUoC:
-    citations: 13
+    citations: 14
     title: 'Confidential LLM Inference: Performance and Cost Across CPU and GPU TEEs'
     year: '2025'
   JdXd8pQAAAAJ:fbc8zXXH2BUC:
-    citations: 36
+    citations: 35
     title: Software Resource Disaggregation for HPC with Serverless Computing
     year: '2024'
   JdXd8pQAAAAJ:hNSvKAmkeYkC:
@@ -122,7 +126,7 @@ papers:
     title: 'SecPerf: Demystifying Cost of Confidential HPC'
     year: '2026'
   JdXd8pQAAAAJ:ji7lAbPyDbYC:
-    citations: 15
+    citations: 17
     title: Computing the Full Earth System at 1km Resolution
     year: '2025'
   JdXd8pQAAAAJ:jlhcAiayVhoC:
@@ -138,7 +142,7 @@ papers:
     title: Parallel Prefix Algorithms for the Registration of Arbitrarily Long Electron Micrograph Series
     year: '2017'
   JdXd8pQAAAAJ:lYAcb2jw7qUC:
-    citations: 78
+    citations: 81
     title: 'Reasoning Language Models: A Blueprint'
     year: '2025'
   JdXd8pQAAAAJ:m92CDrhVnKEC:
@@ -154,7 +158,7 @@ papers:
     title: 2025 ACM Gordon Bell Prize for Climate Modelling
     year: '2025'
   JdXd8pQAAAAJ:naSTrk-c4S8C:
-    citations: 16
+    citations: 17
     title: 'Checkembed: Effective verification of llm solutions to open-ended tasks'
     year: '2024'
   JdXd8pQAAAAJ:qmtmRrLr0tkC:
@@ -174,7 +178,7 @@ papers:
     title: "Extra-P\u2013Empirical Performance Modeling Made Easy"
     year: Unknown Year
   JdXd8pQAAAAJ:tH6gc1N1XXoC:
-    citations: 50
+    citations: 49
     title: 'FMI: Fast and cheap message passing for serverless functions'
     year: '2023'
   JdXd8pQAAAAJ:u-coK7KVo8oC:
@@ -186,7 +190,7 @@ papers:
     title: "A GPGPU\u2013based simulator for PRISM: statistical verification of results of PMC"
     year: '2017'
   JdXd8pQAAAAJ:u5HHmVD_uO8C:
-    citations: 26
+    citations: 27
     title: Using SYCL as an Implementation Framework for HPX.Compute
     year: '2017'
   JdXd8pQAAAAJ:wLxue7F8ec0C:
@@ -206,6 +210,6 @@ papers:
     title: 'Extrapeak: Advanced automatic performance modeling for HPC applications'
     year: '2020'
   JdXd8pQAAAAJ:zwpXiJ37cpgC:
-    citations: 26
+    citations: 25
     title: 'Process-as-a-Service: Unifying Elastic and Stateful Clouds with Serverless Processes'
     year: '2024'
