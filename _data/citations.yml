@@ -1,5 +1,5 @@
 metadata:
-  last_updated: '2026-08-12'
+  last_updated: '2026-08-28'
 papers:
   JdXd8pQAAAAJ:2tRrZ1ZAMYUC:
     citations: 21
@@ -22,7 +22,7 @@ papers:
     title: The generalized matrix chain algorithm
     year: '2018'
   JdXd8pQAAAAJ:AZju0d2GQJ0C:
-    citations: 6
+    citations: 7
     title: 'AI Factories: It''s time to rethink the Cloud-HPC divide'
     year: '2025'
   JdXd8pQAAAAJ:BOlwja0KXvYC:
@@ -38,11 +38,11 @@ papers:
     title: 'Work-stealing prefix scan: Addressing load imbalance in large-scale image registration'
     year: '2021'
   JdXd8pQAAAAJ:L8Ckcad2t8MC:
-    citations: 43
+    citations: 44
     title: 'GraphMineSuite: Enabling High-Performance and Programmable Graph Mining Algorithms with Set Algebra'
     year: '2021'
   JdXd8pQAAAAJ:LK8CI43ZvvMC:
-    citations: 11
+    citations: 12
     title: 'Core hours and carbon credits: Incentivizing sustainability in hpc'
     year: '2025'
   JdXd8pQAAAAJ:M0leSnx2MbUC:
@@ -66,7 +66,7 @@ papers:
     title: Affordable AI Assistants with Knowledge Graph of Thoughts
     year: '2025'
   JdXd8pQAAAAJ:Tyk-4Ss8FVUC:
-    citations: 307
+    citations: 311
     title: 'SeBS: A Serverless Benchmark Suite for Function-as-a-Service Computing'
     year: '2021'
   JdXd8pQAAAAJ:UHK10RUVsp4C:
@@ -81,10 +81,6 @@ papers:
     citations: 3
     title: 'perf-taint: Taint Analysis for Automatic Many-Parameter Performance Modeling'
     year: '2019'
-  JdXd8pQAAAAJ:VN7nJs4JPk0C:
-    citations: 35
-    title: 'Topologies of reasoning: Demystifying chains, trees, and graphs of thoughts'
-    year: '2024'
   JdXd8pQAAAAJ:XD-gHx7UXLsC:
     citations: 2
     title: 'MOM: Matrix Operations in MLIR'
@@ -98,11 +94,11 @@ papers:
     title: 'SISA: Set-centric instruction set architecture for graph mining on processing-in-memory systems'
     year: '2021'
   JdXd8pQAAAAJ:__bU50VfleQC:
-    citations: 19
+    citations: 20
     title: 'SeBS-Flow: Benchmarking Serverless Cloud Function Workflows'
     year: '2025'
   JdXd8pQAAAAJ:aIdbFUkbNIkC:
-    citations: 79
+    citations: 116
     title: Demystifying chains, trees, and graphs of thoughts
     year: '2025'
   JdXd8pQAAAAJ:artPoR2Yc-kC:
@@ -114,7 +110,7 @@ papers:
     title: Methods for abdominal respiratory motion tracking
     year: '2014'
   JdXd8pQAAAAJ:eI34FqJmdUoC:
-    citations: 14
+    citations: 17
     title: 'Confidential LLM Inference: Performance and Cost Across CPU and GPU TEEs'
     year: '2025'
   JdXd8pQAAAAJ:fbc8zXXH2BUC:
@@ -126,7 +122,7 @@ papers:
     title: 'SecPerf: Demystifying Cost of Confidential HPC'
     year: '2026'
   JdXd8pQAAAAJ:ji7lAbPyDbYC:
-    citations: 17
+    citations: 18
     title: Computing the Full Earth System at 1km Resolution
     year: '2025'
   JdXd8pQAAAAJ:jlhcAiayVhoC:
@@ -142,7 +138,7 @@ papers:
     title: Parallel Prefix Algorithms for the Registration of Arbitrarily Long Electron Micrograph Series
     year: '2017'
   JdXd8pQAAAAJ:lYAcb2jw7qUC:
-    citations: 81
+    citations: 82
     title: 'Reasoning Language Models: A Blueprint'
     year: '2025'
   JdXd8pQAAAAJ:m92CDrhVnKEC:
@@ -166,7 +162,7 @@ papers:
     title: 'From Monolith to Serverless: Running a Component-Based Scientific Workflow Across Execution Paradigms'
     year: '2026'
   JdXd8pQAAAAJ:rHJHxKgnXwkC:
-    citations: 14
+    citations: 15
     title: User-guided Page Merging for Memory Deduplication in Serverless Systems
     year: '2023'
   JdXd8pQAAAAJ:s85pQhAUCrAC:
@@ -174,7 +170,7 @@ papers:
     title: 'hpx: HPX V0. 9.99: A general purpose C++ runtime system for parallel and distributed applications of any scale'
     year: '2016'
   JdXd8pQAAAAJ:sfnaS5RM6jYC:
-    citations: 0
+    citations: 1
     title: "Extra-P\u2013Empirical Performance Modeling Made Easy"
     year: Unknown Year
   JdXd8pQAAAAJ:tH6gc1N1XXoC:
