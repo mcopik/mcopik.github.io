@@ -1,5 +1,5 @@
 metadata:
-  last_updated: '2026-08-28'
+  last_updated: '2026-09-02'
 papers:
   JdXd8pQAAAAJ:2tRrZ1ZAMYUC:
     citations: 21
@@ -38,7 +38,7 @@ papers:
     title: 'Work-stealing prefix scan: Addressing load imbalance in large-scale image registration'
     year: '2021'
   JdXd8pQAAAAJ:L8Ckcad2t8MC:
-    citations: 44
+    citations: 45
     title: 'GraphMineSuite: Enabling High-Performance and Programmable Graph Mining Algorithms with Set Algebra'
     year: '2021'
   JdXd8pQAAAAJ:LK8CI43ZvvMC:
@@ -62,11 +62,11 @@ papers:
     title: 'STEllAR-GROUP/hpx: HPX V1. 7.1: The C++ standards library for parallelism and concurrency'
     year: '2020'
   JdXd8pQAAAAJ:QVtou7C4vgoC:
-    citations: 11
+    citations: 12
     title: Affordable AI Assistants with Knowledge Graph of Thoughts
     year: '2025'
   JdXd8pQAAAAJ:Tyk-4Ss8FVUC:
-    citations: 311
+    citations: 316
     title: 'SeBS: A Serverless Benchmark Suite for Function-as-a-Service Computing'
     year: '2021'
   JdXd8pQAAAAJ:UHK10RUVsp4C:
@@ -90,15 +90,15 @@ papers:
     title: Extracting clean performance models from tainted programs
     year: '2021'
   JdXd8pQAAAAJ:YsMSGLbcyi4C:
-    citations: 154
+    citations: 156
     title: 'SISA: Set-centric instruction set architecture for graph mining on processing-in-memory systems'
     year: '2021'
   JdXd8pQAAAAJ:__bU50VfleQC:
-    citations: 20
+    citations: 21
     title: 'SeBS-Flow: Benchmarking Serverless Cloud Function Workflows'
     year: '2025'
   JdXd8pQAAAAJ:aIdbFUkbNIkC:
-    citations: 116
+    citations: 118
     title: Demystifying chains, trees, and graphs of thoughts
     year: '2025'
   JdXd8pQAAAAJ:artPoR2Yc-kC:
@@ -110,7 +110,7 @@ papers:
     title: Methods for abdominal respiratory motion tracking
     year: '2014'
   JdXd8pQAAAAJ:eI34FqJmdUoC:
-    citations: 17
+    citations: 18
     title: 'Confidential LLM Inference: Performance and Cost Across CPU and GPU TEEs'
     year: '2025'
   JdXd8pQAAAAJ:fbc8zXXH2BUC:
@@ -122,7 +122,7 @@ papers:
     title: 'SecPerf: Demystifying Cost of Confidential HPC'
     year: '2026'
   JdXd8pQAAAAJ:ji7lAbPyDbYC:
-    citations: 18
+    citations: 19
     title: Computing the Full Earth System at 1km Resolution
     year: '2025'
   JdXd8pQAAAAJ:jlhcAiayVhoC:
@@ -138,11 +138,11 @@ papers:
     title: Parallel Prefix Algorithms for the Registration of Arbitrarily Long Electron Micrograph Series
     year: '2017'
   JdXd8pQAAAAJ:lYAcb2jw7qUC:
-    citations: 82
+    citations: 84
     title: 'Reasoning Language Models: A Blueprint'
     year: '2025'
   JdXd8pQAAAAJ:m92CDrhVnKEC:
-    citations: 4
+    citations: 5
     title: Engine-Agnostic Model Hot-Swapping for Cost-Effective LLM Inference
     year: '2025'
   JdXd8pQAAAAJ:n3vGvpFsckwC:
@@ -154,7 +154,7 @@ papers:
     title: 2025 ACM Gordon Bell Prize for Climate Modelling
     year: '2025'
   JdXd8pQAAAAJ:naSTrk-c4S8C:
-    citations: 17
+    citations: 18
     title: 'Checkembed: Effective verification of llm solutions to open-ended tasks'
     year: '2024'
   JdXd8pQAAAAJ:qmtmRrLr0tkC:
@@ -162,7 +162,7 @@ papers:
     title: 'From Monolith to Serverless: Running a Component-Based Scientific Workflow Across Execution Paradigms'
     year: '2026'
   JdXd8pQAAAAJ:rHJHxKgnXwkC:
-    citations: 15
+    citations: 16
     title: User-guided Page Merging for Memory Deduplication in Serverless Systems
     year: '2023'
   JdXd8pQAAAAJ:s85pQhAUCrAC:
@@ -174,7 +174,7 @@ papers:
     title: "Extra-P\u2013Empirical Performance Modeling Made Easy"
     year: Unknown Year
   JdXd8pQAAAAJ:tH6gc1N1XXoC:
-    citations: 49
+    citations: 51
     title: 'FMI: Fast and cheap message passing for serverless functions'
     year: '2023'
   JdXd8pQAAAAJ:u-coK7KVo8oC:
