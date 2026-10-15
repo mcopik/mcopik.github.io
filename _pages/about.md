@@ -3,7 +3,7 @@ layout: about
 title: about
 permalink: /
 redirect_from: /about
-description: High-performance computing, serverless, and all that jazz!
+subtitle: High-performance computing, serverless, and all that jazz!
 
 profile:
   align: right
@@ -14,7 +14,7 @@ profile:
     <p>Department of Computer Science (D-INFK)</p>
     <p>ETH Zürich</p>
 
-selected_papers: false # includes a list of papers marked as "selected={true}"
+selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 
 announcements:
@@ -58,6 +58,7 @@ ETH students can find the thesis topics on [SPCL Website](https://spcl.inf.ethz.
 and you can always reach out to me with your own ideas.
 
 ### Research Interests
+
 <div id="html" markdown="0">
 <hr style="width:50%;text-align:left;margin-left:0">
 <ul style="columns:2;list-style-type:none">
@@ -70,4 +71,3 @@ and you can always reach out to me with your own ideas.
 </ul>
 
 </div>
-

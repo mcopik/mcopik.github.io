@@ -1,0 +1,143 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+@charset "utf-8";
+
+/* Built-in Sass modules you’ll likely use across partials */
+@use "sass:math";
+@use "sass:string";
+
+/* Configure your design tokens BEFORE loading any of your partials.
+   Make sure `_sass/_variables.scss` declares `$max-content-width: 72rem !default;` */
+@use "variables" with (
+  $max-content-width: {{ site.max_width | default:  "930px" }}
+);
+
+/* Your project partials — convert these files to `@use "variables";`
+   (or `@use "variables" as *;`) inside each file and qualify variables if needed. */
+@use "themes";
+@use "layout";
+
+// Core styles organized by usage
+@use "typography";
+@use "navbar";
+@use "footer";
+@use "blog";
+@use "publications";
+@use "components";
+@use "utilities";
+
+// Other specialized styles
+@use "tabs";
+@use "teachings";
+@use "typograms";
+
+// -----------------------------------------------------------------------------
+// Site-specific customizations (local override of al_folio_core main.scss)
+// -----------------------------------------------------------------------------
+
+// Stronger section dividers (as on the pre-v1 site)
+:root {
+  --global-divider-color: rgba(0, 0, 0, 0.4);
+}
+html[data-theme="dark"] {
+  --global-divider-color: #636369;
+}
+
+// Grouped publication link rows: paper / code / presentation
+.publications ol.bibliography li .links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0;
+
+  > i {
+    width: 1.25rem;
+    margin-right: 0.25rem;
+    text-align: center;
+    color: var(--global-text-color-light);
+  }
+
+  & + .links {
+    margin-top: 0.25rem;
+  }
+}
+
+// Project page summary strip (papers, GitHub, artifacts, Docker)
+// https://stackoverflow.com/questions/41285466/how-do-i-add-add-text-below-font-awesome-icon-links/41285702
+.project-summary {
+  margin: 0 0 1rem;
+  padding: 0;
+
+  ul {
+    margin: 0;
+    padding: 5px;
+    text-align: center;
+    vertical-align: top;
+    list-style: none;
+  }
+
+  li {
+    display: inline-block;
+    width: 19%;
+    margin: auto;
+    margin-bottom: 3px !important;
+    padding: 0;
+    font-size: 40px;
+    text-align: center;
+    vertical-align: top;
+  }
+
+  i {
+    display: block;
+    margin: 0 auto;
+    padding-top: 5px;
+    text-align: center;
+    color: var(--global-text-color);
+  }
+
+  a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+  }
+
+  a span {
+    display: block;
+    padding: 5px 0 10px;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+}
+
+@media (max-width: 576px) {
+  .project-summary li {
+    width: 32%;
+    font-size: 28px;
+  }
+}
+
+// CV: al_folio_cv emits Bootstrap list-group markup that the Tailwind build does not style
+.cv {
+  ul.list-group {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+  }
+
+  ul.list-group > li.list-group-item {
+    padding: 0.5rem 0;
+    border: 0;
+    background: transparent;
+  }
+
+  table.table-cv,
+  table.table-cv td,
+  table.table-cv tr {
+    border: 0 !important;
+  }
+}

@@ -1,6 +1,3 @@
----
----
-
 @article{2014bachelorthesis,
   title={GPU-accelerated stochastic simulator engine for PRISM model checker.},
   author={Marcin Copik},
@@ -80,7 +77,6 @@
   bibtex_show = {True},
   abbr = {IWOCL}
 }
-
 
 @inproceedings{10.1145/3168804,
   author = {Barthels, Henrik and Copik, Marcin and Bientinesi, Paolo},
@@ -310,21 +306,21 @@
   abbr = {ICS}
 }
 
-@inproceedings{copik2022faaskeeper,
+@inproceedings{copik2024faaskeeper,
   url = {https://arxiv.org/abs/2203.14859},
-  author = {Copik, Marcin and Calotoiu, Alexandru and Taranov, Konstantin and Hoefler, Torsten},
+  author = {Copik, Marcin and Calotoiu, Alexandru and Zhou, Pengyu and Taranov, Konstantin and Hoefler, Torsten},
   title = {FaaSKeeper: Learning from Building Serverless Services with ZooKeeper as an Example},
   abstract = {FaaS (Function-as-a-Service) brought a fundamental shift into cloud computing: (persistent) virtual machines have been replaced with dynamically allocated resources, trading locality and statefulness for a pay-as-you-go model more suitable for varying and infrequent workloads. However, adapting services to functions in the serverless paradigm while still fulfilling functional requirements is challenging. In this work, we demonstrate how ZooKeeper, a centralized coordination service that offers a safe and wait-free consensus mechanism, can be redesigned to benefit from serverless computing. We define synchronization primitives to extend the capabilities of scalable cloud storage and contribute a set of requirements for efficient and scalable FaaS computing. We introduce FaaSKeeper, the first coordination service built on serverless functions and cloud-native services, and share serverless design lessons based on our experiences of implementing a ZooKeeper model deployable to clouds today. FaaSKeeper provides the same consistency guarantees and interface as ZooKeeper, with a serverless price model that lowers costs up to 450 times on infrequent workloads.},
   arxiv={2203.14859},
-  publisher = {arXiv},
   year = {2024},
-  copyright = {arXiv.org perpetual, non-exclusive license},
   code={https://github.com/spcl/faaskeeper/},
-  pdf = {2022_faaskeeper_preprint.pdf},
+  artifact={https://github.com/spcl/faaskeeper-paper-artifact/},
+  pdf = {2024_faaskeeper_preprint.pdf},
   bibtex_show = {True},
   abbr = {HPDC},
   series = {HPDC '24},
-  selected = {true}
+  selected = {true},
+  slides = {2024_hpdc_faaskeeper_slides.pdf},
 }
 
 @inproceedings{copik2022fmi, 
@@ -363,7 +359,9 @@
   series = {IPDPS '24},
   booktitle = {Proceedings of the 38th IEEE Interational Parallel and Distributed Processing Symposium},
   pdf = {2022_software_disaggregation_preprint.pdf},
-  arxiv={2401.10852}
+  slides = {2024_ipdps_disaggregation_slides.pdf},
+  arxiv={2401.10852},
+  artifact={https://github.com/spcl/serverless-software-disaggregation-artifact/},
 }
 
 @inproceedings{2021rfaas,
@@ -384,16 +382,116 @@
   selected = {true}
 }
 
-@misc{copik2022praas,
-  author = {Copik, Marcin and Calotoiu, Alexandru and Bruno, Rodrigo and Rethy, Gyorgy and Böhringer, Roman and Hoefler, Torsten},
-  title = {Process-as-a-Service: Elastic and Stateful Serverless with Cloud Processes},
-  abstract = {
-    Fine-grained and ephemeral functions power many new applications that benefit from elastic scaling and pay-as-you-use billing model with minimal infrastructure management overhead. To achieve these properties, Function-as-a-Service (FaaS) platforms disaggregate compute and state and, consequently, introduce non-trivial costs due to data locality loss, complex control plane interactions, and expensive communication to access state. We revisit the foundations of FaaS and propose a new cloud abstraction, cloud process, that retains all the benefits of FaaS while significantly reducing the overheads that result from the disaggregation. We show how established operating system abstractions can be adapted to provide powerful granular computing on dynamically provisioned cloud resources while building our Process as a Service (PraaS) platform. PraaS improves current FaaS by offering data locality, fast invocations, and efficient communication. PraaS delivers invocations up to 32 times faster and reduces communication overhead by up to 99%.
-  },
-  year = {2022},
+@article{copik2022disaggregationsrc,
+  title={Software Resource Disaggregation for HPC with Serverless Computing},
+  author={Marcin Copik and Alexandru Calotoiu and Torsten Hoefler},
+  year={2022},
+  pdf = {2022_softw_disagg_abstract.pdf},
+  poster = {2022_softw_disagg_poster.pdf},
+  slides = {2022_softw_disagg_slides.pdf},
+  abstract = {Aggregated HPC resources have rigid allocation systems and programming models and struggle to adapt to diverse and changing workloads. Thus, HPC systems fail to efficiently use the large pools of unused memory and increase the utilization of idle computing resources. Prior work attempted to increase the throughput and efficiency of supercomputing systems through workload co-location and resource disaggregation. However, these methods fall short of providing a solution that can be applied to existing systems without major hardware modifications and performance losses. In this project, we use the new cloud paradigm of serverless computing to improve the utilization of supercomputers. We show that the FaaS programming model satisfies the requirements of high-performance applications and how idle memory helps resolve cold startup issues. We demonstrate a software resource disaggregation approach where the co-location of functions allows idle cores and accelerators to be utilized while retaining near-native performance.},
+  html = {https://sc22.supercomputing.org/proceedings/src_poster/src_poster_pages/spostg103.html},
+  journal = {ACM Student Research Competition at ACM/IEEE Supercomputing},
+  note = {Gold Medal in the competition},
+  abbr = {ACM SRC}
+}
+
+@article{chelini2022mom,
+  title={MOM: Matrix Operations in MLIR},
+  author={Chelini, Lorenzo and Barthels, Henrik and Bientinesi, Paolo and Copik, Marcin and Grosser, Tobias and Spampinato, Daniele G},
+  year={2022},
+  abstract = {Modern research in code generators for dense linear algebra computations has shown the ability to produce optimized code with a performance which compares and often exceeds the one of state-of-the-art implementations by domain experts. However, the underlying infrastructure is often developed in isolation making the interconnection of logically combinable systems complicated if not impossible. In this paper, we propose to leverage MLIR as a unifying compiler infrastructure for the optimization of dense linear algebra operations. We propose a new MLIR dialect for expressing linear algebraic computations including matrix properties to enable high-level algorithmic transformations. The integration of this new dialect in MLIR enables end-to-end compilation of matrix computations via conversion to existing lower-level dialects already provided by the framework.},
+  url = {https://acohen.gitlabpages.inria.fr/impact/impact2022/papers/paper7.pdf},
+  html = {https://acohen.gitlabpages.inria.fr/impact/impact2022/papers/paper7.pdf},
+  journal = {12th International Workshop on Polyhedral Compilation Techniques},
+  series = {IMPACT 2022},
+  pdf = {2022_impact_chelini_mom.pdf},
   bibtex_show = {True},
-  abbr = {arXiv},
-  pdf = {2022_praas_preprint.pdf}
+  abbr = {IMPACT}
+}
+
+@article{2023ipdpsphdforum,
+  title={High-Performance Serverless for HPC and Clouds},
+  author={Marcin Copik and Torsten Hoefler},
+  year={2023},
+  pdf = {2023_ipdps_phd_forum_poster_summary.pdf},
+  poster = {2023_ipdps_phd_forum_poster.pdf},
+  abstract = {Function-as-a-Service (FaaS) computing brought a fundamental shift in resource management. It allowed for new and better solutions to the problem of low resource utilization, an issue that has been known for decades in data centers. The problem persists as the frequently changing resource availability cannot be addressed entirely with the techniques employed so far, such as persistent cloud allocations and batch jobs. The elastic fine-grained tasking and largely unconstrained scheduling of FaaS create new opportunities. Still, modern serverless platforms struggle to achieve the high performance needed for the most demanding and latency-critical workloads. Furthermore, many applications cannot be “FaaSified” without non-negligible loss in performance, and the short and stateless functions must be easy to program, debug, and optimize. By solving the fundamental performance challenges of FaaS, we can build a fast and efficient programming model that brings innovative cloud techniques into HPC data centers, allowing users to benefit from pay-as-you-go billing and helping operators to decrease running costs and their environmental impact. My PhD research attempts to bridge the gap between high-performance programming and modern FaaS computing frameworks. I have been working on tailored solutions for different levels of the FaaS computing stack: from computing and network devices to high-level optimizations and efficient system designs.},
+  journal = {PhD Forum at 37th IEEE International Parallel & Distributed Processing Symposium (IPDPS)},
+  abbr = {IPDPS}
+}
+
+@article{2023scdoctoral,
+  title={High-Performance Serverless for HPC and Clouds},
+  author={Marcin Copik and Torsten Hoefler},
+  year={2023},
+  poster = {2023_sc_doctoral_showcase_poster.pdf},
+  abstract = {Function-as-a-Service (FaaS) computing brought a fundamental shift in resource management. It allowed for new and better solutions to the problem of low resource utilization, an issue that has been known for decades in data centers. The problem persists as the frequently changing resource availability cannot be addressed entirely with the techniques employed so far, such as persistent cloud allocations and batch jobs. The elastic fine-grained tasking and largely unconstrained scheduling of FaaS create new opportunities. Still, modern serverless platforms struggle to achieve the high performance needed for the most demanding and latency-critical workloads. Furthermore, many applications cannot be “FaaSified” without non-negligible loss in performance, and the short and stateless functions must be easy to program, debug, and optimize. By solving the fundamental performance challenges of FaaS, we can build a fast and efficient programming model that brings innovative cloud techniques into HPC data centers, allowing users to benefit from pay-as-you-go billing and helping operators to decrease running costs and their environmental impact. My PhD research attempts to bridge the gap between high-performance programming and modern FaaS computing frameworks. I have been working on tailored solutions for different levels of the FaaS computing stack: from computing and network devices to high-level optimizations and efficient system designs.},
+  journal = {Doctoral Showcase at ACM/IEEE Supercomputing (S23)},
+  abbr = {SC}
+}
+
+@article{2023upmbigdata, 
+  author = {Wei Qiu and Marcin Copik and Yun Wang and Alexandru Calotoiu and Torsten Hoefler},
+  title = {User-guided Page Merging for Memory Deduplication in Serverless Systems},
+  year = {2023},
+  booktitle = {2023 IEEE International Conference on Big Data (Big Data)},
+  publisher = {IEEE Computer Society},
+  pdf = {2023_bigdata_upm.pdf},
+  slides = {2023_bigdata_upm_slides.pdf},
+  abstract = {
+    Serverless computing is an emerging cloud paradigm that offers an elastic and scalable allocation of computing resources with pay-as-you-go billing. In the Function-as-a-Service (FaaS) programming model, applications comprise short-lived and stateless serverless functions executed in isolated containers or microVMs, which can quickly scale to thousands of instances and process terabytes of data. This flexibility comes at the cost of duplicated runtimes, libraries, and user data spread across many function instances, and cloud providers do not utilize this redundancy. The memory footprint of serverless forces removing idle containers to make space for new ones, which decreases performance through more cold starts and fewer data caching opportunities. We address this issue by proposing deduplicating memory pages of serverless workers with identical content, based on the content-based page-sharing concept of Linux Kernel Same-page Merging (KSM). We replace the background memory scanning process of KSM, as it is too slow to locate sharing candidates in short-lived functions. Instead, we design User-Guided Page Merging (UPM), a built-in Linux kernel module that leverages the madvise system call: we enable users to advise the kernel of memory areas that can be shared with others. We show that UPM reduces memory consumption by up to 55% on 16 concurrent containers executing a typical image recognition function, more than doubling the density for containers of the same function that can run on a system.
+  },
+  abbr = {Big Data},
+  bibtex_show = {True}
+}
+
+
+@misc{2024xaas,
+    title={{XaaS}: Acceleration as a Service to Enable Productive High-Performance Cloud Computing}, 
+    author={Torsten Hoefler and Marcin Copik and Pete Beckman and Andrew Jones and Ian Foster and Manish Parashar and Daniel Reed and Matthias Troyer and Thomas Schulthess and Dan Ernst and Jack Dongarra},
+    year={2024},
+    eprint={2401.04552},
+    archivePrefix={arXiv},
+    primaryClass={cs.DC},
+    abbr = {IEEE CiSE},
+    arxiv={2106.13859},
+    bibtex_show = {2401.04552},
+    abstract = {HPC and Cloud have evolved independently, specializing their innovations into performance or productivity. Acceleration as a Service (XaaS) is a recipe to empower both fields with a shared execution platform that provides transparent access to computing resources, regardless of the underlying cloud or HPC service provider. Bridging HPC and cloud advancements, XaaS presents a unified architecture built on performance-portable containers. Our converged model concentrates on low-overhead, high-performance communication and computing, targeting resource-intensive workloads from climate simulations to machine learning. XaaS lifts the restricted allocation model of Function-as-a-Service (FaaS), allowing users to benefit from the flexibility and efficient resource utilization of serverless while supporting long-running and performance-sensitive workloads from HPC.},
+    pdf = {2024_xaas_preprint.pdf}
+}
+
+@inproceedings{copik2024praas,
+  author = {Copik, Marcin and Calotoiu, Alexandru and Rethy, Gyorgy and Böhringer, Roman and Bruno, Rodrigo and Hoefler, Torsten},
+  title = {Process-as-a-Service: Unifying Elastic and Stateful Clouds with Serverless Processes},
+  abstract = {Fine-grained and ephemeral functions power many new applications that benefit from elastic scaling and pay-as-you-use billing model with minimal infrastructure management overhead. To achieve these properties, Function-as-a-Service (FaaS) platforms disaggregate compute and state and, consequently, introduce non-trivial costs due to data locality loss, complex control plane interactions, and expensive communication to access state. We revisit the foundations of FaaS and propose a new cloud abstraction, cloud process, that retains all the benefits of FaaS while significantly reducing the overheads that result from the disaggregation. We show how established operating system abstractions can be adapted to provide powerful granular computing on dynamically provisioned cloud resources while building our Process as a Service (PraaS) platform. PraaS improves current FaaS by offering data locality, fast invocations, and efficient communication. PraaS delivers remote invocations up to 17 times faster and reduces communication overhead by up to 99\%.},
+  year = {2024},
+  bibtex_show = {True},
+  abbr = {SoCC},
+  pdf = {2024_praas_preprint.pdf},
+  year = {2024},
+  isbn = {9798400712869},
+  publisher = {Association for Computing Machinery},
+  address = {New York, NY, USA},
+  url = {https://doi.org/10.1145/3698038.3698567},
+  html = {https://doi.org/10.1145/3698038.3698567},
+  doi = {10.1145/3698038.3698567},
+  booktitle = {Proceedings of the 2024 ACM Symposium on Cloud Computing},
+  keywords = {Serverless, Function-as-a-Service, Operating Systems},
+  location = {Redmond, WA, USA},
+  series = {SoCC '24}
+}
+
+@inproceedings{2025normalizationcgo, 
+  author = {Lukas Trümper and Philipp Schaad and Berke Ates and Alexandru Calotoiu and Marcin Copik and Torsten Hoefler},
+  title = {A Priori Loop Nest Normalization: Automatic Loop Scheduling in Complex Applications},
+  year = {2025}, 
+  publisher = {Association for Computing Machinery},
+  address = {New York, NY, USA}, 
+  booktitle = {Proceedings of the 23rd ACM/IEEE International Symposium on Code Generation and Optimization},
+  series = {CGO '25},
+  abbr = {CGO},
+  bibtex_show = {True}
 }
 
 @inproceedings{2024dpuixpug,
@@ -497,3 +595,76 @@ while significantly reducing CPU usage.},
     series = {SESAME '25},
     bibtex_show = {True}
 }
+
+
+
+@article{2025cppless,
+  author = {Copik, Marcin and M\"{o}ller, Lukas and Calotoiu, Alexandru and Hoefler, Torsten},
+  title = {Cppless: Single-Source and High-Performance Serverless Programming in C++},
+  year = {2025},
+  issue_date = {September 2025},
+  publisher = {Association for Computing Machinery},
+  address = {New York, NY, USA},
+  volume = {22},
+  number = {3},
+  issn = {1544-3566},
+  url = {https://doi.org/10.1145/3747841},
+  doi = {10.1145/3747841},
+  abstract = {The rise of serverless computing introduced a new class of scalable, elastic, and widely available parallel workers in the cloud. Many systems and applications benefit from offloading computations and parallel tasks to dynamically allocated resources. However, the developers of C++ applications find it difficult to integrate functions due to complex deployment, lack of compatibility between client and cloud environments, and loosely typed input and output data. To enable single-source and efficient serverless acceleration in C++, we introduce Cppless , an end-to-end framework for implementing remote functions which handles the creation, deployment, and invocation of serverless functions. Cppless is built on top of LLVM and requires only two compiler extensions to automatically extract C++ function objects and deploy them to the cloud. We demonstrate that offloading parallel computations, such as from a C++ application to serverless workers, can provide up to 59x speedup with minimal cost increase while requiring only minor code modifications.},
+  journal = {ACM Trans. Archit. Code Optim.},
+  month = sep,
+  articleno = {110},
+  numpages = {27},
+  keywords = {Serverless, function-as-a-service, faas, cloud computing, c++, llvm, compiler},
+  pdf = {2025_cppless_paper.pdf},
+  abbr = {TACO},
+  bibtex_show = {True},
+  arxiv={2401.10834v3},
+  slides = {2026_hipeac_cppless_slides.pdf},
+}
+
+@inproceedings{2025xaascontainers,
+    title={XaaS Containers: Performance-Portable Representation With Source and IR Containers},
+    author={Marcin Copik and  Eiman Alnuaimi and  Alok Kamatar and  Valerie Hayot-Sasson and  Alberto Madonna and  Todd Gamblin and  Kyle Chard and  Ian Foster and  Torsten Hoefler},
+    year = {2025},
+    isbn = {9798400714665},
+    doi = {10.1145/3712285.3759868},
+    url = {https://doi.org/10.1145/3712285.3759868},
+    archivePrefix={arXiv},
+    arxiv={2509.17914},
+    abstract = {High-performance computing (HPC) systems and cloud data centers are converging, and containers are becoming the default method of portable software deployment. Yet, while containers simplify software management, they face significant performance challenges in HPC environments as they must sacrifice hardware-specific optimizations to achieve portability. Although HPC containers can use runtime hooks to access optimized MPI libraries and GPU devices, they are limited by application binary interface (ABI) compatibility and cannot overcome the effects of early-stage compilation decisions. Acceleration as a Service (XaaS) proposes a vision of performance-portable containers, where a containerized application should achieve peak performance across all HPC systems. We present a practical realization of this vision through Source and Intermediate Representation (IR) containers, where we delay performance-critical decisions until the target system specification is known. We analyze specialization mechanisms in HPC software and propose a new LLM-assisted method for automatic discovery of specializations. By examining the compilation pipeline, we develop a methodology to build containers optimized for target architectures at deployment time. Our prototype demonstrates that new XaaS containers combine the convenience of containerization with the performance benefits of system-specialized builds.},
+    pdf = {2025_xaas_paper.pdf},
+    artifact= {https://zenodo.org/records/17115960},
+    publisher = {Association for Computing Machinery},
+    address = {New York, NY, USA},
+    abbr = {SC},
+    series = {SC '25},
+    bibtex_show = {True},
+    note = {Best Paper Award Finalist},
+    slides = {2025_xaas_paper_slides.pdf},
+    booktitle = {Proceedings of the International Conference for High Performance Computing, Networking, Storage and Analysis},
+    pages = {533–555},
+    numpages = {23}
+}
+
+@inproceedings{2025icondace,
+  author = {Klocke, Daniel and Frauen, Claudia and Engels, Jan Frederik and Alexeev, Dmitry and Redler, Ren\'{e} and Schnur, Reiner and Haak, Helmuth and Kornblueh, Luis and Br\"{u}ggemann, Nils and Chegini, Fatemeh and R\"{o}mmer, Manoel and Hoffmann, Lars and Griessbach, Sabine and Bode, Mathis and Coles, Jonathan and Gila, Miguel and Sawyer, William and Calotoiu, Alexandru and Budanaz, Yakup and Mazumder, Pratyai and Copik, Marcin and Weber, Benjamin and Herten, Andreas and Bockelmann, Hendryk and Hoefler, Torsten and Hohenegger, Cathy and Stevens, Bjorn},
+  title = {Computing the Full Earth System at 1km Resolution},
+  year = {2025},
+  isbn = {9798400714665},
+  publisher = {Association for Computing Machinery},
+  address = {New York, NY, USA},
+  url = {https://doi.org/10.1145/3712285.3771789},
+  doi = {10.1145/3712285.3771789},
+  abstract = {We present the first-ever global simulation of the full Earth system at 1.25 km grid spacing, achieving highest time compression with an unseen number of degrees of freedom. Our model captures the flow of energy, water, and carbon through key components of the Earth system: atmosphere, ocean, and land. To achieve this landmark simulation, we harness the power of 8192 GPUs on Alps and 20480 GPUs on JUPITER, two of the world’s largest GH200 superchip installations. We use both the Grace CPUs and Hopper GPUs by carefully balancing Earth’s components in a heterogeneous setup and optimizing acceleration techniques available in ICON’s codebase. We show how separation of concerns can reduce the code complexity by half while increasing performance and portability. Our achieved time compression of 145.7 simulated days per day enables long studies including full interactions in the Earth system and even outperforms earlier atmosphere-only simulations at a similar resolution.},
+  booktitle = {Proceedings of the International Conference for High Performance Computing, Networking, Storage and Analysis},
+  pages = {125–136},
+  numpages = {12},
+  series = {SC '25},
+  abbr = {SC},
+  note = {Gordon Bell Award in Climate Modeling},
+  pdf = {2025_icon_dace_paper.pdf},
+  bibtex_show = {True},
+  arxiv = {2511.02021}
+}
+

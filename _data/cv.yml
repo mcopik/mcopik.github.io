@@ -35,7 +35,7 @@ cv:
           - Core focus - software engineering.
 
     Experience:
-      - title: Research Intern
+      - position: Research Intern
         company: Microsoft Research
         location: Redmond, USA
         start_date: 2019
@@ -43,7 +43,7 @@ cv:
         highlights:
           - Analyzing microarchitectural implications of serverless workloads.
 
-      - title: Research Assistant
+      - position: Research Assistant
         company: Louisiana State University
         location: Baton Rouge, USA
         start_date: 2016
@@ -51,7 +51,7 @@ cv:
         highlights:
           - Integrating single-source GPU programming in HPX.
 
-      - title: Software Engineer, Mentor
+      - position: Software Engineer, Mentor
         company: Google Summer of Code
         start_date: 2014
         end_date: 2018
@@ -60,7 +60,7 @@ cv:
           - Integrating single-source GPU programming in HPX.
           - Mentoring students working on HPX.
 
-      - title: Student Assistant
+      - position: Student Assistant
         company: Jülich Supercomputing Centre
         location: Jülich, Germany
         start_date: 2014
@@ -68,7 +68,7 @@ cv:
         highlights:
           - Developing tools for performance analysis of parallel applications at Scalasca.
 
-      - title: Student Assistant
+      - position: Student Assistant
         company: Silesian University of Technology
         location: Gliwice, Poland
         start_date: 2012
@@ -76,7 +76,7 @@ cv:
         highlights:
           - Implementing versions of ICP algorithm for registration of respiratory motion.
 
-      - title: Student Assistant
+      - position: Student Assistant
         company: The Institute of Theoretical and Applied Informatics of the Polish Academy of Sciences
         location: Gliwice, Poland
         start_date: 2012

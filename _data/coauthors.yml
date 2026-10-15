@@ -1,3 +1,11 @@
 "Hoefler":
   - firstname: ["Torsten", "T.", "T. H.", "Torsten Hoefler"]
     url: https://htor.inf.ethz.ch/
+
+"Grosser":
+  - firstname: ["Tobias Grosser", "Tobias", "T.", "T. G."]
+    url: https://grosser.science/
+
+"Besta":
+  - firstname: ["Maciej Besta", "Maciej", "M.", "M. B."]
+    url: https://people.inf.ethz.ch/bestam/
